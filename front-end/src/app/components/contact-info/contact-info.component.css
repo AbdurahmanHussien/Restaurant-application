@@ -1,0 +1,256 @@
+/* Basic styles for HTML and Body */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif; /* Use your preferred font */
+  background-color: #f8f8f8; /* Default background */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- Header Styling --- */
+
+/* Styles for the header container */
+header {
+  background-color: #fff; /* White background for the header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Navbar Styling (reusing/adapting styles from previous example) */
+.navbar {
+  padding: 15px 20px; /* Add some padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-brand {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand h1 {
+  margin: 0;
+  font-size: 2rem; /* Adjust font size */
+  font-weight: bold;
+  color: #ff6600; /* Highlight color for brand */
+}
+
+.navbar-brand i {
+  margin-right: 10px;
+  color: #333; /* Color for the icon */
+}
+
+.navbar-toggler {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background-color: transparent;
+  cursor: pointer;
+  /* Bootstrap's .navbar-toggler-icon handles the icon display */
+}
+
+/* Styles for the hero section (Page Title/Breadcrumb area) */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/img/contact.jpg') no-repeat center center; /* Add your background image path */
+  background-size: cover; /* Cover the entire area */
+  text-align: center; /* Center text */
+  color: #fff; /* White text color */
+  height: 500px;
+  display: flex;
+  align-items: center;
+
+
+
+}
+
+.hero-section h1 {
+  font-size: 3rem; /* Adjust hero title size */
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Styles for Bootstrap breadcrumbs */
+.hero-section .breadcrumb {
+  justify-content: center; /* Center the breadcrumbs */
+  background-color: transparent; /* Make background transparent */
+  margin-bottom: 0;
+}
+
+.hero-section .breadcrumb-item {
+  font-size: 1.1rem;
+}
+
+.hero-section .breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white for links */
+  text-decoration: none;
+}
+
+.hero-section .breadcrumb-item a:hover {
+  color: #fff; /* White on hover */
+}
+
+.hero-section .breadcrumb-item.active {
+  color: #fff; /* White color for the active item */
+  font-weight: bold;
+}
+
+
+/* --- Contact Section Styling --- */
+
+.contact-section {
+  padding: 60px 0; /* Padding above and below the section */
+  background-color: #fff; /* White background for the contact section */
+}
+
+/* Container (reusing/adapting from previous example) */
+.container {
+  max-width: 1200px; /* Set a maximum width */
+  margin: 0 auto; /* Center the container */
+  padding: 0 15px; /* Add side padding */
+}
+
+/* Section Header (reusing/adapting from previous example) */
+.section-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.section-header h5 {
+  color: #ff6600;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.section-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0;
+}
+
+/* Styles for the contact content (info + form) */
+.contact-content {
+  display: flex; /* Use flexbox to arrange info and form */
+  gap: 30px; /* Space between the info and form columns */
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+/* Styles for the contact information block */
+.contact-info {
+  flex: 1; /* Allow the contact info to grow */
+  min-width: 300px; /* Minimum width before wrapping */
+}
+
+.contact-item {
+  background-color: #f8f8f8; /* Light background for each info item */
+  border: 1px solid #ff6600; /* Subtle border */
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;    /* Space between info items */
+  margin-right: 20px;
+}
+
+.contact-item h5 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.contact-item p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0;
+}
+
+.contact-item i {
+  color: #ff6600; /* Highlight color for icons */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+
+/* Styles for the contact form block */
+.contact-form {
+  flex: 2; /* Allow the form to grow more than the info block */
+  min-width: 300px; /* Minimum width before wrapping */
+  background-color: #f8f8f8; /* Light background for the form area */
+  border: 1px solid #ff6600;
+  padding: 30px;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px; /* Space between form groups */
+}
+
+.contact-form label {
+  display: block; /* Make label a block element */
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 1rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%; /* Make input fields full width */
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+  border-color: #ff6600; /* Highlight border on focus */
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.3); /* Subtle shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+.contact-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.contact-form button[type="submit"] {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ff6600; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius:20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button[type="submit"]:hover {
+  background-color: #e65c00; /* Darker color on hover */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column; /* Stack contact info and form vertically */
+  }
+
+  .contact-info,
+  .contact-form {
+    min-width: auto;
+    flex: none;
+    width: 100%;
+  }
+}
+
+.contact-section{
+  background: #f2f2f2;
+}
+
+

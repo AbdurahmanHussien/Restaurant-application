@@ -1,0 +1,31 @@
+
+
+<section class="team-section">
+  <div class="container">
+    <div class="section-header" data-wow-delay="0.1s">
+      <h5>Team Members</h5>
+      <h1>Our Master Chefs</h1>
+    </div>
+
+    <div class="team-grid" data-wow-delay="0.1s">
+
+      @for (chef of chefs; track chef.id){
+      <div class="team-card">
+        <div class="team-img">
+          <img [ngSrc]="'assets/img/chef/' + chef.imagePath" [alt]="chef.name" width="350" height="350"/>
+        </div>
+
+        <h5>{{ chef.name }}</h5>
+        <small>{{ chef.specification  || 'No specification provided' }}</small>
+
+        <div class="team-social">
+          <a [href]="chef.facebookLink" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a [href]="chef.twitterLink" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a [href]="chef.instagramLink" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      }
+
+    </div>
+  </div>
+</section>

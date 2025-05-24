@@ -1,0 +1,133 @@
+/* Basic styles for the HTML and body to ensure full page height */
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #f2f2f2; /* Default background */
+}
+
+/* Styles for the main application container */
+.app-container {
+  display: flex;
+  flex-direction: column; /* Stack header, main, and footer vertically */
+  min-height: 100vh; /* Ensure container takes at least the full viewport height */
+  overflow: hidden; /* Prevent potential overflow issues */
+  position: relative; /* Needed for positioning the spinner absolutely */
+}
+
+/* Styles for the full-screen spinner overlay */
+#spinner {
+  position: fixed; /* Fix position relative to the viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+  z-index: 99999; /* Ensure it's on top of everything */
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Hide from screen readers and interactions */
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade transition */
+}
+
+/* Class to show the spinner (add this class with JavaScript when loading starts) */
+#spinner.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styles for the spinner icon itself */
+/* Assuming spinner-icon is a custom class replacing Bootstrap's spinner-border */
+.spinner-icon {
+  display: inline-block;
+  /* These properties are typically handled by Bootstrap's .spinner-border or .spinner-grow */
+  /* If you are not using Bootstrap's spinner CSS, you'll need to define animation, borders, etc. here */
+  border: 0.25em solid currentColor; /* Example border */
+  border-right-color: transparent; /* Make part transparent for spinning effect */
+  border-radius: 50%;
+  animation: spinner-spin 0.75s linear infinite; /* Spinning animation */
+  color: #ff6600; /* Spinner color */
+}
+
+/* Keyframes for the spinning animation */
+@keyframes spinner-spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* Styles for the main content area */
+.main-content {
+  flex-grow: 1;
+  background-color: #f2f2f2;
+
+  /* padding: 20px; /* Optional: Add internal padding to the main content area */
+}
+
+/* Styles for the menu section */
+.menu-section {
+  padding: 60px 0; /* Add padding above and below the section */
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* Styles for the section title within the menu section */
+.menu-section .section-title {
+  font-size: 2rem; /* Adjust title font size */
+  font-weight: bold;
+  color: #333; /* Dark color for the title */
+  margin-bottom: 30px;
+  position: relative;
+
+
+}
+
+.section-title {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 2px;
+  background: #ff6600;
+  top: 50%;
+  margin-top: -1px;
+}
+
+.section-title::before {
+  left: -55px;
+}
+
+.section-title::after {
+  right: -55px;
+}
+
+.section-title.text-start::before,
+.section-title.text-end::after {
+  display: none;
+}
+
+
+
+.back-to-top {
+  width: 40px;
+  height: 41px;
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
+  color: white;
+  background-color: #ff6600;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.back-to-top:hover {
+  background: #444;
+}

@@ -1,0 +1,32 @@
+<div class="app-container relative">
+
+  <app-header></app-header>
+
+  <main class="main-content">
+
+    <section class="menu-section" data-wow-delay="0.1s">
+
+      <h5 class="section-title">Food Menu</h5>
+
+      <app-category></app-category>
+
+    </section>
+
+
+    <router-outlet ></router-outlet>
+
+    <app-loader></app-loader>
+  </main>
+
+  <app-footer></app-footer>
+
+
+  <!-- Back to Top -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <button class="back-to-top" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+</div>

@@ -1,0 +1,42 @@
+
+<div *ngIf="noResultsFound" class="-4 mb-4 text-lg text-red-600 rounded-lg  flex justify-center ">
+  <span class="font-bold">No Product matching </span>
+</div>
+<div class="tab-content" id="tab-1" *ngIf="!noResultsFound" >
+  @for (product of products; track product.id ){
+  <div class="menu-item">
+    <img class="menu-img" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" width="350" height="350"/>
+    <div class="menu-info">
+      <h5>
+        <span>{{ product.name }}</span>
+        <span class="price"> {{ product.price | currency }}</span>
+      </h5>
+      <small>{{ product.description }}</small>
+      <button type="button" class="btn-add">Add to Cart</button>
+    </div>
+  </div>
+  }
+</div>
+<div class="pagination flex justify-center items-center space-x-4 mt-4">
+  <button
+    (click)="previousPage()"
+    [disabled]="page === 0"
+    class="px-4 py-2 bg-[#ff6600] text-white my-10 disabled:hidden rounded-full "
+  >
+    Previous
+  </button>
+
+  <span class="text-l  " *ngIf="!noResultsFound"  >
+    Page {{ page + 1 }}
+  </span>
+
+  <button
+    (click)="nextPage()"
+    [disabled]="page=== totalPages || products.length <8"
+    class="px-4 py-2 bg-[#ff6600] text-white  my-10 disabled:hidden rounded-full  "
+  >
+    Next
+  </button>
+</div>
+
+

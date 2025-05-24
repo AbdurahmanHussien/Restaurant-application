@@ -1,0 +1,88 @@
+.card-link {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ff6600;
+  border-radius: 22px;
+  padding: 8px 15px;
+  min-width: 100px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  /* Spacing from other elements in the navbar - Adjust this as needed */
+  margin-left: 20px;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Hover effect for the cart link */
+.card-link:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-color: #b0b0b0;
+  background-color: #f0f0f0;
+  color: #ff6600;
+}
+
+/* Styles for the container holding the price, separator, and item count */
+.card-info {
+  display: flex;
+  align-items: center;
+  /* Font size and color are inherited from .card-link */
+}
+
+/* Style for the price span */
+.card-info .price {
+  font-weight: bold;
+  color: #ff6600; /* Highlight color for the price text */
+  margin-right: 8px; /* Space after price block */
+  display: flex; /* Use flex to align icon and number if needed */
+  align-items: center;
+}
+
+/* Style for the separator "|" */
+.card-info .separator {
+  color: #999; /* Muted color for the separator */
+  margin: 0 8px; /* Space around the separator */
+}
+
+/* Style for the item count span */
+.card-info .item-count {
+  font-weight: bold;
+  /* Color is inherited from .card-link or .card-info */
+  display: flex; /* Use flex to align number and icon */
+  align-items: center;
+}
+
+
+.card-info .price-icon,
+.card-info .item-icon {
+
+  display: inline-block;
+  width: 1em; /* Size relative to parent font size */
+  height: 1em; /* Size relative to parent font size */
+  text-align: center;
+  line-height: 1em;
+
+}
+
+/* Specific color for the price icon if needed */
+.card-info .price .price-icon {
+  color: inherit; /* Inherit from the price span's color */
+  margin-right: 4px; /* Space between price icon and number */
+}
+
+/* Specific color for the item icon if needed */
+.card-info .item-count .item-icon {
+  color: #333; /* Example: Dark color for cart icon */
+  margin-left: 4px; /* Space between count and cart icon */
+}
+
+/* Style for icon color on hover */
+.card-link:hover .price-icon,
+.card-link:hover .item-icon {
+  color: inherit; /* Inherit the hover color from .card-link */
+}

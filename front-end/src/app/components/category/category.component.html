@@ -1,0 +1,26 @@
+<ul class="category-tabs">
+  <li class="category-item" *ngFor="let cat of categories ">
+    <a
+      class="category-link"
+      [routerLink]="['/productCat', cat.id]"
+      routerLinkActive="active-category"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [class.active]="cat=== selectedTab"
+      (click)="selectedTab=cat"
+    >
+      <img
+        [ngSrc]="'assets/img/icons/' + cat.icon"
+        [alt]="cat.name"
+        class="category-icon"
+        height="30"
+        width="30"
+      />
+      <div class="category-text">
+        <small class="category-subtitle">{{ cat.highlight }}</small>
+        <h6 class="category-title">{{ cat.name }}</h6>
+      </div>
+    </a>
+  </li>
+</ul>
+
+

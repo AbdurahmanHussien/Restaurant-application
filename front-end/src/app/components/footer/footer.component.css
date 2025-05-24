@@ -1,0 +1,35 @@
+/* Footer Container */
+.footer-container {
+  background-color: #222;
+  color: #bbb;
+  padding: 20px 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  user-select: none;
+
+}
+
+/* Footer Content Wrapper */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Footer Text */
+.footer-text {
+  line-height: 1.6;
+}
+
+/* Footer Links */
+.footer-link {
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #e65c00;
+}
