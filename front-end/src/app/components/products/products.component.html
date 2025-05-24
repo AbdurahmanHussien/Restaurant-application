@@ -1,6 +1,6 @@
-
-<div *ngIf="noResultsFound" class="-4 mb-4 text-lg text-red-600 rounded-lg  flex justify-center ">
-  <span class="font-bold">No Product matching </span>
+<app-category></app-category>
+<div *ngIf="noResultsFound" class="no-results-message">
+  <span>No products matched your search</span>
 </div>
 <div class="tab-content" id="tab-1" *ngIf="!noResultsFound" >
   @for (product of products; track product.id ){

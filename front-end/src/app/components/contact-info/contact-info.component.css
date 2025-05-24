@@ -56,13 +56,12 @@ header {
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/img/contact.jpg') no-repeat center center; /* Add your background image path */
   background-size: cover; /* Cover the entire area */
-  text-align: center; /* Center text */
-  color: #fff; /* White text color */
-  height: 500px;
+  text-align: center;
+  color: #fff;
+  height:500px ;
   display: flex;
   align-items: center;
-
-
+  margin-top: 87px;
 
 }
 

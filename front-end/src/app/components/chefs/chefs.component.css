@@ -2,6 +2,7 @@
 .team-section {
   padding: 60px 0; /* Add padding above and below the section */
   background: #f2f2f2;
+  margin-top: 50px;
 }
 
 /* Styles for the container within the section (assuming a max-width and centering) */

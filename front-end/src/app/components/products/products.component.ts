@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { ProductService } from '../../services/product.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../services/shared.service';
-import {LoaderComponent} from '../loader/loader.component';
+import {CategoryComponent} from '../category/category.component';
 
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, LoaderComponent],
+  imports: [CommonModule, CategoryComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -27,9 +26,8 @@ export class ProductsComponent implements OnInit {
   noResultsFound = false;
 
 
-  constructor(private _productService: ProductService, private route: ActivatedRoute, private shared: SharedService , private router : Router) {}
+  constructor(private _productService: ProductService, private shared: SharedService) {}
 
-  showLoader = false;
 
   ngOnInit() {
 

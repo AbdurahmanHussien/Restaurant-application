@@ -2,13 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
+import {CategoryComponent} from '../category/category.component';
 
 @Component({
   selector: 'app-product-cat',
   standalone: true,
   imports: [
     CurrencyPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    CategoryComponent
   ],
   templateUrl: './product-cat.component.html',
   styleUrls: ['./product-cat.component.css']

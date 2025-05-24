@@ -103,4 +103,17 @@
   margin: 10px;
 }
 
+.no-results-message {
+  background-color: #ff6600;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(255, 102, 0, 0.3);
+}
+
 

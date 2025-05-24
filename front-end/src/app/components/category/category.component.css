@@ -108,3 +108,50 @@
 .svg-icon {
   color: red;
 }
+
+.menu-section {
+  padding: 60px 0; /* Add padding above and below the section */
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* Styles for the section title within the menu section */
+.menu-section .section-title {
+  font-size: 2rem; /* Adjust title font size */
+  font-weight: bold;
+  color: #333; /* Dark color for the title */
+  margin-bottom: 30px;
+  position: relative;
+
+
+}
+
+.section-title {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 2px;
+  background: #ff6600;
+  top: 50%;
+  margin-top: -1px;
+}
+
+.section-title::before {
+  left: -55px;
+}
+
+.section-title::after {
+  right: -55px;
+}
+
+.section-title.text-start::before,
+.section-title.text-end::after {
+  display: none;
+}
