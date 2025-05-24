@@ -1,4 +1,14 @@
+
+
+/* disable selecting   */
+* {
+  user-select: none;
+}
+
+
+
 /* Basic styles for the HTML and body to ensure full page height */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -13,48 +23,6 @@ html, body {
   overflow: hidden; /* Prevent potential overflow issues */
   position: relative; /* Needed for positioning the spinner absolutely */
 }
-
-/* Styles for the full-screen spinner overlay */
-#spinner {
-  position: fixed; /* Fix position relative to the viewport */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex; /* Use flexbox to center content */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
-  z-index: 99999; /* Ensure it's on top of everything */
-  opacity: 0; /* Initially hidden */
-  visibility: hidden; /* Hide from screen readers and interactions */
-  transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade transition */
-}
-
-/* Class to show the spinner (add this class with JavaScript when loading starts) */
-#spinner.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Styles for the spinner icon itself */
-/* Assuming spinner-icon is a custom class replacing Bootstrap's spinner-border */
-.spinner-icon {
-  display: inline-block;
-  /* These properties are typically handled by Bootstrap's .spinner-border or .spinner-grow */
-  /* If you are not using Bootstrap's spinner CSS, you'll need to define animation, borders, etc. here */
-  border: 0.25em solid currentColor; /* Example border */
-  border-right-color: transparent; /* Make part transparent for spinning effect */
-  border-radius: 50%;
-  animation: spinner-spin 0.75s linear infinite; /* Spinning animation */
-  color: #ff6600; /* Spinner color */
-}
-
-/* Keyframes for the spinning animation */
-@keyframes spinner-spin {
-  to { transform: rotate(360deg); }
-}
-
 
 /* Styles for the main content area */
 .main-content {
@@ -131,3 +99,5 @@ html, body {
 .back-to-top:hover {
   background: #444;
 }
+
+
