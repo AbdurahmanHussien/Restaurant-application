@@ -5,6 +5,8 @@ import com.spring.restaurant.exceptions.BadRequestException;
 import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.mapper.CategoryMapper;
 import com.spring.restaurant.repository.CategoryRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,6 +24,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
+
     public CategoryDto createCategory(CategoryDto categoryDto) {
         if(Objects.nonNull(categoryDto.getId())){
 
@@ -31,6 +35,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Cacheable("categories")
     public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll(Sort.by("name"))
                 .stream()
@@ -47,6 +52,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
     public CategoryDto updateCategory(CategoryDto categoryDto) {
         if(Objects.isNull(categoryDto.getId())){
 
@@ -60,6 +66,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
+
     public void deleteCategory(long id) {
 
         Category category = categoryRepository.findById(id)
@@ -69,6 +77,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
+
     public List<CategoryDto> addListOfCategory(List<CategoryDto> categoryDtos) {
         List<Category> categories = categoryDtos.stream()
                                 .map(this::toEntity)
@@ -81,6 +91,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
+
     public List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDtos) {
         categoryDtos.forEach(dto -> {
             if (dto.getId() == null) {
