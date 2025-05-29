@@ -14,10 +14,10 @@ public interface IProductService {
     Page<ProductDto> getAllProducts(int page , int size);
     void deleteProduct(long id);
     void deleteProductByIds(List<Long> ids);
-    List<ProductDto> getAllByCategoryId(long id);
+    Page<ProductDto> getAllByCategoryId(long id, int page , int size);
     List<ProductDto> addListOfProducts(List<ProductDto> productDtos);
     List<ProductDto> updateListOfProducts(List<ProductDto> productDtos);
     Page<ProductDto> searchProducts(String keyword , Pageable pageable );
-
+    Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword,  int page , int size);
 }
 

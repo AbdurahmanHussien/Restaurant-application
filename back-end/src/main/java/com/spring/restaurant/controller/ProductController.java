@@ -1,7 +1,5 @@
 package com.spring.restaurant.controller;
-
 import com.spring.restaurant.dto.ProductDto;
-import com.spring.restaurant.entity.Product;
 import com.spring.restaurant.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -17,7 +15,7 @@ import java.util.List;
 public class ProductController {
 
 
-    private  ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -53,18 +51,19 @@ public class ProductController {
 
     @GetMapping
     @Operation(summary = "Get All products")
-    public Page<ProductDto> getAllProducts( @RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int size) {
+    public Page<ProductDto> getAllProducts( @RequestParam int page , int size) {
        return productService.getAllProducts(page, size);
 
     }
 
     @GetMapping("byCatId")
     @Operation(summary = "Get All products By Category Id")
-    public ResponseEntity<List<ProductDto>> getAllByCategoryId(  @RequestParam("categoryId") Long categoryId) {
-        List<ProductDto> products = productService.getAllByCategoryId(categoryId);
-        return ResponseEntity.ok(products);
+    public Page<ProductDto> getAllByCategoryId(
+            @RequestParam("categoryId") Long categoryId,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return productService.getAllByCategoryId(categoryId, page ,  size);
     }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get product By Id")
     public ResponseEntity<ProductDto> getProductById(  @PathVariable int id) throws Exception {
@@ -88,13 +87,26 @@ public class ProductController {
 
     @GetMapping("/search")
     @Operation(summary = "Search Method")
-    public ResponseEntity<Page<ProductDto>> searchProducts(
+    public Page<ProductDto> searchProducts(
+            @RequestParam String keyword,
+            @RequestParam int page,
+            @RequestParam int size) {
+
+        Pageable pageable = PageRequest.of(page-1, size);
+        return productService.searchProducts(keyword, pageable);
+
+    }
+
+    @GetMapping("/searchByCatId")
+    @Operation(summary = "Search Method")
+    public Page<ProductDto> searchProductsByCategory(
+            @RequestParam("categoryId") Long categoryId,
             @RequestParam String keyword,
             @RequestParam int page,
             @RequestParam int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDto> result = productService.searchProducts(keyword, pageable);
-        return ResponseEntity.ok(result);
+        return productService.searchProductsByCategory(categoryId, keyword, page, size);
+
     }
 }

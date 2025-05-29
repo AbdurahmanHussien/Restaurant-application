@@ -7,6 +7,8 @@ import com.spring.restaurant.repository.CategoryRepository;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface ProductMapper {
 
@@ -18,6 +20,10 @@ public interface ProductMapper {
 
     @Mapping(target = "categoryId", source = "category.id")
     ProductDto productToProductDto(Product product);
+
+    List<ProductDto> toDtoList(List<Product> products);
+
+    List<Product> DtosToProducts(List<ProductDto> productDtos);
 
 
     default Category getCategory(Long id, @Context CategoryRepository categoryRepository) {

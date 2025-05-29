@@ -6,6 +6,8 @@ import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.mapper.ProductMapper;
 import com.spring.restaurant.repository.CategoryRepository;
 import com.spring.restaurant.repository.ProductRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,7 @@ public class ProductService implements IProductService {
 
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public ProductDto addProduct(ProductDto productDto) throws Exception {
         if(Objects.nonNull(productDto.getId())){
 
@@ -42,6 +45,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public ProductDto updateProduct(ProductDto productDto) throws Exception {
         if(Objects.isNull(productDto.getId())){
 
@@ -63,15 +67,17 @@ public class ProductService implements IProductService {
 
 
     @Override
+    @Cacheable("products")
     public Page<ProductDto> getAllProducts(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
-        Page<Product> productPage = productRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id"));
+        Page<Product> productPage = productRepository.findAllByOrderByIdAsc(pageable);
         return productPage.map(this::toDto);
 
     }
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public void deleteProduct(long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("product.notfound"));
@@ -79,6 +85,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public void deleteProductByIds(List<Long> ids) {
         List<Product> products = productRepository.findAllById(ids);
         if (products.size() != ids.size()) {
@@ -89,11 +96,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDto> getAllByCategoryId(long id) {
-        return productRepository.getAllByCategoryId(id)
-                .stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+    @Cacheable("productsByCategory")
+    public Page<ProductDto> getAllByCategoryId(long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page -1, size);
+        Page<Product> productPage = productRepository.getAllByCategoryId(id, pageable);
+        return productPage.map(this::toDto);
     }
 
     @Override
@@ -139,6 +146,14 @@ public class ProductService implements IProductService {
 
         return productsPage.map(this::toDto);
     }
+
+    @Override
+    public Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Product> productsPage = productRepository.searchByCategoryIdAndNameOrDescription(categoryId, keyword, pageable);
+        return productsPage.map(this::toDto);
+    }
+
 
 
     private ProductDto saveAndReturnDto(ProductDto dto) {

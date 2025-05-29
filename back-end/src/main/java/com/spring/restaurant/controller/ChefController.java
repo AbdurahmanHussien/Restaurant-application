@@ -1,6 +1,4 @@
 package com.spring.restaurant.controller;
-
-import com.spring.restaurant.dto.CategoryDto;
 import com.spring.restaurant.dto.ChefDto;
 import com.spring.restaurant.service.ChefService;
 import io.swagger.v3.oas.annotations.Operation;

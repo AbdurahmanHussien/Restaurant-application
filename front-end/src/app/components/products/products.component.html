@@ -3,8 +3,7 @@
   <span>No products matched your search</span>
 </div>
 <div class="tab-content" id="tab-1" *ngIf="!noResultsFound" >
-  @for (product of products; track product.id ){
-  <div class="menu-item">
+  <div class="menu-item" *ngFor="let product of products ">
     <img class="menu-img" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" width="350" height="350"/>
     <div class="menu-info">
       <h5>
@@ -15,12 +14,11 @@
       <button type="button" class="btn-add">Add to Cart</button>
     </div>
   </div>
-  }
 </div>
-<div class="flex items-center justify-center space-x-4 my-10">
+<div *ngIf="totalPages > 0" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
-    [disabled]="page === 0"
+    [disabled]="page === 1"
     class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
   >
     ‹
@@ -29,12 +27,12 @@
   <span  *ngIf="!noResultsFound"
          class="w-10 h-10 flex items-center justify-center rounded-full bg-white border-2 border-[#ff6600] text-[#ff6600] font-bold text-lg shadow"
   >
-    {{ page + 1 }}
+    {{ page  }}
   </span>
 
   <button
     (click)="nextPage()"
-    [disabled]="page=== totalPages || products.length <8"
+    [disabled]="page === totalPages"
     class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
   >
     ›

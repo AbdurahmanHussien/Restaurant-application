@@ -6,14 +6,14 @@
 
 
 <ul class="category-tabs">
-  <li class="category-item" *ngFor="let cat of categories ">
+  <li class="category-item"
+      *ngFor="let cat of categories "
+      [ngClass]="{ 'active-category': cat.id === currentCategoryId }"
+  >
     <a
       class="category-link"
-      [routerLink]="['/productCat', cat.id]"
-      routerLinkActive="active-category"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [class.active]="cat=== selectedTab"
-      (click)="selectedTab=cat"
+      [routerLink]="cat.id === 21 ? ['/products'] : ['/category', cat.id]"
+      [queryParams]="{ page: 1 }"
     >
       <img
         [ngSrc]="'assets/img/icons/' + cat.icon"

@@ -4,7 +4,6 @@
   user-select: none;
 }
 
-/* Basic styles for the HTML and body to ensure full page height */
 
 html, body {
   height: 100%;
@@ -26,14 +25,14 @@ html, body {
   flex-grow: 1;
   background-color: #f2f2f2;
 
-  /* padding: 20px; /* Optional: Add internal padding to the main content area */
+    padding: 20px; /* Optional: Add internal padding to the main content area */
 }
 
 /* Styles for the menu section */
 .back-to-top {
   width: 40px;
   height: 41px;
-  position: absolute;
+  position: fixed;
   bottom: 70px;
   right: 10px;
   color: white;
@@ -45,7 +44,7 @@ html, body {
 }
 
 .back-to-top:hover {
-  background: #444;
+  background:#e65c00;
 }
 
 

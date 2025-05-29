@@ -1,12 +1,10 @@
 import {Component, EventEmitter, HostListener, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CardComponent} from '../card/card.component';
-import {Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {ProductService} from '../../services/product.service';
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {HeaderService} from '../../services/header.service';
 import {FormsModule} from '@angular/forms';
-import {__propKey} from 'tslib';
-import {SharedService} from '../../services/shared.service';
+
 
 @Component({
   selector: 'app-header',
@@ -17,18 +15,23 @@ import {SharedService} from '../../services/shared.service';
 })
 export class HeaderComponent {
 
-  constructor(private  headerService: HeaderService , private shared : SharedService ) {}
+  constructor(private router: Router , private activatedRoute: ActivatedRoute) {}
 
-  products: any []=[];
 
-  searchValue = '';
+  searchKey = '';
 
-  onSearchClick() {
-    let term = this.searchValue.trim();
-    this.shared.updateSearch(term);
+
+  search(searchKey:any) {
+
+    const idCategoryExist = this.activatedRoute.firstChild?.snapshot.paramMap.has("id");
+
+    if (idCategoryExist) {
+      const idCategory = this.activatedRoute.firstChild?.snapshot.paramMap.get("id");
+      this.router.navigateByUrl(`/searchInCategory/${idCategory}/search/${searchKey}`);
+    } else {
+      this.router.navigateByUrl(`/search/${searchKey}`);
+    }
   }
-
-
 
 
 }

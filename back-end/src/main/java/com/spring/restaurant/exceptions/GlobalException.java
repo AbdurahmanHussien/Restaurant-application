@@ -3,21 +3,22 @@ package com.spring.restaurant.exceptions;
 import com.spring.restaurant.dto.BundleMessageDTO;
 import com.spring.restaurant.response.ApiError;
 import com.spring.restaurant.service.BundleTranslatorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalException {
 
-    @Autowired
-    private BundleTranslatorService bundleTranslator;
+    private final BundleTranslatorService bundleTranslator;
+
+    public GlobalException(BundleTranslatorService bundleTranslator) {
+        this.bundleTranslator = bundleTranslator;
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(ResourceNotFoundException ex) {
