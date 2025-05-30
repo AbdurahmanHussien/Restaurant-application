@@ -1,14 +1,16 @@
 package com.spring.restaurant.dto.authDto;
 import com.spring.restaurant.entity.ContactInfo;
+import com.spring.restaurant.entity.OrderItem;
 import com.spring.restaurant.entity.auth.Role;
 import com.spring.restaurant.entity.auth.UserDetails;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -27,6 +29,8 @@ public class UserDto {
 
 
     List<ContactInfo> contactInfos ;
+
+    List<OrderItem> orderItems;
 
 
 

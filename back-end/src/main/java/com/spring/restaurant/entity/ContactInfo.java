@@ -1,14 +1,12 @@
 package com.spring.restaurant.entity;
-
-
 import com.spring.restaurant.entity.auth.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
 @Table(name = "ContactInfo")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

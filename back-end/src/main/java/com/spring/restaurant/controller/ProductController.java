@@ -4,8 +4,7 @@ import com.spring.restaurant.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -33,14 +32,14 @@ public class ProductController {
     @Operation(summary = "Add products")
     public ResponseEntity<List<ProductDto>> addProducts( @Valid @RequestBody List<ProductDto> productDtoList) throws Exception {
 
-        return ResponseEntity.ok(productService.addListOfProducts(productDtoList));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.addListOfProducts(productDtoList));
     }
 
     @PutMapping
     @Operation(summary = "Update product")
     public ResponseEntity<ProductDto> updateProduct( @Valid @RequestBody ProductDto productDto) throws Exception {
         ProductDto updated = productService.updateProduct(productDto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(updated);
     }
 
     @PutMapping("/list")
@@ -51,18 +50,18 @@ public class ProductController {
 
     @GetMapping
     @Operation(summary = "Get All products")
-    public Page<ProductDto> getAllProducts( @RequestParam int page , int size) {
-       return productService.getAllProducts(page, size);
+    public ResponseEntity<Page<ProductDto>> getAllProducts( @RequestParam int page , int size) {
+       return ResponseEntity.ok(productService.getAllProducts(page, size));
 
     }
 
     @GetMapping("byCatId")
     @Operation(summary = "Get All products By Category Id")
-    public Page<ProductDto> getAllByCategoryId(
+    public ResponseEntity<Page<ProductDto>> getAllByCategoryId(
             @RequestParam("categoryId") Long categoryId,
             @RequestParam int page,
             @RequestParam int size) {
-        return productService.getAllByCategoryId(categoryId, page ,  size);
+        return ResponseEntity.ok(productService.getAllByCategoryId(categoryId, page ,  size));
     }
     @GetMapping("/{id}")
     @Operation(summary = "Get product By Id")
@@ -87,26 +86,24 @@ public class ProductController {
 
     @GetMapping("/search")
     @Operation(summary = "Search Method")
-    public Page<ProductDto> searchProducts(
+    public ResponseEntity<Page<ProductDto>> searchProducts(
             @RequestParam String keyword,
             @RequestParam int page,
             @RequestParam int size) {
 
-        Pageable pageable = PageRequest.of(page-1, size);
-        return productService.searchProducts(keyword, pageable);
+        return ResponseEntity.ok(productService.searchProducts(keyword, page, size));
 
     }
 
     @GetMapping("/searchByCatId")
     @Operation(summary = "Search Method")
-    public Page<ProductDto> searchProductsByCategory(
+    public ResponseEntity<Page<ProductDto>> searchProductsByCategory(
             @RequestParam("categoryId") Long categoryId,
             @RequestParam String keyword,
             @RequestParam int page,
             @RequestParam int size) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        return productService.searchProductsByCategory(categoryId, keyword, page, size);
+        return ResponseEntity.ok(productService.searchProductsByCategory(categoryId, keyword,page, size));
 
     }
 }

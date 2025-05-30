@@ -26,6 +26,7 @@ public class ProductService implements IProductService {
 
     private final CategoryRepository categoryRepository;
 
+
     public ProductService(ProductRepository productRepository , CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
@@ -70,8 +71,14 @@ public class ProductService implements IProductService {
     @Cacheable("products")
     public Page<ProductDto> getAllProducts(int page, int size) {
 
+        if(page <= 0){
+            throw new BadRequestException("page.zero");
+        }
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id"));
         Page<Product> productPage = productRepository.findAllByOrderByIdAsc(pageable);
+        if (productPage.isEmpty()) {
+            throw new ResourceNotFoundException("page.notfound");
+        }
         return productPage.map(this::toDto);
 
     }
@@ -98,8 +105,14 @@ public class ProductService implements IProductService {
     @Override
     @Cacheable("productsByCategory")
     public Page<ProductDto> getAllByCategoryId(long id, int page, int size) {
+        if(page <= 0){
+            throw new BadRequestException("page.zero");
+        }
         Pageable pageable = PageRequest.of(page -1, size);
         Page<Product> productPage = productRepository.getAllByCategoryId(id, pageable);
+        if (productPage.isEmpty()) {
+            throw new ResourceNotFoundException("page.notfound");
+        }
         return productPage.map(this::toDto);
     }
 
@@ -124,7 +137,6 @@ public class ProductService implements IProductService {
             if (dto.getId() == null) {
                 throw new BadRequestException("id.empty");
             }
-
             productRepository.findById(dto.getId())
                     .orElseThrow(() -> new ResourceNotFoundException("product.notfound" + dto.getId()));
 
@@ -137,20 +149,30 @@ public class ProductService implements IProductService {
     }
 
     @Override
-     public Page<ProductDto> searchProducts(String keyword, Pageable pageable) {
-        Page<Product> productsPage = productRepository.searchByNameOrDescription(keyword, pageable);
-
-        if (productsPage.isEmpty()) {
-            throw new ResourceNotFoundException("not.match");
+     public Page<ProductDto> searchProducts(String keyword, int page, int size) {
+        if(page <= 0){
+            throw new BadRequestException("page.zero");
         }
-
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<Product> productsPage = productRepository.searchByNameOrDescription(keyword, pageable);
+        if (productsPage.isEmpty()) {
+            throw new ResourceNotFoundException("page.notfound");
+        }
         return productsPage.map(this::toDto);
     }
 
     @Override
     public Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword, int page, int size) {
+        if(page <= 0){
+            throw new BadRequestException("page.zero");
+        }
+
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Product> productsPage = productRepository.searchByCategoryIdAndNameOrDescription(categoryId, keyword, pageable);
+
+        if (productsPage.isEmpty()) {
+            throw new ResourceNotFoundException("page.notfound");
+        }
         return productsPage.map(this::toDto);
     }
 

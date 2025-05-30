@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: sans-serif; /* Use your preferred font */
-  background-color: #f8f8f8; /* Default background */
+  background-color: #f9f9f9; /* Default background */
   line-height: 1.6;
   color: #333;
 }
@@ -101,7 +101,7 @@ header {
 
 .contact-section {
   padding: 60px 0; /* Padding above and below the section */
-  background-color: #fff; /* White background for the contact section */
+  background-color: #f9f9f9; /* White background for the contact section */
 }
 
 /* Container (reusing/adapting from previous example) */
@@ -248,8 +248,5 @@ header {
   }
 }
 
-.contact-section{
-  background: #f2f2f2;
-}
 
 

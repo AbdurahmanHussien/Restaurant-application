@@ -14,14 +14,14 @@ public class BundleTranslatorService {
     private static ResourceBundleMessageSource messageSource;
 
     public BundleTranslatorService (ResourceBundleMessageSource messageSource) {
-        this.messageSource = messageSource;
+        BundleTranslatorService.messageSource = messageSource;
     }
 
 
     public   BundleMessageDTO getBundleMessages(String key) {
         return new BundleMessageDTO(
-                messageSource.getMessage(key,null , new Locale("ar")),
-                messageSource.getMessage(key,null , new Locale("en"))
+                messageSource.getMessage(key,null ,  Locale.forLanguageTag("ar")),
+                messageSource.getMessage(key,null , Locale.ENGLISH)
 
         );
     }

@@ -25,12 +25,16 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-
     public CategoryDto createCategory(CategoryDto categoryDto) {
         if(Objects.nonNull(categoryDto.getId())){
 
             throw new BadRequestException("id.notempty");
         }
+        if(categoryRepository.findByName(categoryDto.getName())!=null){
+
+            throw new BadRequestException("category.exists");
+        }
+
         return saveAndReturnDto(categoryDto);
     }
 
@@ -67,7 +71,6 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-
     public void deleteCategory(long id) {
 
         Category category = categoryRepository.findById(id)
@@ -78,7 +81,6 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-
     public List<CategoryDto> addListOfCategory(List<CategoryDto> categoryDtos) {
         List<Category> categories = categoryDtos.stream()
                                 .map(this::toEntity)
@@ -92,7 +94,6 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-
     public List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDtos) {
         categoryDtos.forEach(dto -> {
             if (dto.getId() == null) {
@@ -111,6 +112,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
     public void deleteCategoryByIds(List<Long> ids) {
         List<Category> categories = categoryRepository.findAllById(ids);
         if (categories.size() != ids.size()) {

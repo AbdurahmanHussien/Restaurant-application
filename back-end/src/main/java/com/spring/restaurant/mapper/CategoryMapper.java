@@ -1,6 +1,4 @@
 package com.spring.restaurant.mapper;
-
-
 import com.spring.restaurant.dto.CategoryDto;
 import com.spring.restaurant.entity.Category;
 import org.mapstruct.*;

@@ -7,8 +7,7 @@ import java.util.Set;
 
 
 @Builder
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -30,4 +30,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByOrderByIdAsc(Pageable pageable);
 
+    List<Product> findByIdIn(List<Long> ids);
+
 }

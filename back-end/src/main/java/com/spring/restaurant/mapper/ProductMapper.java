@@ -6,7 +6,6 @@ import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.repository.CategoryRepository;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-
 import java.util.List;
 
 @Mapper

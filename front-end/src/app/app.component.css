@@ -22,9 +22,8 @@ html, body {
 
 /* Styles for the main content area */
 .main-content {
-  flex-grow: 1;
-  background-color: #f2f2f2;
-
+    flex-grow: 1;
+    background-color: #f9f9f9;
     padding: 20px; /* Optional: Add internal padding to the main content area */
 }
 

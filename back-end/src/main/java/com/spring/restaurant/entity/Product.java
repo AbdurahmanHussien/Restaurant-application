@@ -1,12 +1,14 @@
 package com.spring.restaurant.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Builder
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,6 +33,9 @@ public class Product {
 
     private int price;
 
+    @ManyToMany(mappedBy = "products", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+
+    List<OrderItem> orderItems;
 
 
     @ManyToOne(fetch = FetchType.LAZY )

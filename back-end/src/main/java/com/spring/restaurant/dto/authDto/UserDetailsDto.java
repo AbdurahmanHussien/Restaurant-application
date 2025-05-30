@@ -1,10 +1,8 @@
 package com.spring.restaurant.dto.authDto;
 import com.spring.restaurant.entity.auth.User;
-import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

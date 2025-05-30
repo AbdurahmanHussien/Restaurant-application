@@ -5,10 +5,4 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ChefRepository extends JpaRepository<Chef, Long> {
-
-
-
-
-
-}
+public interface ChefRepository extends JpaRepository<Chef, Long> {}

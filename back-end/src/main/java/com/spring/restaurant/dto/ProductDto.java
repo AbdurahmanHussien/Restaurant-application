@@ -4,9 +4,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +14,7 @@ public class ProductDto {
     private Long id;
     @NotEmpty(message = "product.name.notblank")
     private  String name;
+
     @NotNull
     private String imagePath;
 

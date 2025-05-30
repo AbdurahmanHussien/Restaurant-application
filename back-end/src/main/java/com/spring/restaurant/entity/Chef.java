@@ -6,8 +6,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "Chef")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

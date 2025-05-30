@@ -1,8 +1,6 @@
 package com.spring.restaurant.service;
 import com.spring.restaurant.dto.ProductDto;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 
 
@@ -17,7 +15,7 @@ public interface IProductService {
     Page<ProductDto> getAllByCategoryId(long id, int page , int size);
     List<ProductDto> addListOfProducts(List<ProductDto> productDtos);
     List<ProductDto> updateListOfProducts(List<ProductDto> productDtos);
-    Page<ProductDto> searchProducts(String keyword , Pageable pageable );
+    Page<ProductDto> searchProducts(String keyword , int page , int size);
     Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword,  int page , int size);
 }
 
