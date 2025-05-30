@@ -183,14 +183,11 @@
   background-color: #e74c3c; /* red color for removal */
   color: #fff; /* white icon color - replaced var(--text-color-light) */
   border: none;
-  padding: 10px; /* bigger clickable area */
-  border-radius: 15px; /* rounded corners (not fully circular) */
+  border-radius: 20px; /* rounded corners (not fully circular) */
   cursor: pointer;
-  font-size: 1em; /* icon size */
-  line-height: 1;
   transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  width: 35px; /* fixed width */
-  height: 35px; /* fixed height */
+  width: 30px; /* fixed width */
+  height: 30px; /* fixed height */
   display: flex; /* flexbox for icon alignment */
   align-items: center; /* vertical center icon */
   justify-content: center; /* horizontal center icon */

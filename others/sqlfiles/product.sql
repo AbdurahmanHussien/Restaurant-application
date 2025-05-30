@@ -1,4 +1,4 @@
-
+Drop Table PRODUCT;
 
 INSERT INTO PRODUCT (NAME, DESCRIPTION, IMAGE_PATH, PRICE, CATEGORY_ID) VALUES ('French Fries', 'Crispy golden fries, lightly salted', 'appetizers/fries.jpg', 25, 3);
 INSERT INTO PRODUCT (NAME, DESCRIPTION, IMAGE_PATH, PRICE, CATEGORY_ID) VALUES ('Cheese Sticks', 'Fried mozzarella sticks with marinara sauce', 'appetizers/cheese_sticks.jpg', 30, 3);

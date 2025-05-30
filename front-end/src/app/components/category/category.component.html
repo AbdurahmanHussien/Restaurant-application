@@ -12,7 +12,7 @@
   >
     <a
       class="category-link"
-      [routerLink]="cat.id === 21 ? ['/products'] : ['/category', cat.id]"
+      [routerLink]="cat.name === 'ALL' ? ['/products'] : ['/category', cat.id]"
       [queryParams]="{ page: 1 }"
     >
       <img
