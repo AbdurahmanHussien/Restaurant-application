@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  restaurant-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oracle-db
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  oracle-db:
+    image: gvenzl/oracle-xe
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: hr
+      APP_USER: hr
+      APP_USER_PASSWORD: hr
