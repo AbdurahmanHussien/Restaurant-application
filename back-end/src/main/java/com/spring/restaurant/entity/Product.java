@@ -33,8 +33,9 @@ public class Product {
 
     private int price;
 
-    @ManyToMany(mappedBy = "products", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-
+    @ManyToMany(mappedBy = "products",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                       CascadeType.PERSIST, CascadeType.REFRESH})
     List<OrderItem> orderItems;
 
 

@@ -156,7 +156,7 @@ public class ProductService implements IProductService {
         Pageable pageable = PageRequest.of(page-1, size);
         Page<Product> productsPage = productRepository.searchByNameOrDescription(keyword, pageable);
         if (productsPage.isEmpty()) {
-            throw new ResourceNotFoundException("page.notfound");
+            throw new ResourceNotFoundException("search.notfound");
         }
         return productsPage.map(this::toDto);
     }
@@ -171,7 +171,7 @@ public class ProductService implements IProductService {
         Page<Product> productsPage = productRepository.searchByCategoryIdAndNameOrDescription(categoryId, keyword, pageable);
 
         if (productsPage.isEmpty()) {
-            throw new ResourceNotFoundException("page.notfound");
+            throw new ResourceNotFoundException("search.notfound");
         }
         return productsPage.map(this::toDto);
     }

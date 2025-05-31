@@ -21,16 +21,16 @@ public class Category {
 
     private Long id;
 
-
-     private String name;
-
+    private String name;
 
      private String highlight;
 
     private String icon;
 
+
    @Builder.Default
-   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL , fetch = FetchType.LAZY )
+   @OneToMany(mappedBy = "category",
+             cascade = CascadeType.ALL , fetch = FetchType.LAZY )
    @JsonIgnoreProperties("category")
    private Set<Product> products = new HashSet<>();
 

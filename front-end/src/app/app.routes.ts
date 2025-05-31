@@ -9,7 +9,7 @@ import { ChefsComponent } from './components/chefs/chefs.component';
 export const routes: Routes = [
   { path: 'products', component: ProductsComponent , title: "Home" },
   {path : 'category/:id', component: ProductsComponent , title: "Category" },
-  {path : 'search/:key', component: ProductsComponent , title: "search" },
+  {path : 'products/search/:key', component: ProductsComponent , title: "search" },
   {path : 'searchInCategory/:id/search/:key', component: ProductsComponent , title: "search" },
   { path: 'cardDetails', component: CardDetailsComponent , title: "Card Details" },
   { path: 'contact-info', component: ContactInfoComponent , title: "Contact Info" },

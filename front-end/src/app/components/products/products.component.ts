@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import {CategoryComponent} from '../category/category.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {OrderCart} from '../../models/OrderCart';
+import {OrderCartService} from '../../services/order-cart.service';
 
 
 
@@ -25,9 +27,10 @@ export class ProductsComponent implements OnInit {
   isSearching = false;
   noResultsFound = false;
   categoryId: string = '';
+  messageEn : string = '';
 
 
-  constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router) {
+  constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router, private orderCartService: OrderCartService) {
   }
 
 
@@ -69,7 +72,7 @@ export class ProductsComponent implements OnInit {
     } else if (this.categoryId) {
       route = ['/category', this.categoryId];
     } else if (this.isSearching) {
-      route = ['/search', this.searchValue];
+      route = ['products/search/', this.searchValue];
     } else {
       route = ['/products'];
     }
@@ -105,6 +108,7 @@ export class ProductsComponent implements OnInit {
       error: error => {
         this.products = [];
         this.noResultsFound = true;
+        this.messageEn = error.error.messages.message_en;
         console.log('Error', error);
       }
     });
@@ -164,20 +168,26 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  searchByCategoryIdAndKey(categoryId:String, searchValue:String, pageNumber:number) {
-    this._productService.searchInCategory(categoryId, searchValue, pageNumber, this.size).subscribe(
-        data => {
+  searchByCategoryIdAndKey(categoryId: string, searchValue: string, pageNumber: number) {
+    this._productService.searchInCategory(categoryId, searchValue, pageNumber, this.size).subscribe({
+      next: (data) => {
         this.products = data.content;
         this.totalPages = data.totalPages;
         this.noResultsFound = this.products.length === 0;
       },
-      error => {
+      error: (error) => {
         this.products = [];
         this.noResultsFound = true;
+        this.messageEn = error?.error?.messages?.message_en || 'Error occurred.';
         console.error(error);
       }
+    });
+  }
 
-    )
+
+  addToCart(product: any) {
+    const orderCart = new OrderCart(product);
+    this.orderCartService.addToCart(orderCart);
   }
 
 }

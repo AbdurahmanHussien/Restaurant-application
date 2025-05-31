@@ -29,7 +29,7 @@ export class HeaderComponent {
       const idCategory = this.activatedRoute.firstChild?.snapshot.paramMap.get("id");
       this.router.navigateByUrl(`/searchInCategory/${idCategory}/search/${searchKey}`);
     } else {
-      this.router.navigateByUrl(`/search/${searchKey}`);
+      this.router.navigateByUrl(`products/search/${searchKey}`);
     }
   }
 

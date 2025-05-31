@@ -4,7 +4,11 @@
       <h1 class="orders-title">Your Orders</h1>
     </div>
     <div class="orders-body">
-      <div class="table-wrapper">
+      <div *ngIf="orders.length === 0" class="no-orders-message">
+        Your cart is empty
+      </div>
+
+      <div class="table-wrapper"  *ngIf="orders.length > 0">
         <table class="orders-table">
           <thead class="orders-thead">
           <tr>
@@ -18,117 +22,40 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="order-row">
+          <tr class="order-row" *ngFor="let orderCart of orders">
             <td class="empty-col"></td>
             <td class="img-col">
-              <img class="order-img" src="assets/img/main_dish/pizza.jpg" alt="Product Image" />
+              <img class="order-img" [src]="'assets/img/' +orderCart.imagePath" alt="Product Image" />
             </td>
             <td class="product-col">
               <div class="product-info">
-                <span class="product-name">Veggie Pizza</span>
-                <span class="product-desc">Fresh vegetables and mozzarella cheese</span>
+                <span class="product-name">{{ orderCart.name }}</span>
+                <span class="product-desc">{{ orderCart.description }}</span>
               </div>
             </td>
-            <td class="price-col" data-label="Price">$90</td>
+            <td class="price-col" data-label="Price">  ${{orderCart.price }}</td>
             <td class="quantity-controls-col" data-label="Quantity">
               <div class="quantity-wrapper">
-                <button class="remove-btn">-</button>
-                <input disabled type="text" name="quantity" class="quantity-input" value="1" min="1" max="100" />
-                <button class="add-btn">+</button>
+                <button class="remove-btn" (click)="decrementQuantity(orderCart)">-</button>
+                <input disabled type="text" name="quantity" class="quantity-input" value={{orderCart.quantity}} min="1" max="100" />
+                <button class="add-btn" (click)="incrementQuantity(orderCart)">+</button>
               </div>
             </td>
-            <td class="total-col" data-label="Total">$90</td>
+            <td class="total-col" data-label="Total">${{ orderCart.quantity * orderCart.price }}</td>
             <td class="close-col">
-              <button type="button" class="close-btn" aria-label="Remove item">
+              <button type="button" class="close-btn" (click)="remove(orderCart)" aria-label="Remove item">
                 <i class="fas fa-times"></i>
               </button>
             </td>
           </tr>
 
-          <tr class="order-row">
-            <td class="empty-col"></td>
-            <td class="img-col">
-              <img class="order-img" src="assets/img/main_dish/grilled.jpg" alt="Product Image" />
-            </td>
-            <td class="product-col">
-              <div class="product-info">
-                <span class="product-name">Grilled Beef Steak</span>
-                <span class="product-desc">Juicy and tender beef steak, cooked over open flames for a smoky flavor</span>
-              </div>
-            </td>
-            <td class="price-col" data-label="Price">$200</td>
-            <td class="quantity-controls-col" data-label="Quantity">
-              <div class="quantity-wrapper">
-                <button class="remove-btn">-</button>
-                <input disabled type="text" name="quantity" class="quantity-input" value="1" min="1" max="100" />
-                <button class="add-btn">+</button>
-              </div>
-            </td>
-            <td class="total-col" data-label="Total">$200</td>
-            <td class="close-col">
-              <button type="button" class="close-btn" aria-label="Remove item">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr class="order-row">
-            <td class="empty-col"></td>
-            <td class="img-col">
-              <img class="order-img" src="assets/img/appetizers/chicken-wings.jpg" alt="Product Image" />
-            </td>
-            <td class="product-col">
-              <div class="product-info">
-                <span class="product-name">BBQ Chicken Wings</span>
-                <span class="product-desc">Spicy grilled chicken wings with tangy BBQ sauce</span>
-              </div>
-            </td>
-            <td class="price-col" data-label="Price">$150</td>
-            <td class="quantity-controls-col" data-label="Quantity">
-              <div class="quantity-wrapper">
-                <button class="remove-btn">-</button>
-                <input disabled type="text" name="quantity" class="quantity-input" value="1" min="1" max="100" />
-                <button class="add-btn">+</button>
-              </div>
-            </td>
-            <td class="total-col" data-label="Total">$150</td>
-            <td class="close-col">
-              <button type="button" class="close-btn" aria-label="Remove item">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr class="order-row">
-            <td class="empty-col"></td>
-            <td class="img-col">
-              <img class="order-img" src="assets/img/sandwich/wrap.jpg" alt="Product Image" />
-            </td>
-            <td class="product-col">
-              <div class="product-info">
-                <span class="product-name">Chicken Shawarma Wrap</span>
-                <span class="product-desc">Grilled chicken wrapped in pita bread with vegetables and sauce</span>
-              </div>
-            </td>
-            <td class="price-col" data-label="Price">$90</td>
-            <td class="quantity-controls-col" data-label="Quantity">
-              <div class="quantity-wrapper">
-                <button class="remove-btn">-</button>
-                <input disabled type="text" name="quantity" class="quantity-input" value="2" min="1" max="100" />
-                <button class="add-btn">+</button>
-              </div>
-            </td>
-            <td class="total-col" data-label="Total">$180</td>
-            <td class="close-col">
-              <button type="button" class="close-btn" aria-label="Remove item">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
           </tbody>
         </table>
+        <div class="take-order-row">
+          <button class="take-order-btn">Place Order</button>
+        </div>
       </div>
-      <div class="take-order-row">
-        <button class="take-order-btn">Place Order</button>
-      </div>
+
     </div>
   </div>
 </section>
