@@ -30,6 +30,7 @@ public class User {
 
     private String password;
 
+
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinColumn(name = "user_details_id")
     private UserDetails userDetails;

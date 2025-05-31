@@ -11,7 +11,9 @@ import {Category} from '../models/category';
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
+  private apiUrl = 'http://localhost:8080/api/category';
+
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/category');
+    return this.http.get(this.apiUrl);
   }
 }

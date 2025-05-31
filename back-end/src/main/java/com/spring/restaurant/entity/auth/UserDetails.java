@@ -19,6 +19,8 @@ public class UserDetails {
 
     private String phoneNum;
 
+    private String email;
+
     private String address;
 
     @OneToOne(mappedBy = "userDetails")

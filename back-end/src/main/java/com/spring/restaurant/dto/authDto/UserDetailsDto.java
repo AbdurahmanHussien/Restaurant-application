@@ -1,6 +1,11 @@
 package com.spring.restaurant.dto.authDto;
+
 import com.spring.restaurant.entity.auth.User;
-import lombok.*;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +19,9 @@ public class UserDetailsDto {
     private String name;
 
     private String phoneNum;
+
+    @Email
+    private String email;
 
     private String address;
 
