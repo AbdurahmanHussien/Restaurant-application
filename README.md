@@ -13,7 +13,6 @@ This project is a comprehensive restaurant management system built with Spring B
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -23,7 +22,6 @@ This project is a comprehensive restaurant management system built with Spring B
 - Order processing system
 - Table/reservation management
 - Staff management
-- Reporting and analytics
 
 ### Frontend Features
 - Responsive design with Tailwind CSS
@@ -31,7 +29,7 @@ This project is a comprehensive restaurant management system built with Spring B
 - Real-time order tracking
 - Customer management interface
 - Inventory management
-- Admin panel
+- Admin panel (coming)
 
 ## Technologies Used
 
