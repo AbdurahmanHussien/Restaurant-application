@@ -132,7 +132,7 @@ API documentation is available via Swagger UI when the backend is running:
 http://localhost:8080/swagger-ui.html
 
 
-##  🏗️  Project Structure
+##  🏗️Project Structure
 ```
 restaurant-management-system/
 ├── back-end/                  # Spring Boot Backend
@@ -171,14 +171,14 @@ restaurant-management-system/
 │   └── system-banner.png     # 🏆 Main banner
 └── README.md                 # 📖 This file
 ```
-## 📸 Screenshots
+## 📸Screenshots
 
 | Home Page | Login Page | Signup Page |
 |-----------|------------|-------------|
 | ![Home](/others/screenshots/home.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) |
 
 
-### Contributing
+## Contributing
 Contributions are welcome! Please follow these steps:
 
 Fork the project
