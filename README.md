@@ -134,52 +134,53 @@ API documentation is available via Swagger UI when the backend is running:
 http://localhost:8080/swagger-ui.html
 
 
-# Project Structure
+##  🏗️  Project Structure
+``bash
 restaurant-management-system/
-restaurant-management-system/
-├── back-end/
+├── back-end/                  # Spring Boot Backend
 │   ├── src/
 │   │   ├── main/java/com/restaurant/
-│   │   │   ├── config/         # Spring configuration classes
-│   │   │   ├── controller/     # REST controllers
-│   │   │   ├── dto/            # Data Transfer Objects
-│   │   │   ├── exception/      # Exception handling
-│   │   │   ├── model/          # Entity classes
-│   │   │   ├── repository/     # JPA repositories
-│   │   │   ├── security/       # Security configuration
-│   │   │   └── service/        # Business logic
+│   │   │   ├── config/         # 🛠️ Spring configuration classes
+│   │   │   ├── controller/     # 🎮 REST controllers
+│   │   │   ├── dto/            # 📦 Data Transfer Objects
+│   │   │   ├── exception/      # ❗ Exception handling
+│   │   │   ├── model/          # 🗃️ Entity classes
+│   │   │   ├── repository/     # 💾 JPA repositories
+│   │   │   ├── security/       # 🔒 Security configuration
+│   │   │   └── service/        # 💡 Business logic
 │   │   └── resources/
-│   │       ├── application.yml
-│   │       └── static/         # Static resources
-│   └── pom.xml                 # Maven dependencies
-├── front-end/
+│   │       ├── application.yml # ⚙️ Configuration
+│   │       └── static/         # 🖼️ Static resources
+│   └── pom.xml                 # 📦 Maven dependencies
+│
+├── front-end/                 # Angular Frontend
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── components/     # Angular components
-│   │   │   ├── models/         # TypeScript interfaces
-│   │   │   ├── services/       # Angular services
-│   │   │   ├── guards/         # Route guards
-│   │   │   ├── interceptors/   # HTTP interceptors
-│   │   │   └── shared/         # Shared modules
-│   ├── assets/                 # Static assets
-│   └── environments/           # Environment configurations
-└── package.json                # Frontend dependencies
+│   │   │   ├── components/     # 🧩 Angular components
+│   │   │   ├── models/         # 📐 TypeScript interfaces
+│   │   │   ├── services/       # 🔌 Angular services
+│   │   │   ├── guards/         # 🛡️ Route guards
+│   │   │   ├── interceptors/   # ↔️ HTTP interceptors
+│   │   │   └── shared/         # 🤝 Shared modules
+│   ├── assets/                # 🎨 Static assets
+│   └── environments/          # 🌍 Environment configs
+│
+├── docs/                     # 📚 Documentation
+├── assets/                   # 🖼️ Screenshots & images
+│   ├── home-page.png         # 🏠 Homepage screenshot
+│   ├── login-page.png        # 🔑 Login page
+│   ├── signup-page.png       # ✍️ Signup page
+│   └── system-banner.png     # 🏆 Main banner
+└── README.md                 # 📖 This file
 
-## Screenshots
+## 📸 Screenshots
 
-### Home Page
-![Home Page](/others/screenshots/home.png)
-*Modern responsive homepage with featured menu items and promotions*
+| Home Page | Login Page | Signup Page |
+|-----------|------------|-------------|
+| ![Home](/others/screenshots/home.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) |
 
-### Login Page
-![Login Page](/others/screenshots/login.png)
-*Secure login interface with form validation*
 
-### Signup Page
-![Signup Page](/others/screenshots/sign.png)
-*User registration form with password strength meter*
-
-Contributing
+### Contributing
 Contributions are welcome! Please follow these steps:
 
 Fork the project
