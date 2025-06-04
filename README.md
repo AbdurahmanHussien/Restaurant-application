@@ -135,7 +135,7 @@ http://localhost:8080/swagger-ui.html
 
 
 ##  🏗️  Project Structure
-``bash
+```
 restaurant-management-system/
 ├── back-end/                  # Spring Boot Backend
 │   ├── src/
@@ -172,7 +172,7 @@ restaurant-management-system/
 │   ├── signup-page.png       # ✍️ Signup page
 │   └── system-banner.png     # 🏆 Main banner
 └── README.md                 # 📖 This file
-``
+```
 ## 📸 Screenshots
 
 | Home Page | Login Page | Signup Page |
