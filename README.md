@@ -172,7 +172,7 @@ restaurant-management-system/
 │   ├── signup-page.png       # ✍️ Signup page
 │   └── system-banner.png     # 🏆 Main banner
 └── README.md                 # 📖 This file
-
+``
 ## 📸 Screenshots
 
 | Home Page | Login Page | Signup Page |
