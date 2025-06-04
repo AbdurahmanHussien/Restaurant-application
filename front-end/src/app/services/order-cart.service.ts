@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { OrderCart } from '../models/OrderCart';
 import { BehaviorSubject, Subject } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Product} from '../models/product';
+import {OrderItem} from '../models/orderItem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderCartService {
 
-  constructor() {
+  private apiUrl = 'http://localhost:8080/api/orders';
+
+
+  constructor(private http: HttpClient) {
     const storedCart = localStorage.getItem('orderCart');
     if (storedCart) {
       this.orderCart = JSON.parse(storedCart);
@@ -68,4 +74,30 @@ export class OrderCartService {
   private saveCartToStorage() {
     localStorage.setItem('orderCart', JSON.stringify(this.orderCart));
   }
+
+  addOrderToDatabase() {
+    const totalPrice = this.orderCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalQuantity = this.orderCart.reduce((sum, item) => sum + item.quantity, 0);
+
+    const orderItem : OrderItem = {
+      totalPrice: totalPrice.toString(),
+      totalQuantity: totalQuantity.toString(),
+      productIds: this.orderCart.map(item => item.id)
+
+    };
+    this.http.post<OrderItem>(`${this.apiUrl}`, orderItem ).subscribe({
+      next: response => {
+        this.orderCart = [];
+        localStorage.removeItem('orderCart');
+        this.computeCartTotals();
+        this.saveCartToStorage();
+        window.location.reload();
+      },
+      error: error => {
+        console.error('Failed to add order to database:', error);
+      }
+    });
+
+  }
+
 }

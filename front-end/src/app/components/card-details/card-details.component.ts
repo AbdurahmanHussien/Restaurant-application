@@ -34,6 +34,9 @@ export class CardDetailsComponent implements OnInit {
     this.orderCartService.remove(orderCart);
   }
 
+  confirmOrder() {
+    this.orderCartService.addOrderToDatabase();
+  }
 
 
 

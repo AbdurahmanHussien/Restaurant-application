@@ -1,6 +1,6 @@
 package com.spring.restaurant.controller;
 import com.spring.restaurant.dto.CategoryDto;
-import com.spring.restaurant.service.CategoryService;
+import com.spring.restaurant.service.impl.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +49,7 @@ public class CategoryController {
     }
     @GetMapping
     @Operation(summary = "Get All category")
-    public ResponseEntity<List<CategoryDto>> getAllProducts() {
+    public ResponseEntity<List<CategoryDto>> getAllCategories() {
         List<CategoryDto> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }

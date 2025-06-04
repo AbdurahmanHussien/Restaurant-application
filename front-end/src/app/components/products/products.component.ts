@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
 
   products: any[] = [];
   page = 1; // first page
-  size = 8;
+  size = 6;
   totalPages = 8; // changeable based on data rows from backend
   searchValue = '';
   isSearching = false;

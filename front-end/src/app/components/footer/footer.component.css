@@ -1,13 +1,14 @@
 /* Footer Container */
 .footer-container {
-  background-color: #222;
+  background-color: black;
   color: #bbb;
   padding: 20px 0;
   text-align: center;
   font-family: Arial, sans-serif;
   font-size: 14px;
   user-select: none;
-
+  z-index: 9999;
+  position: relative;
 }
 
 /* Footer Content Wrapper */

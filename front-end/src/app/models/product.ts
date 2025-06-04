@@ -4,7 +4,7 @@ export interface Product {
   imagePath: string;
   description: string;
   price: number;
-  categoryId: string;
+  categoryId?: string;
 
 
 }

@@ -1,6 +1,6 @@
 package com.spring.restaurant.controller;
 import com.spring.restaurant.dto.ChefDto;
-import com.spring.restaurant.service.ChefService;
+import com.spring.restaurant.service.impl.ChefService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -4,6 +4,7 @@ import {CardComponent} from '../card/card.component';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {HeaderService} from '../../services/header.service';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -15,13 +16,15 @@ import {FormsModule} from '@angular/forms';
 })
 export class HeaderComponent {
 
-  constructor(private router: Router , private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router , private activatedRoute: ActivatedRoute, private loginService: AuthService) {}
 
 
   searchKey = '';
 
 
+
   search(searchKey:any) {
+
 
     const idCategoryExist = this.activatedRoute.firstChild?.snapshot.paramMap.has("id");
 
@@ -33,5 +36,16 @@ export class HeaderComponent {
     }
   }
 
+  get isLoggedIn() {
+    return this.loginService.isLoggedIn;
+  }
+  logout() {
+    localStorage.removeItem('jwt_token');
+
+    this.router.navigate(['/login'],
+      {
+      queryParams: { loggedOut: 'true' }
+    });
+  }
 
 }

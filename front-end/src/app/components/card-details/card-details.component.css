@@ -69,7 +69,7 @@
 /* Table body */
 .orders-table td {
   padding: 15px 10px;
-  text-align: center;
+  text-align: -webkit-center;
   border-bottom: 1px solid #ddd; /* replaced var(--border-color) */
   vertical-align: middle;
 }

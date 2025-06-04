@@ -1,9 +1,11 @@
-package com.spring.restaurant.service;
+package com.spring.restaurant.service.impl;
+
 import com.spring.restaurant.dto.ContactInfoDto;
 import com.spring.restaurant.entity.ContactInfo;
 import com.spring.restaurant.exceptions.BadRequestException;
 import com.spring.restaurant.mapper.ContactInfoMapper;
 import com.spring.restaurant.repository.ContactInfoRepository;
+import com.spring.restaurant.service.IContactService;
 import org.springframework.stereotype.Service;
 
 
@@ -23,8 +25,6 @@ public class ContactService implements IContactService {
         if (contactInfoDto.getId() != null) {
             throw new BadRequestException("id.notempty");
         }
-
-
         ContactInfo contactInfo = ContactInfoMapper.CONTACT_INFO_MAPPER.contactDTOToContact(contactInfoDto);
         ContactInfo saved = contactInfoRepository.save(contactInfo);
         return ContactInfoMapper.CONTACT_INFO_MAPPER.contactToContactDTO(saved);

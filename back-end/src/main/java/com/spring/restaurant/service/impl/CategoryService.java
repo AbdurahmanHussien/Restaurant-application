@@ -1,10 +1,11 @@
-package com.spring.restaurant.service;
+package com.spring.restaurant.service.impl;
 import com.spring.restaurant.dto.CategoryDto;
 import com.spring.restaurant.entity.Category;
 import com.spring.restaurant.exceptions.BadRequestException;
 import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.mapper.CategoryMapper;
 import com.spring.restaurant.repository.CategoryRepository;
+import com.spring.restaurant.service.ICategoryService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;

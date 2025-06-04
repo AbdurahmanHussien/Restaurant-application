@@ -19,6 +19,9 @@ spring:
         format_sql: true
 
 
+jwt:
+  secret: U29tZVN1cGVyU2VjdXJlU2VjcmV0S2V5MTIzNDU2tkodlsbhnbnxnbfhbdf
+  expiration: 3600000
 ---
 spring:
   config:
@@ -40,3 +43,5 @@ spring:
     username: hr
     password: hr
     driver-class-name: oracle.jdbc.OracleDriver
+
+

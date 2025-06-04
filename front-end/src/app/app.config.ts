@@ -6,6 +6,8 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {loaderInterceptor} from './interceptors/loader.interceptor';
+import {JwtInterceptor} from './interceptors/jwt.Interceptor';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(ReactiveFormsModule),
     importProvidersFrom(FormsModule),
-    provideHttpClient(withInterceptors([loaderInterceptor])),
+    provideHttpClient(withInterceptors([loaderInterceptor , JwtInterceptor])),
 
   ]
 };

@@ -2,7 +2,7 @@
 <div *ngIf="noResultsFound" class="no-results-message">
   <span>{{ messageEn }}</span>
 </div>
-<div class="tab-content" id="tab-1" *ngIf="!noResultsFound" >
+<div class="tab-content"  *ngIf="!noResultsFound" >
   <div class="menu-item" *ngFor="let product of products ">
     <img class="menu-img" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" width="350" height="350"/>
     <div class="menu-info">

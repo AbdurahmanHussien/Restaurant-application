@@ -234,6 +234,21 @@ header {
   background-color: #e65c00; /* Darker color on hover */
 }
 
+.error{
+  position: absolute;
+  color: red;
+  font-size: larger;
+  display: contents;
+}
+
+.success{
+  position: relative;
+  color: green;
+  margin-bottom: 20px;
+  font-size: larger;
+  display: contents;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .contact-content {
@@ -246,6 +261,7 @@ header {
     flex: none;
     width: 100%;
   }
+
 }
 
 

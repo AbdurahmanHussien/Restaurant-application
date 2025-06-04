@@ -1,4 +1,5 @@
 package com.spring.restaurant.entity.auth;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,12 @@ public class UserDetails {
 
     private String phoneNum;
 
+    @Column(unique = true)
     private String email;
 
     private String address;
+
+    private int age;
 
     @OneToOne(mappedBy = "userDetails")
     private User user;

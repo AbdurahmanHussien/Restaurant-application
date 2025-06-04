@@ -1,13 +1,16 @@
 package com.spring.restaurant.controller;
+
 import com.spring.restaurant.dto.ProductDto;
-import com.spring.restaurant.service.ProductService;
+import com.spring.restaurant.service.impl.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 
 @RestController
 @RequestMapping ("/api/product")
@@ -65,7 +68,7 @@ public class ProductController {
     }
     @GetMapping("/{id}")
     @Operation(summary = "Get product By Id")
-    public ResponseEntity<ProductDto> getProductById(  @PathVariable int id) throws Exception {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable int id) throws Exception {
         ProductDto product = productService.getProductById(id);
         return ResponseEntity.ok(product);
     }

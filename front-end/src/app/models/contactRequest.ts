@@ -9,5 +9,4 @@ export interface ContactRequest {
 
   message: string;
 
-  userId?: number;
 }

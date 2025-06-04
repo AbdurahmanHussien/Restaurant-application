@@ -1,0 +1,67 @@
+<div class="min-h-32  flex flex-col justify-center items-center p-2 py-4 md:py-6 mt-6 ">
+  <img ngSrc="assets/img/wallpaper.png" alt="Logo" class="absolute inset-0 w-full h-full object-cover opacity-95 z-0 pointer-events-none "
+       height="1080" width="1920">
+  <div class="absolute inset-0 bg-black  opacity-50 z-10  pointer-events-none "></div>
+
+  <div class="max-w-md w-full p-4 sm:p-5 bg-white z-50 rounded-2xl  ml-20 mr-auto mt-20">
+    <div class="text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-black">Create Your Account</h2>
+      <p class="text-sm text-black mt-1">Join us and start your journey</p>
+    </div>
+
+    <form class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="fullName" class="block text-black text-sm font-semibold mb-2">Full Name</label>
+        <input type="text" id="fullName" formControlName="name" placeholder="e.g., John Doe" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm" required />
+      </div>
+
+      <div>
+        <label for="username" class="block text-black text-sm font-semibold mb-2">Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="e.g., johndoe99" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm" required />
+      </div>
+
+      <div>
+        <label for="email" class="block text-black text-sm font-semibold mb-2">Email address</label>
+        <input type="email" id="email" formControlName="email" placeholder="you@example.com" class="w-full px-3 py-2  border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm" required />
+      </div>
+
+      <div>
+        <label for="phoneNum" class="block text-black text-sm font-semibold mb-2">Phone Number</label>
+        <input type="tel" id="phoneNum" formControlName="phoneNum" placeholder="e.g., +1234567890" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm" required />
+      </div>
+
+      <div>
+        <label for="age" class="block text-black text-sm font-semibold mb-2">Age</label>
+        <input type="number" id="age" min="15" formControlName="age" placeholder="e.g., 25" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm [appearance:text field] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" required />
+      </div>
+
+      <div>
+        <label for="password" class="block text-black text-sm font-semibold mb-2">Password</label>
+        <div class="relative">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password" placeholder="••••••••" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm" required />
+          <button type="button" (click)="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-amberCustom focus:outline-none" aria-label="Toggle password visibility">
+            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.98 8.223A10.477 10.477 0 002.458 12c1.274 4.057 5.065 7 9.542 7a10.48 10.48 0 006.195-2.06M14.121 14.121A3 3 0 019.88 9.88m3.758 3.758l5.303 5.303m-8.485-1.06l-5.303-5.303" />
+            </svg>
+            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7zm9.542 3a3 3 0 100-6 3 3 0 000 6z" />
+            </svg>          </button>
+        </div>
+      </div>
+
+      <div class="col-span-2" >
+        <label for="address" class="block text-black text-sm font-semibold mb-2">Address</label>
+        <input id="address" formControlName="address" placeholder="e.g., 123 Main St, Anytown, USA" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors " required />
+      </div>
+
+      <div class="col-span-2">
+        <button type="submit" class="w-full bg-amberCustom text-white py-2 rounded-3xl font-semibold hover:bg-amberCustom focus:ring-2 focus:ring-amberCustom focus:ring-opacity-50 transition-colors">Create Account</button>
+      </div>
+
+      <div class="text-sm text-center text-black sm:col-span-2">
+        Already have an account?
+        <a routerLink="/login" class="font-semibold text-amberCustom hover:underline ">Login</a>
+      </div>
+    </form>
+  </div>
+</div>

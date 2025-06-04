@@ -50,6 +50,10 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" [(ngModel)]="contactData.message" placeholder="Leave a message here" style="height:150px" required></textarea>
           </div>
+          <div class="error" *ngFor="let error of errors">
+            <p *ngIf="!success">{{ error }}</p>
+          </div>
+          <div  class="success"  *ngIf="success">{{ successMessage }}</div>
           <div class="form-group">
             <button type="submit">Send Message</button>
           </div>

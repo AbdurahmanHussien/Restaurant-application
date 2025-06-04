@@ -17,23 +17,38 @@ export class ContactInfoComponent implements OnInit {
 
   ngOnInit(): void {}
 
+    errors: any[]= [];
+    successMessage: string = 'Your message has been sent successfully';
+    success: boolean | undefined ;
 
-  contactData: ContactRequest = {
+   contactData: ContactRequest = {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   };
 
   onSubmit() {
     this._contactService.sendMessage(this.contactData).subscribe({
       next: () => {
-        alert('your message has been sent');
+        this.success = true;
       },
-      error: () => {
-        alert('error while sending message');
+      error: (error) => {
+        this.success = false;
+        if(Array.isArray(error.error)) {
+          this.errors = this.handleErrors(error.error);
+        }
       }
     });
   }
+
+
+
+  handleErrors(errors: any[]) {
+    const englishMessages = errors.map(err => err.messages?.message_en).filter(msg => !!msg);
+    console.log(englishMessages);
+    return englishMessages;
+  }
+
 
 }

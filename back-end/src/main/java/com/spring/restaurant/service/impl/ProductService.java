@@ -1,4 +1,4 @@
-package com.spring.restaurant.service;
+package com.spring.restaurant.service.impl;
 import com.spring.restaurant.dto.ProductDto;
 import com.spring.restaurant.entity.Product;
 import com.spring.restaurant.exceptions.BadRequestException;
@@ -6,6 +6,7 @@ import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.mapper.ProductMapper;
 import com.spring.restaurant.repository.CategoryRepository;
 import com.spring.restaurant.repository.ProductRepository;
+import com.spring.restaurant.service.IProductService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -71,9 +72,7 @@ public class ProductService implements IProductService {
     @Cacheable("products")
     public Page<ProductDto> getAllProducts(int page, int size) {
 
-        if(page <= 0){
-            throw new BadRequestException("page.zero");
-        }
+        validatePageNumber(page);
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id"));
         Page<Product> productPage = productRepository.findAllByOrderByIdAsc(pageable);
         if (productPage.isEmpty()) {
@@ -105,9 +104,7 @@ public class ProductService implements IProductService {
     @Override
     @Cacheable("productsByCategory")
     public Page<ProductDto> getAllByCategoryId(long id, int page, int size) {
-        if(page <= 0){
-            throw new BadRequestException("page.zero");
-        }
+        validatePageNumber(page);
         Pageable pageable = PageRequest.of(page -1, size);
         Page<Product> productPage = productRepository.getAllByCategoryId(id, pageable);
         if (productPage.isEmpty()) {
@@ -150,9 +147,7 @@ public class ProductService implements IProductService {
 
     @Override
      public Page<ProductDto> searchProducts(String keyword, int page, int size) {
-        if(page <= 0){
-            throw new BadRequestException("page.zero");
-        }
+        validatePageNumber(page);
         Pageable pageable = PageRequest.of(page-1, size);
         Page<Product> productsPage = productRepository.searchByNameOrDescription(keyword, pageable);
         if (productsPage.isEmpty()) {
@@ -163,9 +158,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword, int page, int size) {
-        if(page <= 0){
-            throw new BadRequestException("page.zero");
-        }
+        validatePageNumber(page);
 
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Product> productsPage = productRepository.searchByCategoryIdAndNameOrDescription(categoryId, keyword, pageable);
@@ -176,6 +169,11 @@ public class ProductService implements IProductService {
         return productsPage.map(this::toDto);
     }
 
+    private static void validatePageNumber(int page) {
+        if(page <= 0){
+            throw new BadRequestException("page.zero");
+        }
+    }
 
 
     private ProductDto saveAndReturnDto(ProductDto dto) {

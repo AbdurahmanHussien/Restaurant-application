@@ -1,5 +1,6 @@
 package com.spring.restaurant.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.List;
@@ -10,8 +11,8 @@ public class OrderItemDto {
 
 
     private Long id;
-
     private String code;
+
 
     private long totalPrice;
 
@@ -19,5 +20,6 @@ public class OrderItemDto {
 
     List<ProductDto> products;
 
+    @NotBlank(message="user.notblank")
     private long userId;
 }

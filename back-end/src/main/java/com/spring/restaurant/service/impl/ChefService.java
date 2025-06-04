@@ -1,7 +1,8 @@
-package com.spring.restaurant.service;
+package com.spring.restaurant.service.impl;
 import com.spring.restaurant.dto.ChefDto;
 import com.spring.restaurant.mapper.ChefMapper;
 import com.spring.restaurant.repository.ChefRepository;
+import com.spring.restaurant.service.IChefService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -1,6 +1,6 @@
-<div class="app-container relative">
+<div class="app-container relative ">
 
-  <app-header></app-header>
+  <app-header *ngIf="!isLoginPage"></app-header>
 
   <main class="main-content">
 
@@ -10,13 +10,14 @@
     <app-loader></app-loader>
   </main>
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="!isLoginPage"></app-footer>
 
 
   <!-- Back to Top -->
 
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <button class="back-to-top" (click)="scrollToTop()">
+  <button *ngIf="!isLoginPage" class="back-to-top dark:bg-gray-800" (click)="scrollToTop()">
     <i class="fas fa-arrow-up"></i>
   </button>
 

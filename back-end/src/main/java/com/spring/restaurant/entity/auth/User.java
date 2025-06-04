@@ -3,10 +3,8 @@ package com.spring.restaurant.entity.auth;
 import com.spring.restaurant.entity.ContactInfo;
 import com.spring.restaurant.entity.OrderItem;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.Set;
 
 
 @Setter
-@Getter
+@Getter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,17 +23,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userName")
+    @Column(name = "userName" , unique = true)
     private String username;
 
     private String password;
 
 
-    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinColumn(name = "user_details_id")
     private UserDetails userDetails;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
      @JoinTable(
              name = "user_roles",
              joinColumns = @JoinColumn(name = "user_id"),
@@ -45,12 +43,13 @@ public class User {
 
 
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL , fetch = FetchType.LAZY )
+            cascade = CascadeType.ALL , fetch = FetchType.LAZY)
    private List<ContactInfo> contactInfos ;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true , fetch = FetchType.LAZY )
     private List<OrderItem> orderItems;
+
 
 
 }
