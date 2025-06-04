@@ -73,26 +73,31 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/AbdurahmanHussien/Restaurant-application.git
    cd restaurant-management-system/backend
+   ```
 Configure your Oracle database connection in application.properties:
 
-properties
+```properties
 spring.datasource.url=jdbc:oracle:thin:@localhost:1521:ORCL
 spring.datasource.username=your_username
 spring.datasource.password=your_password
+```
 Build the project:
 
-bash
+```bash
 mvn clean install
+```
 Frontend Setup
 Navigate to the frontend directory:
 
-bash
+```bash
 cd ../fron-tend
+```
 Install dependencies:
 
-bash
+```bash
 npm install
-Configuration
+```
+## Configuration
 Backend Configuration
 Update application.properties with your specific configurations:
 
@@ -105,22 +110,18 @@ Server port
 CORS settings
 
 Frontend Configuration
-Update environment.ts with your backend API URL:
 
-typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api'
-};
 Running the Application
 Start the Backend
-bash
+```bash
 cd backend
 mvn spring-boot:run
+```
 Start the Frontend
-bash
+```bash
 cd frontend
 ng serve
+```
 The application will be available at:
 
 Backend: http://localhost:8080
@@ -135,33 +136,34 @@ http://localhost:8080/swagger-ui.html
 
 # Project Structure
 restaurant-management-system/
+restaurant-management-system/
 ├── back-end/
 │   ├── src/
 │   │   ├── main/java/com/restaurant/
-│   │   │   ├── config/          # Spring configuration classes
-│   │   │   ├── controller/      # REST controllers
-│   │   │   ├── dto/             # Data Transfer Objects
-│   │   │   ├── exception/       # Exception handling
-│   │   │   ├── model/           # Entity classes
-│   │   │   ├── repository/      # JPA repositories
-│   │   │   ├── security/        # Security configuration
-│   │   │   └── service/         # Business logic
+│   │   │   ├── config/         # Spring configuration classes
+│   │   │   ├── controller/     # REST controllers
+│   │   │   ├── dto/            # Data Transfer Objects
+│   │   │   ├── exception/      # Exception handling
+│   │   │   ├── model/          # Entity classes
+│   │   │   ├── repository/     # JPA repositories
+│   │   │   ├── security/       # Security configuration
+│   │   │   └── service/        # Business logic
 │   │   └── resources/
 │   │       ├── application.yml
-│   │       └── static/          # Static resources
-│   └── pom.xml                  # Maven dependencies
-└── front-end/
-    ├── src/
-    │   ├── app/
-    │   │   ├── components/      # Angular components
-    │   │   ├── models/          # TypeScript interfaces
-    │   │   ├── services/        # Angular services
-    │   │   ├── guards/          # Route guards
-    │   │   └── shared/          # Shared modules
-    │   │   └── interceptors/     # interceptor modules
-    │   ├── assets/              # Static assets
-    │   └── environments/        # Environment configurations
-    └── package.json             # Frontend dependencies
+│   │       └── static/         # Static resources
+│   └── pom.xml                 # Maven dependencies
+├── front-end/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/     # Angular components
+│   │   │   ├── models/         # TypeScript interfaces
+│   │   │   ├── services/       # Angular services
+│   │   │   ├── guards/         # Route guards
+│   │   │   ├── interceptors/   # HTTP interceptors
+│   │   │   └── shared/         # Shared modules
+│   ├── assets/                 # Static assets
+│   └── environments/           # Environment configurations
+└── package.json                # Frontend dependencies
 
 ## Screenshots
 
