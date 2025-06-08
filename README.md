@@ -7,13 +7,9 @@ This project is a comprehensive restaurant management system built with Spring B
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Configuration](#configuration)
-- [Running the Application](#running-the-application)
-- [API Documentation](#api-documentation)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -23,7 +19,6 @@ This project is a comprehensive restaurant management system built with Spring B
 - Order processing system
 - Table/reservation management
 - Staff management
-- Reporting and analytics
 
 ### Frontend Features
 - Responsive design with Tailwind CSS
@@ -31,7 +26,7 @@ This project is a comprehensive restaurant management system built with Spring B
 - Real-time order tracking
 - Customer management interface
 - Inventory management
-- Admin panel
+- Admin panel (coming)
 
 ## Technologies Used
 
@@ -73,26 +68,31 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/AbdurahmanHussien/Restaurant-application.git
    cd restaurant-management-system/backend
+   ```
 Configure your Oracle database connection in application.properties:
 
-properties
+```properties
 spring.datasource.url=jdbc:oracle:thin:@localhost:1521:ORCL
 spring.datasource.username=your_username
 spring.datasource.password=your_password
+```
 Build the project:
 
-bash
+```bash
 mvn clean install
+```
 Frontend Setup
 Navigate to the frontend directory:
 
-bash
+```bash
 cd ../fron-tend
+```
 Install dependencies:
 
-bash
+```bash
 npm install
-Configuration
+```
+## Configuration
 Backend Configuration
 Update application.properties with your specific configurations:
 
@@ -105,22 +105,18 @@ Server port
 CORS settings
 
 Frontend Configuration
-Update environment.ts with your backend API URL:
 
-typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api'
-};
 Running the Application
 Start the Backend
-bash
+```bash
 cd backend
 mvn spring-boot:run
+```
 Start the Frontend
-bash
+```bash
 cd frontend
 ng serve
+```
 The application will be available at:
 
 Backend: http://localhost:8080
@@ -133,51 +129,53 @@ API documentation is available via Swagger UI when the backend is running:
 http://localhost:8080/swagger-ui.html
 
 
-# Project Structure
+##  🏗️ Project Structure
+```
 restaurant-management-system/
-├── back-end/
+├── back-end/                  # Spring Boot Backend
 │   ├── src/
 │   │   ├── main/java/com/restaurant/
-│   │   │   ├── config/          # Spring configuration classes
-│   │   │   ├── controller/      # REST controllers
-│   │   │   ├── dto/             # Data Transfer Objects
-│   │   │   ├── exception/       # Exception handling
-│   │   │   ├── model/           # Entity classes
-│   │   │   ├── repository/      # JPA repositories
-│   │   │   ├── security/        # Security configuration
-│   │   │   └── service/         # Business logic
+│   │   │   ├── config/         # 🛠️ Spring configuration classes
+│   │   │   ├── controller/     # 🎮 REST controllers
+│   │   │   ├── dto/            # 📦 Data Transfer Objects
+│   │   │   ├── exception/      # ❗ Exception handling
+│   │   │   ├── model/          # 🗃️ Entity classes
+│   │   │   ├── repository/     # 💾 JPA repositories
+│   │   │   ├── security/       # 🔒 Security configuration
+│   │   │   └── service/        # 💡 Business logic
 │   │   └── resources/
-│   │       ├── application.yml
-│   │       └── static/          # Static resources
-│   └── pom.xml                  # Maven dependencies
-└── front-end/
-    ├── src/
-    │   ├── app/
-    │   │   ├── components/      # Angular components
-    │   │   ├── models/          # TypeScript interfaces
-    │   │   ├── services/        # Angular services
-    │   │   ├── guards/          # Route guards
-    │   │   └── shared/          # Shared modules
-    │   │   └── interceptors/     # interceptor modules
-    │   ├── assets/              # Static assets
-    │   └── environments/        # Environment configurations
-    └── package.json             # Frontend dependencies
+│   │       ├── application.yml # ⚙️ Configuration
+│   │       └── static/         # 🖼️ Static resources
+│   └── pom.xml                 # 📦 Maven dependencies
+│
+├── front-end/                 # Angular Frontend
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/     # 🧩 Angular components
+│   │   │   ├── models/         # 📐 TypeScript interfaces
+│   │   │   ├── services/       # 🔌 Angular services
+│   │   │   ├── guards/         # 🛡️ Route guards
+│   │   │   ├── interceptors/   # ↔️ HTTP interceptors
+│   │   │   └── shared/         # 🤝 Shared modules
+│   ├── assets/                # 🎨 Static assets
+│   └── environments/          # 🌍 Environment configs
+│
+├── docs/                     # 📚 Documentation
+├── assets/                   # 🖼️ Screenshots & images
+│   ├── home-page.png         # 🏠 Homepage screenshot
+│   ├── login-page.png        # 🔑 Login page
+│   ├── signup-page.png       # ✍️ Signup page
+│   └── system-banner.png     # 🏆 Main banner
+└── README.md                 # 📖 This file
+```
+## 📸 Screenshots
 
-## Screenshots
+| Home Page | Login Page | Signup Page |
+|-----------|------------|-------------|
+| ![Home](/others/screenshots/home.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) |
 
-### Home Page
-![Home Page](/others/screenshots/home.png)
-*Modern responsive homepage with featured menu items and promotions*
 
-### Login Page
-![Login Page](/others/screenshots/login.png)
-*Secure login interface with form validation*
-
-### Signup Page
-![Signup Page](/others/screenshots/sign.png)
-*User registration form with password strength meter*
-
-Contributing
+## Contributing
 Contributions are welcome! Please follow these steps:
 
 Fork the project
