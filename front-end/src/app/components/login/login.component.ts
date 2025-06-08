@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
 
 
-  errorMessage = signal('');
+  errorMessage:String = '';
   showPassword = false;
 
   logOutMessage = '';
@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
         const token = res.token;
         localStorage.setItem('jwt_token', token);
         this.router.navigate(['/products'])},
-      error: () => this.errorMessage.set('Invalid email or password'),
+
+      error: () => this.errorMessage='Invalid email or password'
     });
   }
 }

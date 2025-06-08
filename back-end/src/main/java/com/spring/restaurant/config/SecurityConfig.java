@@ -28,7 +28,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter JwtAuthenticationFilter;
     private static final String[] AUTH_WHITELIST = {
-            // -- swagger ui
+
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-resources/**",
@@ -42,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain defaultsecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(AUTH_WHITELIST).permitAll()
                                 .anyRequest().authenticated())
@@ -63,6 +63,8 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -70,6 +72,8 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {

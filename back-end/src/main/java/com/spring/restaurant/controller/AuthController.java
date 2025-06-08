@@ -1,8 +1,10 @@
 package com.spring.restaurant.controller;
+
 import com.spring.restaurant.request.LoginRequest;
 import com.spring.restaurant.request.RegisterRequest;
 import com.spring.restaurant.response.AuthResponse;
 import com.spring.restaurant.service.auth.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +22,12 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register( @Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.createUser(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> login( @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.loginUser(request));
     }
 }

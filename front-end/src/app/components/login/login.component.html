@@ -81,11 +81,11 @@
         <button
           [disabled]="loginForm.invalid"
           type="submit"
-          class="w-full bg-amberCustom text-white py-2.5 rounded-3xl font-semibold hover:bg-amberCustom focus:outline-none focus:ring-2 focus:ring-amberCustom focus:ring-opacity-50 transition-colors duration-300"
+          class="w-full bg-amberCustom text-white py-2.5 rounded-3xl font-semibold hover:bg-[#e69500] uppercase"
         >
           Login
         </button>
-        <div *ngIf="errorMessage()" class="text-red-500 mt-2">{{ errorMessage() }}</div>
+        <div *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</div>
       </div>
 
       <div class="text-sm text-center text-black">

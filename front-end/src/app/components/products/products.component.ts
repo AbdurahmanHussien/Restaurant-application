@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   products: any[] = [];
   page = 1; // first page
   size = 6;
-  totalPages = 8; // changeable based on data rows from backend
+  totalPages = 10; // changeable based on data rows from backend
   searchValue = '';
   isSearching = false;
   noResultsFound = false;
@@ -32,6 +32,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router, private orderCartService: OrderCartService) {
   }
+
+
 
 
   ngOnInit() {

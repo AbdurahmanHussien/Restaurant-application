@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 public class ApiError  {
 
     private int status;
-    private String error;
+    private String field;
     private BundleMessageDTO messages;
     private LocalDateTime time;
 
 
-    public ApiError (int status, String error, BundleMessageDTO messages ) {
+    public ApiError (int status, String field, BundleMessageDTO messages ) {
         this.status = status;
-        this.error = error;
+        this.field = field;
         this.messages = messages;
         this.time = LocalDateTime.now();
     }

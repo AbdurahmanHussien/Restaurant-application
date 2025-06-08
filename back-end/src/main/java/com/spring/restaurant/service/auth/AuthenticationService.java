@@ -1,8 +1,10 @@
 package com.spring.restaurant.service.auth;
+
 import com.spring.restaurant.config.jwt.JwtUtils;
 import com.spring.restaurant.entity.auth.Role;
 import com.spring.restaurant.entity.auth.User;
 import com.spring.restaurant.entity.auth.UserDetails;
+import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.repository.auth.RoleRepository;
 import com.spring.restaurant.repository.auth.UserRepository;
 import com.spring.restaurant.request.LoginRequest;
@@ -11,6 +13,7 @@ import com.spring.restaurant.response.AuthResponse;
 import com.spring.restaurant.utils.RoleType;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -80,19 +83,21 @@ public class AuthenticationService implements IAuthenticationService {
 
     @Override
     public AuthResponse loginUser(LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.email(),
-                        request.password()
-                )
-        );
-
         User user = userRepository.findByUserDetailsEmail(request.email())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("email.not.found"));
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.email(),
+                            request.password()
+                    )
+            );
+        } catch (BadCredentialsException ex) {
+            throw new BadCredentialsException("invalid.password");
+        }
 
-        String token = jwtUtils.generateToken(user.getUserDetails().getEmail());
-        return AuthResponse.builder().token(token).build();
-    }
-
+            String token = jwtUtils.generateToken(user.getUserDetails().getEmail());
+            return AuthResponse.builder().token(token).build();
+        }
 
 }

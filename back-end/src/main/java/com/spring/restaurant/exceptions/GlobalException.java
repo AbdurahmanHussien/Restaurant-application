@@ -1,13 +1,18 @@
 package com.spring.restaurant.exceptions;
+
 import com.spring.restaurant.dto.BundleMessageDTO;
 import com.spring.restaurant.response.ApiError;
 import com.spring.restaurant.service.BundleTranslatorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -49,12 +54,19 @@ public class GlobalException {
                     var messages = bundleTranslator.getBundleMessages(errorField.getDefaultMessage());
                     return new ApiError(
                             HttpStatus.BAD_REQUEST.value(),
-                            "validation.error",
+                            errorField.getField(),
                             messages
                     );
                 })
                 .collect(Collectors.toList());
 
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String, String>> handleRuntime(BadCredentialsException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 }
