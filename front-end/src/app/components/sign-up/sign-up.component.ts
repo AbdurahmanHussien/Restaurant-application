@@ -2,7 +2,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -38,6 +38,8 @@ export class SignUpComponent implements OnInit {
 
   signupErrors : any = {}
 
+  errorMessageEmail: string = ''
+
 
   onSubmit() {
     if (this.signupForm.invalid) return;
@@ -47,8 +49,12 @@ export class SignUpComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error: (err) => {
+       // debugger
+        this.errorMessageEmail = err.error?.messages?.message_en || '' ;
+
         this.signupErrors = {};
         err.error.forEach((err: any) => {
+
           this.signupErrors[err.field] = err.messages.message_en;
         });
 

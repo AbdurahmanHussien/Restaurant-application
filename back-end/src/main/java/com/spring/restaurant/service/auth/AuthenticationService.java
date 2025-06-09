@@ -53,8 +53,8 @@ public class AuthenticationService implements IAuthenticationService {
 
         Optional<User> getUser= userRepository.findByUserDetailsEmail(request.email());
         Optional<User> getUser1= userRepository.findByUsername(request.phoneNum());
-        if (getUser.isPresent() || getUser1.isPresent()) {
-            throw new RuntimeException("Email already exists Or username already exists");
+        if (getUser.isPresent()) {
+            throw new ResourceNotFoundException("email.exists");
         }
 
         Role userRole = roleRepository.findByRoleType(RoleType.USER)
@@ -76,7 +76,7 @@ public class AuthenticationService implements IAuthenticationService {
         }
 
 
-        String token = jwtUtils.generateToken(request.username());
+        String token = jwtUtils.generateToken(user);
 
         return AuthResponse.builder().token(token).build();
     }
@@ -96,8 +96,13 @@ public class AuthenticationService implements IAuthenticationService {
             throw new BadCredentialsException("invalid.password");
         }
 
-            String token = jwtUtils.generateToken(user.getUserDetails().getEmail());
+            String token = jwtUtils.generateToken(user);
             return AuthResponse.builder().token(token).build();
         }
 
+    public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
+        userRepository.delete(user);
+    }
 }

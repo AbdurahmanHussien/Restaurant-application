@@ -1,5 +1,7 @@
 package com.spring.restaurant.config.jwt;
 
+import com.spring.restaurant.entity.auth.Role;
+import com.spring.restaurant.entity.auth.User;
 import com.spring.restaurant.service.auth.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -7,10 +9,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -25,11 +29,15 @@ public class JwtUtils {
     private int ExpirationTime;
 
 
-    public String generateToken(String username) {
+    public String generateToken(User user) {
+        Claims claims = Jwts.claims().setSubject(user.getUserDetails().getEmail());
+        claims.put("roles", user.getRoles().stream().map(Role::getRoleType).collect(Collectors.toList()));
+        claims.put("username", user.getUsername());
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject("jwtToken")
+                .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ExpirationTime))
+                .setExpiration(new Date(System.currentTimeMillis() + ExpirationTime * 1000L))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

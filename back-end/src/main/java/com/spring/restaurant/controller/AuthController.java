@@ -7,10 +7,7 @@ import com.spring.restaurant.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -30,4 +27,11 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login( @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.loginUser(request));
     }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<Void> removeUser(@PathVariable Long id) {
+        authService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

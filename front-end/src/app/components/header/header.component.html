@@ -6,11 +6,17 @@
     <a routerLink="/"   class="navbar-title font-bold text-2xl flex items-center justify-center h-14 color">
       Aroma Hub
     </a>
+
+    <h3 class=" text-[#ff6600] rounded-full px-2 py-1 w-4 ml-3 mr-9 font-bold"> Welcome, {{username}} </h3>
+  </div>
+
+  <div class="w-24 mx-2 px-2 py-1 order-2 mb-2 md:mb-0 md:mr-[10px]">
     <button *ngIf="isLoggedIn" (click)="logout()" class="search-btn bg-[#ff6600] text-white rounded-full px-4 py-1 hover:bg-[#e65c00] transition-colors ml-10 mr-3" >
 
       Logout</button>
   </div>
   <div class="nav-links flex flex-wrap  md:gap-6 justify-center">
+
 
         <a
           routerLink="/products"

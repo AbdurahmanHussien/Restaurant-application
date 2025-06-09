@@ -9,11 +9,11 @@
       <p class="text-sm text-black mt-1">Your new favorite bite starts here</p>
     </div>
 
-    <form class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 " [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="fullName" class="block text-black text-sm font-semibold mb-2">Full Name</label>
-        <input type="text"   id="fullName" formControlName="name" placeholder="e.g., Mohamed Hussein" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['name']">
+        <input type="text"   id="fullName" formControlName="name" placeholder="e.g., Mohamed Hussein" class="w-full px-3 py-2  border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['name']">
           {{ signupErrors['name'] }}
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div>
         <label for="username" class="block text-black text-sm font-semibold mb-2">Username</label>
         <input type="text" id="username" formControlName="username" placeholder="e.g., mohamed99" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['username']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['username']">
           {{ signupErrors['username'] }}
         </div>
       </div>
@@ -29,15 +29,18 @@
       <div>
         <label for="email" class="block text-black text-sm font-semibold mb-2">Email address</label>
         <input type="email" id="email" formControlName="email" placeholder="you@example.com" class="w-full px-3 py-2  border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['email']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['email']">
           {{ signupErrors['email'] }}
+        </div>
+        <div class="mt-1 text-sm text-red-500" *ngIf="errorMessageEmail">
+          {{ errorMessageEmail}}
         </div>
       </div>
 
       <div>
         <label for="phoneNum" class="block text-black text-sm font-semibold mb-2">Phone Number</label>
         <input type="tel" id="phoneNum" formControlName="phoneNum" placeholder="e.g., 01017119146" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['phoneNum']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['phoneNum']">
           {{ signupErrors['phoneNum'] }}
         </div>
       </div>
@@ -45,7 +48,7 @@
       <div>
         <label for="age" class="block text-black text-sm font-semibold mb-2">Age</label>
         <input type="number" id="age" formControlName="age" placeholder="e.g., 25" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm [appearance:text field] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['age']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['age']">
           {{ signupErrors['age'] }}
         </div>
       </div>
@@ -63,7 +66,7 @@
             </svg>
           </button>
         </div>
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['password']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['password']">
 
           {{ signupErrors['password'] }}
         </div>
@@ -72,7 +75,7 @@
       <div class="col-span-2" >
         <label for="address" class="block text-black text-sm font-semibold mb-2">Address</label>
         <input id="address" formControlName="address" placeholder="e.g., 32 Nozha Street, Nasr City, Cairo, Egypt" class="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors "  />
-        <div class="mt-1 text-xs text-red-500" *ngIf="signupErrors['address']">
+        <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="signupErrors['address']">
           {{ signupErrors['address'] }}
         </div>
       </div>

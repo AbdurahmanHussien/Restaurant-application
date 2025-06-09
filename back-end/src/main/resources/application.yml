@@ -21,7 +21,7 @@ spring:
 
 jwt:
   secret: U29tZVN1cGVyU2VjdXJlU2VjcmV0S2V5MTIzNDU2tkodlsbhnbnxnbfhbdf
-  expiration: 3600000
+  expiration: 36000
 ---
 spring:
   config:

@@ -1,8 +1,7 @@
-import {Component, EventEmitter, HostListener, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CardComponent} from '../card/card.component';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {HeaderService} from '../../services/header.service';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 
@@ -14,13 +13,24 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements  OnInit{
 
-  constructor(private router: Router , private activatedRoute: ActivatedRoute, private loginService: AuthService) {}
+  constructor(private router: Router , private activatedRoute: ActivatedRoute, private loginService: AuthService) {
+  }
+
+
+  ngOnInit(): void {
+    let token = localStorage.getItem("jwt_token");
+    let payload = this.getPayload(token);
+    this.username = payload.username;
+    console.log(this.username);
+    }
+
 
 
   searchKey = '';
 
+  username: string | undefined;
 
 
   search(searchKey:any) {
@@ -47,5 +57,15 @@ export class HeaderComponent {
       queryParams: { loggedOut: 'true' }
     });
   }
+
+
+  getPayload(token: string | null) {
+    // @ts-ignore
+    const payloadBase64 = token.split('.')[1];
+    const decodedPayload = atob(payloadBase64);
+    return JSON.parse(decodedPayload);
+  }
+
+
 
 }

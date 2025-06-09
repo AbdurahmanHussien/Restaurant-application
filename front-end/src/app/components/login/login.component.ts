@@ -1,15 +1,13 @@
-import {Component, signal, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators,
-  FormGroup,
 } from '@angular/forms';
 import {
   NgIf,
   NgOptimizedImage,
-  AsyncPipe,
   CommonModule,
 } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
