@@ -16,7 +16,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+.qodo
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

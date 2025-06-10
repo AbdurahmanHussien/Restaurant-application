@@ -28,12 +28,21 @@ public class GlobalException {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(ResourceNotFoundException ex) {
        BundleMessageDTO messages = bundleTranslator.getBundleMessages(ex.getMessage());
-
        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND.value(),
                HttpStatus.NOT_FOUND.getReasonPhrase(),
                messages);
 
             return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicateFieldException.class)
+    public ResponseEntity<ApiError> handleDuplicate(DuplicateFieldException ex) {
+        BundleMessageDTO messages = bundleTranslator.getBundleMessages(ex.getMessage());
+        ApiError apiError = new ApiError(HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                messages);
+
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(BadRequestException.class)

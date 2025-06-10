@@ -4,6 +4,7 @@ import com.spring.restaurant.config.jwt.JwtUtils;
 import com.spring.restaurant.entity.auth.Role;
 import com.spring.restaurant.entity.auth.User;
 import com.spring.restaurant.entity.auth.UserDetails;
+import com.spring.restaurant.exceptions.DuplicateFieldException;
 import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.repository.auth.RoleRepository;
 import com.spring.restaurant.repository.auth.UserRepository;
@@ -52,9 +53,12 @@ public class AuthenticationService implements IAuthenticationService {
                 .build();
 
         Optional<User> getUser= userRepository.findByUserDetailsEmail(request.email());
-        Optional<User> getUser1= userRepository.findByUsername(request.phoneNum());
+        Optional<User> getUser1= userRepository.findByUsername(request.username());
         if (getUser.isPresent()) {
-            throw new ResourceNotFoundException("email.exists");
+            throw new DuplicateFieldException("email.exists");
+        }
+        if (getUser1.isPresent()) {
+            throw new DuplicateFieldException("username.exists");
         }
 
         Role userRole = roleRepository.findByRoleType(RoleType.USER)

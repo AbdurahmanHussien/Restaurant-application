@@ -17,4 +17,5 @@ public class BundleMessageDTO {
         this.messageAr = messageAr;
         this.messageEn = messageEn;
     }
+
 }
