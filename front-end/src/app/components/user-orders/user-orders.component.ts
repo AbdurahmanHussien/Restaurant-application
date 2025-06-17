@@ -31,7 +31,7 @@ export class UserOrdersComponent implements OnInit {
          next: (res) => {
            this.AllUserOrders = res;
          },
-         error: (err) => {
+         error: () => {
            this.message = 'You have no orders yet';
          }
        })

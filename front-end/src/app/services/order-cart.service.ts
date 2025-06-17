@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { OrderCart } from '../models/OrderCart';
 import { BehaviorSubject, Subject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Product} from '../models/product';
 import {OrderItem} from '../models/orderItem';
 import {ToastrService} from 'ngx-toastr';
 
@@ -87,7 +86,7 @@ export class OrderCartService {
 
     };
     this.http.post<OrderItem>(`${this.apiUrl}`, orderItem ).subscribe({
-      next: response => {
+      next: () => {
         this.orderCart = [];
         localStorage.removeItem('orderCart');
         this.computeCartTotals();

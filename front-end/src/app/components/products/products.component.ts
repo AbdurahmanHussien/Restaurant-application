@@ -14,7 +14,7 @@ import {Product} from '../../models/product';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, CategoryComponent, RouterLink],
+  imports: [CommonModule, CategoryComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
