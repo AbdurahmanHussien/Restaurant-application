@@ -14,6 +14,7 @@
   align-items: normal;
   background-color: #ffffff;
   border: 1px solid #ff6600;
+  position: relative;
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
@@ -34,7 +35,6 @@
   height: 120px;
   object-fit: cover;
   border-radius: 20px;
-  margin-right: 20px;
   flex-shrink: 0;
 }
 
@@ -86,9 +86,8 @@
   border-radius: 35px;
   cursor: pointer;
   transition: background-color 0.25s ease, transform 0.2s ease;
-  align-self: flex-start;
+  align-self: flex-end;
   margin-top: auto;
-  margin-left: 145px;
 }
 
 .tab-content .menu-item .menu-info .btn-add:hover {

@@ -18,7 +18,7 @@ public class OrderItemDto {
 
     private long totalQuantity;
 
-    List<ProductDto> products;
+    List<String> productsNames;
 
     @NotBlank(message="user.notblank")
     private long userId;

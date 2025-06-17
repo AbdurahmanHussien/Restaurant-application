@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import {CategoryComponent} from '../category/category.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {OrderCart} from '../../models/OrderCart';
 import {OrderCartService} from '../../services/order-cart.service';
+import {ToastrService} from 'ngx-toastr';
+import {AuthService} from '../../services/auth.service';
+import {Product} from '../../models/product';
 
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, CategoryComponent],
+  imports: [CommonModule, CategoryComponent, RouterLink],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -30,7 +33,7 @@ export class ProductsComponent implements OnInit {
   messageEn : string = '';
 
 
-  constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router, private orderCartService: OrderCartService) {
+  constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router, private orderCartService: OrderCartService, private toastr: ToastrService, private authService:AuthService) {
   }
 
 
@@ -192,4 +195,31 @@ export class ProductsComponent implements OnInit {
     this.orderCartService.addToCart(orderCart);
   }
 
+  isUserAdmin(): boolean {
+    return this.authService.isUserAdmin();
+  }
+
+  deleteProduct(productId: number) {
+    if (!confirm('Are you sure you want to delete this product?')) {
+      return;
+    }
+    this._productService.deleteProduct(productId).subscribe({
+      next: () => {
+
+        this.toastr.success('Product deleted successfully', 'Success');
+        this.loadProducts();
+      },
+      error: () => {
+        this.toastr.error('Error deleting product', 'Error');
+      }
+    });
+  }
+
+  editProduct(product: Product) {
+    if (product && product.id) {
+      this.router.navigate(['/product/edit', product.id]);
+    } else {
+      console.error('Product ID is undefined');
+    }
+  }
 }

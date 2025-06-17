@@ -4,6 +4,7 @@ import com.spring.restaurant.entity.auth.Role;
 import com.spring.restaurant.entity.auth.User;
 import com.spring.restaurant.service.auth.CustomUserDetails;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -19,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtUtils {
-
 
 
     @Value("${jwt.secret}")
@@ -47,6 +47,7 @@ public class JwtUtils {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
+
     private Key getSignInKey() {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -68,7 +69,13 @@ public class JwtUtils {
                 .parseClaimsJws(token)
                 .getBody();
     }
-    private boolean isTokenExpired(String token) {
-        return extractClaim(token, Claims::getExpiration).before(new Date());
+
+    boolean isTokenExpired(String token) {
+        try {
+            Date expiration = extractClaim(token, Claims::getExpiration);
+            return expiration.before(new Date());
+        } catch (ExpiredJwtException e) {
+            return true;
+        }
     }
 }

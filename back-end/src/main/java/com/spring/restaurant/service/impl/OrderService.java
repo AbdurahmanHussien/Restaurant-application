@@ -68,4 +68,14 @@ public class OrderService {
                 .map(OrderMapper.INSTANCE::orderItemToOrderItemDto)
                 .collect(Collectors.toList());
     }
+
+    public List<OrderItemDto> getUserOrders(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("user.notfound"));
+       List<OrderItemDto> orderItem= orderItemRepository.findAllByUserId(userId).stream().map(OrderMapper.INSTANCE::orderItemToOrderItemDto).toList();
+       if (orderItem.isEmpty()) {
+           throw new ResourceNotFoundException("order.notfound");
+       }
+        return orderItem;
+    }
 }

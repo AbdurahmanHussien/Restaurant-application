@@ -7,3 +7,8 @@
 body{
   font-family: 'Poppins', sans-serif;
 }
+
+.toast-success, .toast-error, .toast-info, .toast-warning {
+  z-index: 99999;
+  position: fixed;
+}

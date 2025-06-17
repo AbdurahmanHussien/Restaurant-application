@@ -78,4 +78,5 @@ public class GlobalException {
         error.put("message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+
 }

@@ -11,6 +11,7 @@ import {
   CommonModule,
 } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  constructor(private router:Router , private route: ActivatedRoute , private loginService: AuthService) {}
+  constructor(private router:Router ,
+              private route: ActivatedRoute ,
+              private loginService: AuthService,
+              private toastr: ToastrService) {}
   private fb = inject(FormBuilder);
 
 
@@ -42,6 +46,7 @@ export class LoginComponent implements OnInit {
   showPassword = false;
 
   logOutMessage = '';
+  UserRole:any;
 
 
   loginForm = this.fb.group({
@@ -62,10 +67,18 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).subscribe({
       next: (res) =>{
         const token = res.token;
+        const userId= res.userId;
+        console.log(userId);
         localStorage.setItem('jwt_token', token);
+        this.UserRole = res.userRole;
+        localStorage.setItem('roles', this.UserRole);
+        localStorage.setItem('userId', userId);
+        console.log( this.UserRole);
+        this.toastr.success('You have been logged in successfully', 'Welcome')
         this.router.navigate(['/products'])},
 
       error: () => this.errorMessage='Invalid email or password'
     });
   }
+
 }

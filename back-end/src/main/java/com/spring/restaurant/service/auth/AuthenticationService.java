@@ -14,11 +14,13 @@ import com.spring.restaurant.response.AuthResponse;
 import com.spring.restaurant.utils.RoleType;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -75,20 +77,26 @@ public class AuthenticationService implements IAuthenticationService {
 
       User savedUser =  userRepository.save(user);
 
-        if (savedUser == null || savedUser.getId() == null) {
+        if (savedUser.getId() == null) {
             throw new RuntimeException("User not saved");
         }
 
+        List<String> roles = user.getRoles().stream().map(Role::getRoleType).map(RoleType::name).toList();
 
         String token = jwtUtils.generateToken(user);
 
-        return AuthResponse.builder().token(token).build();
+
+        return AuthResponse.builder()
+                .userId(savedUser.getId())
+                .token(token)
+                .UserRole(roles)
+                .build();
     }
 
     @Override
     public AuthResponse loginUser(LoginRequest request) {
         User user = userRepository.findByUserDetailsEmail(request.email())
-                .orElseThrow(() -> new ResourceNotFoundException("email.not.found"));
+                .orElseThrow(() -> new AuthenticationServiceException("email.not.found"));
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -99,9 +107,13 @@ public class AuthenticationService implements IAuthenticationService {
         } catch (BadCredentialsException ex) {
             throw new BadCredentialsException("invalid.password");
         }
-
+            List<String> roles = user.getRoles().stream().map(Role::getRoleType).map(RoleType::name).toList();
             String token = jwtUtils.generateToken(user);
-            return AuthResponse.builder().token(token).build();
+            return AuthResponse.builder()
+                    .userId(user.getId())
+                    .token(token)
+                    .UserRole(roles)
+                    .build();
         }
 
     public void deleteUser(Long id) {

@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Product} from '../models/product';
 import {OrderItem} from '../models/orderItem';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class OrderCartService {
   private apiUrl = 'http://localhost:8080/api/orders';
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
     const storedCart = localStorage.getItem('orderCart');
     if (storedCart) {
       this.orderCart = JSON.parse(storedCart);
@@ -91,7 +92,10 @@ export class OrderCartService {
         localStorage.removeItem('orderCart');
         this.computeCartTotals();
         this.saveCartToStorage();
-        window.location.reload();
+        this.toastr.success('Your order has been confirmed', 'Success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
       error: error => {
         console.error('Failed to add order to database:', error);

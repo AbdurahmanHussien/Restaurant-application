@@ -22,4 +22,7 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('jwt_token');
   }
+   isUserAdmin(): boolean{
+    return localStorage.getItem('roles') === 'ADMIN';
+   }
 }

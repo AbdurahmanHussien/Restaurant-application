@@ -15,8 +15,12 @@ import {AuthService} from '../../services/auth.service';
 })
 export class HeaderComponent implements  OnInit{
 
-  constructor(private router: Router , private activatedRoute: ActivatedRoute, private loginService: AuthService) {
+  constructor(private router: Router ,
+              private activatedRoute: ActivatedRoute,
+              private loginService: AuthService) {
   }
+
+  dropdownOpen = false;
 
 
   ngOnInit(): void {
@@ -66,6 +70,13 @@ export class HeaderComponent implements  OnInit{
     return JSON.parse(decodedPayload);
   }
 
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  isUserAdmin(): boolean {
+    return this.loginService.isUserAdmin();
+  }
 
 
 }

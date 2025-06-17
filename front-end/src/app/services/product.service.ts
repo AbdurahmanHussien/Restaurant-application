@@ -32,6 +32,22 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/searchByCatId?categoryId=${categoryId}&keyword=${keyword}&page=${page}&size=${size}`);
   }
 
+  addProduct(product: any): Observable<any> {
+    const { id: _, ...data } = product;
+    return this.http.post(`${this.baseUrl}`, data);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  updateProduct(product: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}`, product);
+  }
+  getProduct(id:number) : Observable<any> {
+    return this.http.get((`${this.baseUrl}/${id}`));
+  }
+
   //http://localhost:8080/api/product/searchByCatId?categoryId=6&keyword=df&page=3&size=5
 
 

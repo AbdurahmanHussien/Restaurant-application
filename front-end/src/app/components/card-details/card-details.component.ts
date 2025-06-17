@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {OrderCart} from '../../models/OrderCart';
 import {OrderCartService} from '../../services/order-cart.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-card-details',
@@ -35,7 +36,9 @@ export class CardDetailsComponent implements OnInit {
   }
 
   confirmOrder() {
+
     this.orderCartService.addOrderToDatabase();
+
   }
 
 

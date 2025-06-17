@@ -1,0 +1,65 @@
+<h1 class="text-4xl font-bold text-center text-[#ff6600] mb-4 mt-32 ">
+  User Profile
+</h1>
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-3xl mt-12 border-[#ff6600] border-2 ">
+  <div class="grid grid-cols-2 gap-4">
+
+    <div class="relative group">
+      <label class="block text-sm  font-semibold">Username:</label>
+      <input [(ngModel)]="userData.username" disabled
+             class="w-full px-3 py-2  readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+      <div
+        class="absolute  mb-1 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded-3xl left-2 opacity-70 "
+      >
+        Username can't be edited
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold">Name:</label>
+      <input [(ngModel)]="userData.name" [disabled]="!editMode"
+             class="w-full  px-3 py-2   readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold">Email:</label>
+      <input [(ngModel)]="userData.email" [disabled]="!editMode"
+             class="w-full  px-3 py-2  readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold">Phone:</label>
+      <input [(ngModel)]="userData.phone" [disabled]="!editMode"
+             class="w-full  px-3 py-2   readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold">Address:</label>
+      <input [(ngModel)]="userData.address" [disabled]="!editMode"
+             class="w-full px-3 py-2 b
+      readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold">Age:</label>
+      <input [(ngModel)]="userData.age" [disabled]="!editMode"
+             class="w-full  px-3 py-2  readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-4 mt-6">
+    <button (click)="editMode = true" [disabled]="editMode"
+            class="bg-gray-600 text-white px-4 py-2 rounded-3xl hover:bg-gray-800 disabled:opacity-50">Edit</button>
+
+    <button (click)="saveUserData()" [disabled]="!editMode"
+            class="bg-[#ff6600] text-white px-4 py-2 rounded-3xl hover:[#ff6600] disabled:opacity-50">Save</button>
+
+    <button *ngIf="editMode"
+      class="px-4 py-2 text-white rounded-3xl bg-gray-600 hover:bg-gray-800"
+      (click)="cancelEdit()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
