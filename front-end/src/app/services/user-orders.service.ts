@@ -12,7 +12,10 @@ export class UserOrdersService {
 
    private baseUrl = 'http://localhost:8080/api/orders'
 
-  getUserOrders(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  getUserOrders(id: number , page: number, size: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}?page=${page}&size=${size}`);
+  }
+  getAllOrders(page: number, size: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}?page=${page}&size=${size}`);
   }
 }

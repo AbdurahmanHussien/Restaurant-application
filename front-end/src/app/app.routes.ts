@@ -10,6 +10,7 @@ import {GuestGuard} from './services/GuestGuard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {UserOrdersComponent} from './components/user-orders/user-orders.component';
 import {ProductActionComponent} from './components/product-action/product-action.component';
+import {AllSystemOrderComponent} from './components/all-system-order/all-system-order.component';
 
 
 
@@ -25,6 +26,8 @@ export const routes: Routes = [
   { path: 'chefs', component: ChefsComponent , title: "Teams" ,  canActivate: [AuthGuard] },
   { path: 'profile', component: UserProfileComponent , title: "profile" ,  canActivate: [AuthGuard] },
   { path: 'my-orders', component: UserOrdersComponent , title: "my orders" ,  canActivate: [AuthGuard] },
+  { path: 'all-orders', component: AllSystemOrderComponent , title: "All orders" ,  canActivate: [AuthGuard] },
+
   { path: 'product/add', component: ProductActionComponent , title: "product" ,  canActivate: [AuthGuard] },
   { path: 'product/edit/:id', component: ProductActionComponent , title: "product" ,  canActivate: [AuthGuard] },
 

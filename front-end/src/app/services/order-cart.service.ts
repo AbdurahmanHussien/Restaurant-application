@@ -79,13 +79,19 @@ export class OrderCartService {
     const totalPrice = this.orderCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const totalQuantity = this.orderCart.reduce((sum, item) => sum + item.quantity, 0);
 
-    const orderItem : OrderItem = {
+    const products = this.orderCart.map(item => ({
+      productId: item.id,
+      quantity: item.quantity,
+      price: item.price
+    }));
+
+    const orderItem: OrderItem = {
       totalPrice: totalPrice.toString(),
       totalQuantity: totalQuantity.toString(),
-      productIds: this.orderCart.map(item => item.id)
-
+      products: products
     };
-    this.http.post<OrderItem>(`${this.apiUrl}`, orderItem ).subscribe({
+
+    this.http.post(`${this.apiUrl}`, orderItem ).subscribe({
       next: () => {
         this.orderCart = [];
         localStorage.removeItem('orderCart');
@@ -94,7 +100,7 @@ export class OrderCartService {
         this.toastr.success('Your order has been confirmed', 'Success');
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       },
       error: error => {
         console.error('Failed to add order to database:', error);

@@ -3,11 +3,12 @@ package com.spring.restaurant.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
 @Data
-public class OrderItemDto {
+public class OrderDto {
 
 
     private Long id;
@@ -18,7 +19,12 @@ public class OrderItemDto {
 
     private long totalQuantity;
 
-    List<String> productsNames;
+    private LocalDateTime createdAt;
+
+
+
+    private List<OrderProductDTO> items;
+
 
     @NotBlank(message="user.notblank")
     private long userId;

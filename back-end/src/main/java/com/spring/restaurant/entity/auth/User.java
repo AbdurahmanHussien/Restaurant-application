@@ -1,10 +1,10 @@
 package com.spring.restaurant.entity.auth;
 
 import com.spring.restaurant.entity.ContactInfo;
-import com.spring.restaurant.entity.OrderItem;
+import com.spring.restaurant.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,7 +47,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true , fetch = FetchType.LAZY )
-    private List<OrderItem> orderItems;
+    private List<Order> order;
 
 
 

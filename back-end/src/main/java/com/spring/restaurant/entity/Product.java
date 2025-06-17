@@ -33,9 +33,7 @@ public class Product {
 
     private int price;
 
-    @ManyToMany(mappedBy = "products",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                       CascadeType.PERSIST, CascadeType.REFRESH})
+   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     List<OrderItem> orderItems;
 
 

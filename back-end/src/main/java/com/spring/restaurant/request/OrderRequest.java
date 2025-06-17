@@ -1,5 +1,6 @@
 package com.spring.restaurant.request;
 
+import com.spring.restaurant.dto.OrderProductDTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 public class OrderRequest {
 
     @NotNull(message = "order.products.notblank")
-    private List<Long> productIds;
+    private List<OrderProductDTO> products;
 
     @Min(value = 1 , message = "order.price.min")
     private long totalPrice;

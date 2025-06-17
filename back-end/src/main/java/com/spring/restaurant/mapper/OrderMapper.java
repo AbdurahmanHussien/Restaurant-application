@@ -1,6 +1,8 @@
 package com.spring.restaurant.mapper;
 
-import com.spring.restaurant.dto.OrderItemDto;
+import com.spring.restaurant.dto.OrderDto;
+import com.spring.restaurant.dto.OrderProductDTO;
+import com.spring.restaurant.entity.Order;
 import com.spring.restaurant.entity.OrderItem;
 import com.spring.restaurant.entity.Product;
 import org.mapstruct.Mapper;
@@ -18,12 +20,13 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "products", target = "productsNames")
-    OrderItemDto orderItemToOrderItemDto(OrderItem orderItem);
+    OrderDto orderToOrderDto(Order order);
 
 
-    OrderItem orderItemDtoToOrderItem(OrderItemDto orderItemDto);
+    Order orderDtoToOrder(OrderDto orderDto);
 
+
+    List<OrderProductDTO> orderItemsToOrderItemDtos(List<OrderItem> items);
 
     default List<String> mapProductNames(List<Product> products) {
         return products.stream()

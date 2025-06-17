@@ -1,11 +1,11 @@
-import {Product} from './product';
+import {SingleOrderItem} from './singleOrderItem';
 
 export interface OrderItem {
   id?: number;
   code?: string;
   totalPrice: string;
   totalQuantity: string;
-  productIds: number[];
-
+  products: SingleOrderItem[];
+  userName?: string;
 
 }

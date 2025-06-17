@@ -1,7 +1,14 @@
 export interface AllUserOrders {
   id?: number;
   code: string;
+  userName?: string;
   totalPrice: number;
   totalQuantity: number;
-  productsNames: string[];
+  createdAt: Date
+
+  items: {
+    productName: string;
+    quantity: number;
+    price: number;
+  }[];
 }

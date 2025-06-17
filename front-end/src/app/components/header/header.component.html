@@ -49,7 +49,7 @@
       <a class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/profile">Profile</a>
       <a class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/my-orders">My Orders</a>
       <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/product/add">Add product</a>
-      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block">All Orders</a>
+      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/all-orders">All Orders</a>
     </div>
   </div>
 
