@@ -13,4 +13,5 @@ public interface IAuthenticationService {
 
     User getUserById(Long id);
 
+   void resetPassword(String email);
 }

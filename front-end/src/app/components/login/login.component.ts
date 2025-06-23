@@ -12,6 +12,7 @@ import {
 } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ import {ToastrService} from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
-    this.form =this.fb.group({
+    this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -41,21 +42,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  constructor(private router:Router ,
-              private route: ActivatedRoute ,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private loginService: AuthService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private http: HttpClient) {
+  }
 
   private fb = inject(FormBuilder);
 
 
-  errorMessage:String = '';
+  errorMessage: String = '';
   showPassword = false;
   form: FormGroup;
 
   logOutMessage = '';
-  UserRole:any;
-
+  UserRole: any;
 
 
   togglePassword() {
@@ -72,25 +74,35 @@ export class LoginComponent implements OnInit {
       email: formValue.email.trim().toLowerCase()
     };
 
-    if(localStorage.getItem('jwt_token')){
+    if (localStorage.getItem('jwt_token')) {
       this.router.navigate(['/products']);
     }
 
     this.loginService.login(payload).subscribe({
-      next: (res) =>{
+      next: (res) => {
         const token = res.token;
-        const userId= res.userId;
+        const userId = res.userId;
         console.log(userId);
         localStorage.setItem('jwt_token', token);
         this.UserRole = res.userRole;
         localStorage.setItem('roles', this.UserRole);
         localStorage.setItem('userId', userId);
-        console.log( this.UserRole);
+        console.log(this.UserRole);
         this.toastr.success('You have been logged in successfully', 'Welcome')
-        this.router.navigate(['/products'])},
+        this.router.navigate(['/products'])
+      },
 
-      error: () => this.errorMessage='Invalid email or password'
+      error: () => this.errorMessage = 'Invalid email or password'
     });
   }
 
+
+  forgetPassword() {
+    this.loginService.resetPassword({ email: this.form.value.email }).subscribe({
+      next: () =>
+        alert('Password reset to Hello@1234'),
+      error: () =>
+        alert('cannot reset password')
+    });
+  }
 }

@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -34,4 +37,13 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/reset-password")
+    public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        authService.resetPassword(email);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Password reset to Hello@1234");
+        return ResponseEntity.ok(response);
+    }
 }

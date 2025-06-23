@@ -18,6 +18,9 @@ export class AuthService {
     return this.http.post('http://localhost:8080/auth/signup', data);
   }
 
+  resetPassword(data: any): Observable<any> {
+    return this.http.post(`http://localhost:8080/auth/reset-password`, data);  //http://localhost:8080/auth/reset-password
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('jwt_token');

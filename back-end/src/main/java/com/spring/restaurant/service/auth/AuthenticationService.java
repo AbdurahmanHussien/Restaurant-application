@@ -44,6 +44,14 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
+    public void resetPassword(String email) {
+        User user = userRepository.findByUserDetailsEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
+        user.setPassword(passwordEncoder.encode("Hello@1234"));
+        userRepository.save(user);
+    }
+
+    @Override
     public AuthResponse createUser(RegisterRequest request) {
 
         UserDetails userDetails = UserDetails.builder()
@@ -68,7 +76,7 @@ public class AuthenticationService implements IAuthenticationService {
 
         User user = User.builder()
                 .username(request.username())
-                .password(passwordEncoder.encode(request.password()))
+                .password(passwordEncoder.encode(request.password() != null && !request.password().isEmpty() ? request.password() : "hello@1234"))
                 .userDetails(userDetails)
                 .roles(Set.of((userRole)))
                 .build();
