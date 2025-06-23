@@ -6,5 +6,6 @@ export interface Chef {
   facebookLink: string;
   twitterLink: string;
   instagramLink: string;
+  rating?: number;
 
 }

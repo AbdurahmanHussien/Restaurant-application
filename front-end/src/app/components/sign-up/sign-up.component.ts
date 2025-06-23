@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -22,22 +22,31 @@ export class SignUpComponent implements OnInit {
   private fb = inject(FormBuilder);
 
 
+  form : FormGroup;
 
   ngOnInit(): void {
-    }
+    this.form = this.fb.group({
+      name: [''],
+      username: [''],
+      phoneNum: [''],
+      age: [''],
+      email: [''],
+      password: [''],
+      address: [''],
+    });
+    this.form.get('email')?.valueChanges.subscribe(value => {
+      if (value) {
+        const clean = value.trim().toLowerCase();
+        if (clean !== value) {
+          this.form.get('email')?.setValue(clean, { emitEvent: false });
+        }
+      }
+    });
+  }
 
   showPassword = false
   UserRole: any  ;
 
-  signupForm = this.fb.group({
-    name: [''],
-    username: [''],
-    phoneNum: [''],
-    age: [''],
-    email: [''],
-    password: [''],
-    address: [''],
-  });
 
   signupErrors : any = {}
 
@@ -45,9 +54,16 @@ export class SignUpComponent implements OnInit {
 
 
   onSubmit() {
-    if (this.signupForm.invalid) return;
+    if (this.form.invalid) return;
 
-    this.authService.signup(this.signupForm.value).subscribe({
+    const formValue = this.form.value;
+
+    const payload = {
+      ...formValue,
+      email: formValue.email.trim().toLowerCase()
+    };
+
+    this.authService.signup(payload).subscribe({
       next: (res) => {
         const token = res.token;
         const userId = res.userId;

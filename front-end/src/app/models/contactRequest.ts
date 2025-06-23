@@ -1,3 +1,5 @@
+import {Comments} from './comments';
+
 export interface ContactRequest {
   id?: number;
 
@@ -8,5 +10,7 @@ export interface ContactRequest {
   subject: string;
 
   message: string;
+  userId?: number;
 
+  comments?: Comments[]
 }

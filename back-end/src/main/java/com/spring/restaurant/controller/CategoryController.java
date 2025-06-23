@@ -1,10 +1,13 @@
 package com.spring.restaurant.controller;
+
 import com.spring.restaurant.dto.CategoryDto;
 import com.spring.restaurant.service.impl.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -21,6 +24,7 @@ public class CategoryController {
 
     @PostMapping
     @Operation(summary = "Add category")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CategoryDto> addCategory( @Valid @RequestBody CategoryDto categoryDto) throws Exception {
         CategoryDto saved = categoryService.createCategory(categoryDto);
         return ResponseEntity.ok(saved);
@@ -28,6 +32,7 @@ public class CategoryController {
 
     @PostMapping("/list")
     @Operation(summary = "Add categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CategoryDto>> addCategories( @Valid @RequestBody List<CategoryDto> categoryDtoList) throws Exception {
 
         return ResponseEntity.ok(categoryService.addListOfCategory(categoryDtoList));
@@ -36,6 +41,7 @@ public class CategoryController {
 
     @PutMapping
     @Operation(summary = "Update category")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto) throws Exception {
         CategoryDto updated = categoryService.updateCategory(categoryDto);
         return ResponseEntity.ok(updated);
@@ -44,6 +50,7 @@ public class CategoryController {
 
     @PutMapping("/list")
     @Operation(summary = "Update categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CategoryDto>> updateCategories(@Valid @RequestBody List<CategoryDto> categoryDtoList) throws Exception {
         return ResponseEntity.ok(categoryService.updateListOfCategory(categoryDtoList));
     }
@@ -63,6 +70,7 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete category by Id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable long id) {
         categoryService.deleteCategory(id);
         return ResponseEntity.noContent().build();
@@ -70,6 +78,7 @@ public class CategoryController {
 
     @DeleteMapping
     @Operation(summary = "Delete all categories by Ids")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteCategoriesByIds(@RequestParam List<Long> ids) {
         categoryService.deleteCategoryByIds(ids);
         return ResponseEntity.noContent().build();

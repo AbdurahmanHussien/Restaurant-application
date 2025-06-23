@@ -10,7 +10,7 @@
       <div class="text-sm text-green-600 mt-1" *ngIf="logOutMessage" > {{logOutMessage}}</div>
     </div>
 
-    <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
         <label for="email" class="block text-black text-sm font-semibold mb-2">Email address</label>
         <input
@@ -79,7 +79,7 @@
 
       <div>
         <button
-          [disabled]="loginForm.invalid"
+          [disabled]="form.invalid"
           type="submit"
           class="w-full bg-amberCustom text-white py-2.5 rounded-3xl font-semibold hover:bg-[#e69500] uppercase"
         >

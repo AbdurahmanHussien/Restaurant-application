@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {ContactService} from '../../services/contact.service';
 import {ContactRequest} from '../../models/contactRequest';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact-info',
@@ -13,7 +14,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class ContactInfoComponent implements OnInit {
 
-  constructor( private _contactService: ContactService) {}
+  constructor( private _contactService: ContactService , private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -50,5 +51,8 @@ export class ContactInfoComponent implements OnInit {
     return englishMessages;
   }
 
+  goToMyMessages(){
+    this.router.navigate(['/myMessages']);
+  }
 
 }

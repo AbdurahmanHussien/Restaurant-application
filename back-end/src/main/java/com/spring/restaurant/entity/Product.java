@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "Product")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Product {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+public class Product extends BaseEntity {
 
 
     @Id
@@ -33,7 +33,7 @@ public class Product {
 
     private int price;
 
-   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL , orphanRemoval = true)
     List<OrderItem> orderItems;
 
 

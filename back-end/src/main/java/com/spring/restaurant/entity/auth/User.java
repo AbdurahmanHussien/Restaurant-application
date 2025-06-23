@@ -1,5 +1,6 @@
 package com.spring.restaurant.entity.auth;
 
+import com.spring.restaurant.entity.Comment;
 import com.spring.restaurant.entity.ContactInfo;
 import com.spring.restaurant.entity.Order;
 import jakarta.persistence.*;
@@ -49,6 +50,9 @@ public class User {
             orphanRemoval = true , fetch = FetchType.LAZY )
     private List<Order> order;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true , fetch = FetchType.LAZY )
+    private List<Comment> comments;
 
 
 }

@@ -31,7 +31,12 @@
           <h5>Technical</h5>
           <p><i class="fa fa-envelope"></i> book&#64;example.com</p>
         </div>
+        <div (click)="goToMyMessages()" class = "cursor-pointer rounded-2xl text-center border-[#ff6600] border-2 bg-white mt-4 mb-4 mx-20 hover:bg-[#ff6600] ">
+          <button class="text-black text-xl font-bold"  (click)="goToMyMessages()">My Messages</button>
+        </div>
       </div>
+
+
       <div class="contact-form rounded-2xl" data-wow-delay="0.2s">
         <form (ngSubmit)="onSubmit()">
           <div class="form-group">
@@ -57,6 +62,7 @@
           <div class="form-group">
             <button type="submit">Send Message</button>
           </div>
+
         </form>
       </div>
     </div>

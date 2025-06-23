@@ -9,7 +9,7 @@
       <p class="text-sm text-black mt-1">Your new favorite bite starts here</p>
     </div>
 
-    <form class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 " [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 " [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
         <label for="fullName" class="block text-black text-sm font-semibold mb-2">Full Name</label>
         <input type="text"   id="fullName" formControlName="name" placeholder="e.g., Mohamed Hussein" class="w-full px-3 py-2  border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amberCustom focus:border-transparent transition-colors text-sm"  />

@@ -2,13 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {UserOrdersService} from '../../services/user-orders.service';
 import {AllUserOrders} from '../../models/allUserOrders';
+import {TimeagoPipe} from '../../services/timeago.pipe';
 
 @Component({
   selector: 'app-user-orders',
   imports: [
     NgForOf,
     NgIf,
-    DatePipe
+    TimeagoPipe
+
   ],
   templateUrl: './user-orders.component.html',
   styleUrl: './user-orders.component.css'
@@ -29,13 +31,21 @@ export class UserOrdersComponent implements OnInit {
     }
 
     getUserOrders(page:number){
+    debugger
       // @ts-ignore
       let userId:number = localStorage.getItem('userId');
        this.userOrdersService.getUserOrders(userId, page, this.size).subscribe({
          next: (res) => {
-           this.noResultsFound = false;
-           this.AllUserOrders = res.content;
-           this.totalPages = res.totalPages;
+           if (!res.content || res.content.length === 0) {
+             this.noResultsFound = true;
+             this.message = 'You have no orders yet';
+             this.AllUserOrders = [];
+             this.totalPages = 0;
+           } else {
+             this.noResultsFound = false;
+             this.AllUserOrders = res.content;
+             this.totalPages = res.totalPages;
+           }
          },
          error: () => {
            this.noResultsFound = true;

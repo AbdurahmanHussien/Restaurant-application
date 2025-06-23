@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -25,4 +25,19 @@ export class AuthService {
    isUserAdmin(): boolean{
     return localStorage.getItem('roles') === 'ADMIN';
    }
+
+  getCurrentUser() {
+    return localStorage.getItem('userId');
+  }
+
+  getCurrentUserName(): string {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) return '';
+
+    const payloadBase64 = token.split('.')[1];
+    const payload = JSON.parse(atob(payloadBase64));
+
+    return payload.username;
+  }
+
 }

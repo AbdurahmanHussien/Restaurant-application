@@ -16,7 +16,7 @@
       </div>
       <div class="mb-3 text-gray-600">
         <h3>User name : {{order.userName}}</h3>
-        <p class="text-sm text-gray-600 font-medium mb-2"> Order Date: {{ order.createdAt | date: 'yyyy-MM-dd HH:mm'}}</p>
+        <time class="text-sm text-gray-600 font-medium mb-2"> Order Date: {{ order.createdAt | timeago }}</time>
       </div>
 
       <div class="mb-3">
@@ -27,7 +27,7 @@
               <span class="block font-medium">{{ item.productName }}</span>
               <span class="text-xs text-gray-500">Qty: {{ item.quantity }}</span>
             </div>
-            <div class="font-semibold text-green-700">${{ item.price }}</div>
+            <div class="font-semibold text-green-700">${{ item.price * item.quantity  }}</div>
           </li>
         </ul>
       </div>

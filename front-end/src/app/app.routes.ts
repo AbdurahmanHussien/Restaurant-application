@@ -11,6 +11,8 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {UserOrdersComponent} from './components/user-orders/user-orders.component';
 import {ProductActionComponent} from './components/product-action/product-action.component';
 import {AllSystemOrderComponent} from './components/all-system-order/all-system-order.component';
+import {MyMessagesComponent} from './components/my-messages/my-messages.component';
+import {AdminContactInfoComponent} from './components/admin-contact-info/admin-contact-info.component';
 
 
 
@@ -27,6 +29,8 @@ export const routes: Routes = [
   { path: 'profile', component: UserProfileComponent , title: "profile" ,  canActivate: [AuthGuard] },
   { path: 'my-orders', component: UserOrdersComponent , title: "my orders" ,  canActivate: [AuthGuard] },
   { path: 'all-orders', component: AllSystemOrderComponent , title: "All orders" ,  canActivate: [AuthGuard] },
+  { path: 'myMessages', component: MyMessagesComponent , title: "My messages" ,  canActivate: [AuthGuard] },
+  { path: 'feedback', component: AdminContactInfoComponent , title: "All feedback" ,  canActivate: [AuthGuard] },
 
   { path: 'product/add', component: ProductActionComponent , title: "product" ,  canActivate: [AuthGuard] },
   { path: 'product/edit/:id', component: ProductActionComponent , title: "product" ,  canActivate: [AuthGuard] },

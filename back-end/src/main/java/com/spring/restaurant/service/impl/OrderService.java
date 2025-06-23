@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -85,7 +86,7 @@ public class OrderService {
 
 
     public Page<AllSystemOrderDto> getAllOrders(int page, int size) {
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page - 1, size ,Sort.by("createdAt").descending());
         Page<Order> orders = orderRepository.findAll(pageable);
         return getSystemOrderDtos(orders);
     }
@@ -95,7 +96,7 @@ public class OrderService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
         Page<Order> orders = orderRepository.findAllByUserId(userId, pageable);
 
         return getOrderDtos(orders);

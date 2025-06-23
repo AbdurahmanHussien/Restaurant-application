@@ -121,4 +121,5 @@ public class AuthenticationService implements IAuthenticationService {
                 .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
         userRepository.delete(user);
     }
+
 }

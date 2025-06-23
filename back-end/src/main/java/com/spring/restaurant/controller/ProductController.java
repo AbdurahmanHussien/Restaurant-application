@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class ProductController {
 
     @PostMapping
     @Operation(summary = "Add product")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProductDto> addProduct( @Valid @RequestBody ProductDto productDto) throws Exception {
         ProductDto saved = productService.addProduct(productDto);
         return ResponseEntity.ok(saved);
@@ -33,6 +35,7 @@ public class ProductController {
 
     @PostMapping("/list")
     @Operation(summary = "Add products")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<ProductDto>> addProducts( @Valid @RequestBody List<ProductDto> productDtoList) throws Exception {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.addListOfProducts(productDtoList));
@@ -40,6 +43,7 @@ public class ProductController {
 
     @PutMapping
     @Operation(summary = "Update product")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProductDto> updateProduct( @Valid @RequestBody ProductDto productDto) throws Exception {
         ProductDto updated = productService.updateProduct(productDto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(updated);
@@ -47,6 +51,7 @@ public class ProductController {
 
     @PutMapping("/list")
     @Operation(summary = "Update products")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<ProductDto>> updateProducts( @Valid @RequestBody List<ProductDto> productDtoList) throws Exception {
         return ResponseEntity.ok(productService.updateListOfProducts(productDtoList));
     }
@@ -75,6 +80,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete product by Id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
@@ -82,6 +88,7 @@ public class ProductController {
 
     @DeleteMapping
     @Operation(summary = "Delete all product by Ids")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteProductsByIds(@RequestParam List<Long> ids) {
         productService.deleteProductByIds(ids);
         return ResponseEntity.noContent().build();

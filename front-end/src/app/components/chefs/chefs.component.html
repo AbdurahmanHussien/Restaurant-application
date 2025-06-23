@@ -18,6 +18,18 @@
         <h5>{{ chef.name }}</h5>
         <small>{{ chef.specification  || 'No specification provided' }}</small>
 
+        <div class="chef-rating">
+          <ng-container *ngFor="let star of [1,2,3,4,5]">
+            <i class="fa-star"
+               [ngClass]="{
+         'fas': star <= (chef.rating || 0),
+         'far': star > (chef.rating || 0)
+       }"
+               (click)="updateRating(chef, star)">
+            </i>
+          </ng-container>
+        </div>
+
         <div class="team-social">
           <a [href]="chef.facebookLink" target="_blank"><i class="fab fa-facebook-f"></i></a>
           <a [href]="chef.twitterLink" target="_blank"><i class="fab fa-twitter"></i></a>

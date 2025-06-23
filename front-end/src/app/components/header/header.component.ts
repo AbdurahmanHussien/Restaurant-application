@@ -21,6 +21,8 @@ export class HeaderComponent implements  OnInit{
   }
 
   dropdownOpen = false;
+  showInput = false;
+
 
 
   ngOnInit(): void {

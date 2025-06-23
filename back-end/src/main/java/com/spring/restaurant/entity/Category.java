@@ -6,13 +6,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Category")
-public class Category {
+public class Category extends BaseEntity {
 
 
 
@@ -30,7 +31,7 @@ public class Category {
 
    @Builder.Default
    @OneToMany(mappedBy = "category",
-             cascade = CascadeType.ALL , fetch = FetchType.LAZY )
+             cascade = CascadeType.ALL , fetch = FetchType.LAZY , orphanRemoval = true)
    @JsonIgnoreProperties("category")
    private Set<Product> products = new HashSet<>();
 

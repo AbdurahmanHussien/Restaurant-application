@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {
-  FormBuilder,
+  FormBuilder, FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -27,7 +27,13 @@ import {ToastrService} from 'ngx-toastr';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
+
   ngOnInit(): void {
+    this.form =this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params['loggedOut'] === 'true') {
         this.logOutMessage = 'You have been logged out successfully';
@@ -39,32 +45,38 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute ,
               private loginService: AuthService,
               private toastr: ToastrService) {}
+
   private fb = inject(FormBuilder);
 
 
   errorMessage:String = '';
   showPassword = false;
+  form: FormGroup;
 
   logOutMessage = '';
   UserRole:any;
 
 
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-  });
 
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) return;
+    if (this.form.invalid) return;
+
+    const formValue = this.form.value;
+
+    const payload = {
+      ...formValue,
+      email: formValue.email.trim().toLowerCase()
+    };
+
     if(localStorage.getItem('jwt_token')){
       this.router.navigate(['/products']);
     }
 
-    this.loginService.login(this.loginForm.value).subscribe({
+    this.loginService.login(payload).subscribe({
       next: (res) =>{
         const token = res.token;
         const userId= res.userId;

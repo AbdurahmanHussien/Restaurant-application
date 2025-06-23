@@ -1,0 +1,73 @@
+<div class="container mx-auto py-6 mt-20">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Feedback Messages</h2>
+
+    <select [(ngModel)]="filterType" class="border border-gray-300 rounded px-3 py-1 text-sm">
+      <option value="all">All</option>
+      <option value="replied">Replied</option>
+      <option value="notReplied">Not Replied</option>
+    </select>
+  </div>
+
+
+  <div *ngIf="errorMessage" class="flex absolute mr-auto justify-center justify-self-center items-center gap-2 bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg shadow-sm min-w-96 mt-14">
+    <svg class="w-5 h-5 mt-0.5 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.054 0 1.918-.816 1.994-1.851L21 18V6a2 2 0 00-1.851-1.995L19 4H5a2 2 0 00-1.995 1.851L3 6v12c0 1.054.816 1.918 1.851 1.994L5 20z"/>
+    </svg>
+    <h3 class="text-sm font-medium">{{ errorMessage }}</h3>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div *ngFor="let contact of filteredMessages()" class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-between">
+
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">{{ contact.name }}</h3>
+        <p class="text-gray-600 text-sm mb-3">{{ contact.message }}</p>
+
+        <div *ngIf="contact.comments?.length > 0" class="bg-gray-50 p-3 rounded-md border border-gray-200">
+          <h4 class="text-xs font-medium text-gray-700 mb-2">Replies</h4>
+
+          <div *ngFor="let c of contact.comments.slice().reverse()" class="mb-1">
+            <div class="text-xs items-center bg-white border border-gray-300 px-3 py-2 rounded-md shadow-sm text-gray-800 flex justify-between">
+              <div>
+                <span class="font-semibold">{{ c.username }}</span> : {{ c.value }}
+              </div>
+              <div class="flex items-center space-x-2">
+                <time class="text-xs text-gray-500">{{ c.createdDate | timeago }}</time>
+                <button
+                  *ngIf="c.username === currentUser"
+                  class="bg-red-100 hover:bg-red-200 text-red-600 text-xs rounded-full px-3 py-1"
+                  (click)="deleteComment(c.id)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <button
+          class="text-xs bg-[#ff6600] hover:bg-[#e65c00] text-white px-4 py-2 rounded-md"
+          (click)="openReplyBox(contact)">
+          Reply
+        </button>
+
+        <div *ngIf="selectedContact?.id === contact.id" class="mt-3">
+          <textarea [(ngModel)]="replyValue" rows="2"
+                    class="w-full p-2 border border-gray-300 rounded-md text-xs resize-none"
+                    placeholder="Write your reply..."></textarea>
+          <button
+            class="mt-2 bg-[#ff6600] hover:bg-[#e65c00] text-white px-4 py-2 rounded-md text-xs"
+            (click)="submitReply(contact.id)">
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

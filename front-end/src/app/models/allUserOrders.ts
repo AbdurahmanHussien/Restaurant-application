@@ -4,7 +4,7 @@ export interface AllUserOrders {
   userName?: string;
   totalPrice: number;
   totalQuantity: number;
-  createdAt: Date
+  createdAt :Date;
 
   items: {
     productName: string;

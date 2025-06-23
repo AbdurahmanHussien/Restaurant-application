@@ -1,8 +1,14 @@
 package com.spring.restaurant.dto;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +31,9 @@ public class ContactInfoDto {
     private String message;
 
 
-    private Long UserId;
+    private Long userId;
+
+    private List<CommentDto> comments;
 
 
 

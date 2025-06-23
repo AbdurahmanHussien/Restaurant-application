@@ -21,6 +21,9 @@ export class ChefsComponent implements OnInit {
     this.chefService.getChefs().subscribe(chef => {
       this.chefs = chef;
     })
-
   }
+  updateRating(chef: Chef, newRating: number) {
+    chef.rating = newRating;
+  }
+
 }

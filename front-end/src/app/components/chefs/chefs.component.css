@@ -130,3 +130,10 @@
   border-color: #ff6600; /* Match border color */
   color: #fff; /* White icon color on hover */
 }
+
+.chef-rating i {
+  color: gold;
+  cursor: pointer;
+  margin: 0 2px;
+  font-size: 1.2rem;
+}

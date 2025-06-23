@@ -1,7 +1,13 @@
 package com.spring.restaurant.entity;
+
 import com.spring.restaurant.entity.auth.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity
@@ -25,10 +31,12 @@ public class ContactInfo {
 
     private String message;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER )
     private User user;
 
+    @OneToMany(mappedBy = "contactInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OrderBy("id DESC")
+    private List<Comment> comments;
 
 
 

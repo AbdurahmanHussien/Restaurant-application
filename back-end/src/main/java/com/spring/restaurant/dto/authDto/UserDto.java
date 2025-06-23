@@ -1,5 +1,6 @@
 package com.spring.restaurant.dto.authDto;
 
+import com.spring.restaurant.dto.CommentDto;
 import com.spring.restaurant.entity.ContactInfo;
 import com.spring.restaurant.entity.Order;
 import com.spring.restaurant.entity.auth.Role;
@@ -33,6 +34,8 @@ public class UserDto {
     List<ContactInfo> contactInfos ;
 
     List<Order> orderItems;
+
+    List<CommentDto> comments;
 
 
 

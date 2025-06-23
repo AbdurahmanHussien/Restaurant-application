@@ -50,24 +50,32 @@
       <a class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/my-orders">My Orders</a>
       <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/product/add">Add product</a>
       <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/all-orders">All Orders</a>
+      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/feedback">All Feedbacks</a>
+
     </div>
   </div>
 
 
   <div
-    class="w-full md:w-auto flex items-center gap-2 mx-10 px-3 py-1 order-2 md:order-none mb-2 md:mb-0 md:mr-[10px]"
+    class="search-container w-full md:w-auto flex items-center gap-2 mx-10 px-3 py-1 order-2 md:order-none mb-2 md:mb-0 md:mr-[10px]"
   >
     <input [(ngModel)]="searchKey" (keydown.enter)="search(searchKey)"
            type="text"
       placeholder="Search"
       class="search-input outline-none text-gray-800 rounded-full px-2 py-1 w-full md:w-48"
     />
-
     <button (click)="search(searchKey)"
-      class="search-btn bg-[#ff6600] text-white rounded-full px-4 py-1 hover:bg-[#e65c00] transition-colors"
+            class="search-btn bg-[#ff6600] text-white rounded-full px-4 py-1 hover:bg-[#e65c00] transition-colors flex items-center justify-center"
     >
-      Search
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+           stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z" />
+      </svg>
     </button>
+
+
   </div>
 
   <div class="navbar-card order-4 ml-0 md:ml-4 w-full md:w-auto flex justify-center md:justify-start">
