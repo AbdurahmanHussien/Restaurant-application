@@ -12,7 +12,6 @@ import {
 } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
