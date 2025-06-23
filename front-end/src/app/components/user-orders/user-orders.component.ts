@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf} from '@angular/common';
 import {UserOrdersService} from '../../services/user-orders.service';
 import {AllUserOrders} from '../../models/allUserOrders';
 import {TimeagoPipe} from '../../services/timeago.pipe';

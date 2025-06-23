@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ContactService} from '../../services/contact.service';
 import {ContactRequest} from '../../models/contactRequest';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CommentService} from '../../services/comment.service';
 import {AuthService} from '../../services/auth.service';
