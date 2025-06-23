@@ -37,7 +37,6 @@
               <div class="flex items-center space-x-2">
                 <time class="text-xs text-gray-500">{{ c.createdDate | timeago }}</time>
                 <button
-                  *ngIf="c.username === currentUser"
                   class="bg-red-100 hover:bg-red-200 text-red-600 text-xs rounded-full px-3 py-1"
                   (click)="deleteComment(c.id)">
                   Delete

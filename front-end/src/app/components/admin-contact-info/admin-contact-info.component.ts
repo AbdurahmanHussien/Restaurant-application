@@ -26,7 +26,6 @@ export class AdminContactInfoComponent implements OnInit {
   replyValue: string = '';
   filterType: 'all' | 'replied' | 'notReplied' = 'all';
   errorMessage: string;
-  currentUser: string
 
 
   constructor(
@@ -36,7 +35,6 @@ export class AdminContactInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUserName();
     this.getAllMessages();
   }
 
