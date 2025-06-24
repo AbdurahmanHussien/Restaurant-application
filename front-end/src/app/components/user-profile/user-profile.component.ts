@@ -39,6 +39,9 @@ export class UserProfileComponent implements OnInit {
     age: 0
   }
 
+  profileErrors : any = {}
+
+
 
   ngOnInit() {
     // @ts-ignore
@@ -60,7 +63,13 @@ export class UserProfileComponent implements OnInit {
       this.editMode = false;
       this.toastr.success('your profile has been updated', 'Success');
     },
-    error: () => {
+    error: (err) => {
+
+      this.profileErrors = {};
+      err.error.forEach((err: any) => {
+
+        this.profileErrors[err.field] = err.messages.message_en;
+      });
       this.toastr.error('Error updating user data', 'Error');
   }
   });

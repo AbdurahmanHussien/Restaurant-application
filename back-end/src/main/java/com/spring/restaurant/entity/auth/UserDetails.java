@@ -3,6 +3,8 @@ package com.spring.restaurant.entity.auth;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class UserDetails implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

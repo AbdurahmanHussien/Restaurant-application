@@ -2,6 +2,7 @@ package com.spring.restaurant.service.auth;
 
 import com.spring.restaurant.repository.auth.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 
     @Override
+    @Cacheable(value = "user", key = "#email")
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByUserDetailsEmail(email)
                 .map(CustomUserDetails::new)

@@ -19,18 +19,27 @@
       <label class="block text-sm font-semibold">Name:</label>
       <input [(ngModel)]="userData.name" [disabled]="!editMode"
              class="w-full  px-3 py-2   readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+      <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="profileErrors['name']">
+        {{ profileErrors['name'] }}
+      </div>
     </div>
 
     <div>
       <label class="block text-sm font-semibold">Email:</label>
       <input [(ngModel)]="userData.email" [disabled]="!editMode"
              class="w-full  px-3 py-2  readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+      <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="profileErrors['email']">
+        {{ profileErrors['email'] }}
+      </div>
     </div>
 
     <div>
       <label class="block text-sm font-semibold">Phone:</label>
       <input [(ngModel)]="userData.phone" [disabled]="!editMode"
              class="w-full  px-3 py-2   readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+      <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="profileErrors['phone']">
+        {{ profileErrors['phone'] }}
+      </div>
     </div>
 
     <div>
@@ -39,12 +48,18 @@
              class="w-full px-3 py-2 b
       readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
 
+      <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="profileErrors['address']">
+        {{ profileErrors['address'] }}
+      </div>
     </div>
 
     <div>
       <label class="block text-sm font-semibold">Age:</label>
       <input [(ngModel)]="userData.age" [disabled]="!editMode"
              class="w-full  px-3 py-2  readonly:bg-gray-100 readonly:text-gray-500 readonly:cursor-not-allowed border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-[#ff6600] " />
+      <div class="mt-1 ml-2 text-xs text-red-500" *ngIf="profileErrors['age']">
+        {{ profileErrors['age'] }}
+      </div>
     </div>
   </div>
 

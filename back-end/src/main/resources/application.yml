@@ -1,7 +1,10 @@
 spring:
   application:
     name: restaurant
-
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000
 
   messages:
     basename: i18n/messages

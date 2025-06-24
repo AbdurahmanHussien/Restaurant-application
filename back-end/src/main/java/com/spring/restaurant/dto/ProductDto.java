@@ -1,14 +1,20 @@
 package com.spring.restaurant.dto;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class ProductDto implements Serializable {
 
 
     private Long id;

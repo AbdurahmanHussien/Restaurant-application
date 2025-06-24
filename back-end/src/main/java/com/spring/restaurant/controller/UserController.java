@@ -1,6 +1,8 @@
 package com.spring.restaurant.controller;
+
 import com.spring.restaurant.response.UserData;
 import com.spring.restaurant.service.impl.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ public class UserController {
 
 
     @PutMapping("/{id}")
-    public UserData updateUserData(@PathVariable long id, @RequestBody UserData userData) {
+    public UserData updateUserData( @PathVariable long id, @Valid @RequestBody UserData userData) {
         return userService.updateUserData(id, userData);
     }
 

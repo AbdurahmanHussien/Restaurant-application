@@ -20,7 +20,7 @@ public class ChefService implements IChefService {
 
 
     @Override
-    @Cacheable("chefs")
+    @Cacheable( value = "chefs", key= "'all'")
     public List<ChefDto> getAllChefs() {
          return chefRepository.findAll().stream().map(ChefMapper.CHEF_MAPPER::chefToChefDTO).collect(Collectors.toList());
     }

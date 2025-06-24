@@ -1,7 +1,6 @@
 package com.spring.restaurant.service.impl;
 
 import com.spring.restaurant.dto.CommentDto;
-import org.springframework.transaction.annotation.Transactional;
 import com.spring.restaurant.entity.Comment;
 import com.spring.restaurant.entity.auth.User;
 import com.spring.restaurant.mapper.CommentMapper;
@@ -9,7 +8,11 @@ import com.spring.restaurant.repository.CommentRepository;
 import com.spring.restaurant.service.ICommentService;
 import com.spring.restaurant.service.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,11 @@ public class CommentService implements ICommentService {
 
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "comments", key = "'all'"),
+            @CacheEvict(value = "comments", key = "#commentDto.contactInfoId"),
+            @CacheEvict(value = "contacts", key = "'all'")
+    })
     public CommentDto addComment(CommentDto commentDto) {
         Comment comment = commentMapper.toEntity(commentDto);
         User user = userService.getUserById(commentDto.getUserId());
@@ -35,7 +43,7 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Cacheable(value = "comments", key = "'all'")
     public List<CommentDto> getComments() {
         List<Comment> comments = commentRepository.findAllWithUser();
         return comments.stream()
@@ -50,7 +58,7 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Cacheable(value = "comments", key = "#contactId")
     public List<CommentDto> getCommentsByContactId(Long contactId) {
         List<Comment> comments = commentRepository.findByContactInfoIdWithUser(contactId);
         return comments.stream()
@@ -65,6 +73,12 @@ public class CommentService implements ICommentService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "comments", key = "'all'"),
+            @CacheEvict(value = "contacts", key = "'all'")
+
+    })
+    @CacheEvict(value = "comments", allEntries = true)
     public void deleteComment(Long id) {
         commentRepository.deleteById(id);
 

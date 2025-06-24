@@ -35,7 +35,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true )
     public ProductDto addProduct(ProductDto productDto) throws Exception {
         if(Objects.nonNull(productDto.getId())){
 
@@ -47,7 +47,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true , key = "#productDto.id")
     public ProductDto updateProduct(ProductDto productDto) throws Exception {
         if(Objects.isNull(productDto.getId())){
 
@@ -61,6 +61,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Cacheable(value = "products", key = "#id")
     public ProductDto getProductById(long id) {
         Product product= productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("product.notfound"));
@@ -69,7 +70,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-    @Cacheable("products")
+    @Cacheable(value = "products", key = "#page + '_' + #size")
     public Page<ProductDto> getAllProducts(int page, int size) {
 
         validatePageNumber(page);
@@ -83,7 +84,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true, key = "#id")
     public void deleteProduct(long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("product.notfound"));
@@ -91,7 +92,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true , key = "#ids")
     public void deleteProductByIds(List<Long> ids) {
         List<Product> products = productRepository.findAllById(ids);
         if (products.size() != ids.size()) {
@@ -102,7 +103,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @Cacheable("productsByCategory")
+    @Cacheable(value = "productsByCategory" , key = "#id + '_' + #page + '_' + #size")
     public Page<ProductDto> getAllByCategoryId(long id, int page, int size) {
         validatePageNumber(page);
         Pageable pageable = PageRequest.of(page -1, size);
@@ -114,6 +115,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public List<ProductDto> addListOfProducts(List<ProductDto> productDtos) {
 
         List<Product> products = productDtos.stream()
@@ -128,6 +130,7 @@ public class ProductService implements IProductService {
 
 
     @Override
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public List<ProductDto> updateListOfProducts(List<ProductDto> productDtos) {
 
         productDtos.forEach(dto -> {
@@ -146,6 +149,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Cacheable(value = "products", key = "#keyword + '_' + #page + '_' + #size")
      public Page<ProductDto> searchProducts(String keyword, int page, int size) {
         validatePageNumber(page);
         Pageable pageable = PageRequest.of(page-1, size);
@@ -157,6 +161,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Cacheable(value = "productsByCategory", key = "#categoryId + '_' + #keyword + '_' + #page + '_' + #size")
     public Page<ProductDto> searchProductsByCategory(Long categoryId, String keyword, int page, int size) {
         validatePageNumber(page);
 

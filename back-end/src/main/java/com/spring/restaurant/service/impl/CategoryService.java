@@ -40,7 +40,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @Cacheable("categories")
+    @Cacheable(value = "categories", key = "'all'")
     public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll(Sort.by("name"))
                 .stream()
@@ -49,6 +49,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Cacheable(value = "category", key = "#id")
     public CategoryDto getCategoryById(long id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("category.notfound"));
@@ -57,7 +58,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @CacheEvict(value = "categories", allEntries = true)
+    @CacheEvict(value = {"categories", "category" }, allEntries = true)
     public CategoryDto updateCategory(CategoryDto categoryDto) {
         if(Objects.isNull(categoryDto.getId())){
 
@@ -71,7 +72,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @CacheEvict(value = "categories", allEntries = true)
+    @CacheEvict(value = {"categories", "category" }, allEntries = true)
     public void deleteCategory(long id) {
 
         Category category = categoryRepository.findById(id)
@@ -81,7 +82,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @CacheEvict(value = "categories", allEntries = true)
+    @CacheEvict(value = {"categories", "category" }, allEntries = true)
     public List<CategoryDto> addListOfCategory(List<CategoryDto> categoryDtos) {
         List<Category> categories = categoryDtos.stream()
                                 .map(this::toEntity)
@@ -94,7 +95,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @CacheEvict(value = "categories", allEntries = true)
+    @CacheEvict(value ={"categories", "category" }, allEntries = true)
     public List<CategoryDto> updateListOfCategory(List<CategoryDto> categoryDtos) {
         categoryDtos.forEach(dto -> {
             if (dto.getId() == null) {
@@ -113,7 +114,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @CacheEvict(value = "categories", allEntries = true)
+    @CacheEvict(value = {"categories", "category" }, allEntries = true)
     public void deleteCategoryByIds(List<Long> ids) {
         List<Category> categories = categoryRepository.findAllById(ids);
         if (categories.size() != ids.size()) {

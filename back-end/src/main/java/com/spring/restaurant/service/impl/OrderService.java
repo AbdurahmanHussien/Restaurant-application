@@ -14,6 +14,8 @@ import com.spring.restaurant.repository.ProductRepository;
 import com.spring.restaurant.repository.auth.UserRepository;
 import com.spring.restaurant.request.OrderRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +39,7 @@ public class OrderService {
 
 
 
+    @CacheEvict(value = {"orders", "userOrders"}, allEntries = true)
     public OrderDto createOrder(OrderRequest request, Long userId) {
 
         User user = userRepository.findById(userId)
@@ -84,14 +87,14 @@ public class OrderService {
     }
 
 
-
+    @Cacheable(value = "orders", key = "#page + '_' + #size")
     public Page<AllSystemOrderDto> getAllOrders(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size ,Sort.by("createdAt").descending());
         Page<Order> orders = orderRepository.findAll(pageable);
         return getSystemOrderDtos(orders);
     }
 
-
+    @Cacheable(value = "userOrders", key = "#userId + '_' + #page + '_' + #size")
     public Page<OrderDto> getUserOrders(Long userId, int page, int size) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));

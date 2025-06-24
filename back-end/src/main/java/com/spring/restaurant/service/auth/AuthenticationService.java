@@ -13,6 +13,8 @@ import com.spring.restaurant.request.RegisterRequest;
 import com.spring.restaurant.response.AuthResponse;
 import com.spring.restaurant.utils.RoleType;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,12 +40,14 @@ public class AuthenticationService implements IAuthenticationService {
 
 
     @Override
+    @Cacheable(value = "user" , key = "#id")
     public User getUserById(Long id) {
        return userRepository.findById(id)
                .orElseThrow(()-> new RuntimeException("user Not found"));
     }
 
     @Override
+    @CacheEvict(value = "user", allEntries = true, key = "#email")
     public void resetPassword(String email) {
         User user = userRepository.findByUserDetailsEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
@@ -124,6 +128,7 @@ public class AuthenticationService implements IAuthenticationService {
                     .build();
         }
 
+        @CacheEvict(value = "user", allEntries = true)
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));

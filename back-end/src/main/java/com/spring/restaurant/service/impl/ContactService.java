@@ -7,6 +7,8 @@ import com.spring.restaurant.mapper.ContactInfoMapper;
 import com.spring.restaurant.repository.ContactInfoRepository;
 import com.spring.restaurant.service.IContactService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class ContactService implements IContactService {
 
 
     @Override
+    @CacheEvict(value = {"contacts", "comments"}, allEntries = true)
     public ContactInfoDto addInfo(ContactInfoDto contactInfoDto) {
         if (contactInfoDto.getId() != null) {
             throw new BadRequestException("id.notempty");
@@ -35,12 +38,14 @@ public class ContactService implements IContactService {
     }
 
     @Override
+    @Cacheable(value = "contacts", key = "'all'")
     public List<ContactInfoDto> getAllInfo() {
         List<ContactInfo> contactInfos = contactInfoRepository.findAll();
         return contactInfos.stream().map(contactInfoMapper::contactToContactDTO).collect(Collectors.toList());
     }
 
     @Override
+    @Cacheable(value = "contacts", key = "#userId")
     public List<ContactInfoDto> getAllInfoByUserId(Long userId) {
         List<ContactInfo> contactInfos = contactInfoRepository.findByUserId(userId);
         return contactInfos.stream().map(contactInfoMapper::contactToContactDTO).collect(Collectors.toList());

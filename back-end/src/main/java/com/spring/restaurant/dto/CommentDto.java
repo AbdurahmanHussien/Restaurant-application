@@ -1,12 +1,14 @@
 package com.spring.restaurant.dto;
+
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class CommentDto {
+public class CommentDto implements Serializable {
 
     private Long id;
 
