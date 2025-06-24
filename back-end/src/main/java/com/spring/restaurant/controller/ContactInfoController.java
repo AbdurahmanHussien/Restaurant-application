@@ -33,11 +33,13 @@ public class ContactInfoController {
     }
 
     @GetMapping
+    @Operation(summary = "get all contact Info")
     public ResponseEntity<List<ContactInfoDto>> getAllContactInfo() {
             return ResponseEntity.ok(contactService.getAllInfo());
 
     }
     @GetMapping("/user")
+    @Operation(summary = "get all contact Info for user")
     public ResponseEntity<List<ContactInfoDto>> getAllContactInfoByUserId(@AuthenticationPrincipal UserDetails user) {
             Long userId = ((CustomUserDetails) user).getId();
             return ResponseEntity.ok(contactService.getAllInfoByUserId(userId));

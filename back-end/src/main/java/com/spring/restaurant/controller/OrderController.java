@@ -6,6 +6,7 @@ import com.spring.restaurant.dto.OrderDto;
 import com.spring.restaurant.request.OrderRequest;
 import com.spring.restaurant.service.auth.CustomUserDetails;
 import com.spring.restaurant.service.impl.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,11 +28,13 @@ public class OrderController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Operation(summary = "get all orders")
     public ResponseEntity<Page<AllSystemOrderDto>> getAllOrders(@RequestParam int page, @RequestParam int size) {
         return ResponseEntity.ok(orderService.getAllOrders(page, size));
     }
 
     @PostMapping
+    @Operation(summary = "create order")
     public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody OrderRequest request , @AuthenticationPrincipal UserDetails user) {
         Long userId = ((CustomUserDetails) user).getId();
         request.setUserId(userId);
@@ -40,6 +43,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "get order by id")
     public ResponseEntity<Page<OrderDto>> getOrderById(@PathVariable Long id, @RequestParam int page, @RequestParam int size) {
         return ResponseEntity.ok(orderService.getUserOrders(id, page, size));
     }
