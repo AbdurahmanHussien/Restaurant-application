@@ -2,9 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 0;
-  margin: 20px 0;
+  padding: 10px;
+  margin: 20px 5px;
   list-style: none;
+  position: relative;
 }
 
 .category-item {
@@ -155,3 +156,5 @@
 .section-title.text-end::after {
   display: none;
 }
+
+

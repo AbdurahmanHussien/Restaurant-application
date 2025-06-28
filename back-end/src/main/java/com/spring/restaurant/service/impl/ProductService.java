@@ -84,7 +84,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true, key = "#id")
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public void deleteProduct(long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("product.notfound"));
@@ -92,7 +92,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true , key = "#ids")
+    @CacheEvict(value = {"products", "productsByCategory"}, allEntries = true)
     public void deleteProductByIds(List<Long> ids) {
         List<Product> products = productRepository.findAllById(ids);
         if (products.size() != ids.size()) {

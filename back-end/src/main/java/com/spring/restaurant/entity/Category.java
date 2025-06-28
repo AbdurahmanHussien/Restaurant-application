@@ -28,7 +28,6 @@ public class Category extends BaseEntity {
 
     private String icon;
 
-
    @Builder.Default
    @OneToMany(mappedBy = "category",
              cascade = CascadeType.ALL , fetch = FetchType.LAZY , orphanRemoval = true)

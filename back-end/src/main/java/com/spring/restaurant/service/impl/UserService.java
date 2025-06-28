@@ -5,6 +5,8 @@ import com.spring.restaurant.exceptions.ResourceNotFoundException;
 import com.spring.restaurant.repository.auth.UserRepository;
 import com.spring.restaurant.response.UserData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
 
 
+   @Cacheable(value = "userData", key = "#id")
   public UserData getUserData(long id){
       User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
       return UserData.builder()
@@ -27,6 +30,7 @@ public class UserService {
               .build();
     }
 
+    @CachePut(value = "userData", key = "#id")
     public UserData updateUserData(long id, UserData userData) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
         user.getUserDetails().setName(userData.getName());

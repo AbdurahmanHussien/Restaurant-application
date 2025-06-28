@@ -25,5 +25,7 @@ public class CategoryDto implements Serializable {
 
     private String icon;
 
+    private boolean recommended;
+
 
 }

@@ -40,12 +40,28 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    @Cacheable(value = "categories", key = "'all'")
-    public List<CategoryDto> getAllCategories() {
-        return categoryRepository.findAll(Sort.by("name"))
+    public List<CategoryDto> getAllCategories(Long userId) {
+
+        List <CategoryDto> categories = categoryRepository.findAll(Sort.by("name"))
                 .stream()
                 .map(this::toDto)
-                .collect(Collectors.toList());
+                .toList();
+
+        List<Object[]> result = categoryRepository.findTopCategoriesByUser(userId);
+        Long topCategoryId = result.stream()
+                .findFirst()
+                .map(r -> (Long) r[0])
+                .orElse(null);
+
+        List<CategoryDto> dtos = categories.stream()
+                .map(category -> {
+                    category.setRecommended(category.getId().equals(topCategoryId));
+                    return category;
+                })
+                .toList();
+            return dtos;
+
+
     }
 
     @Override

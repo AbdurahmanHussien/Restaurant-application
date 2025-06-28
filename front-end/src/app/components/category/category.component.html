@@ -10,11 +10,13 @@
       *ngFor="let cat of categories "
       [ngClass]="{ 'active-category': cat.id === currentCategoryId }"
   >
+
     <a
       class="category-link"
       [routerLink]="cat.name === 'ALL' ? ['/products'] : ['/category', cat.id]"
       [queryParams]="{ page: 1 }"
     >
+      <i *ngIf="cat.recommended" class=">recommended-icon fas fa-star"></i>
       <img
         [ngSrc]="'assets/img/icons/' + cat.icon"
         [alt]="cat.name"
@@ -24,7 +26,7 @@
       />
       <div class="category-text">
         <small class="category-subtitle">{{ cat.highlight }}</small>
-        <h6 class="category-title">{{ cat.name }}</h6>
+        <span class="category-title">{{ cat.name }}</span>
       </div>
     </a>
   </li>

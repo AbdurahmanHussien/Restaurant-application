@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Builder
 @Getter @Setter
-public class UserData {
+public class UserData implements Serializable {
 
     private Long id;
 
-    @NotBlank(message = "user.username.notblank")  @Size(min = 7, max = 10, message = "user.username.size")
+    @NotBlank(message = "user.username.notblank")  @Size(min = 5, max = 10, message = "user.username.size")
     @Pattern(regexp = "^\\S+$", message = "user.name.pattern")
     private String username;
 

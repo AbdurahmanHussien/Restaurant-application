@@ -8,6 +8,7 @@ import {OrderCartService} from '../../services/order-cart.service';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from '../../services/auth.service';
 import {Product} from '../../models/product';
+import {combineLatest} from 'rxjs';
 
 
 
@@ -136,9 +137,9 @@ export class ProductsComponent implements OnInit {
   }
 
   checkCategoryIdOrSearch() {
-    this.route.paramMap.subscribe(params => {
-      this.route.queryParamMap.subscribe(queryParams => {
-        this.page = +queryParams.get('page')! || 1;
+      combineLatest([this.route.paramMap, this.route.queryParamMap])
+        .subscribe(([params, queryParams]) => {
+          this.page = +queryParams.get('page')! || 1;
 
         const hasCategory = params.has('id');
         const hasKey = params.has('key');
@@ -168,7 +169,6 @@ export class ProductsComponent implements OnInit {
           this.categoryId = '';
           this.loadProducts();
         }
-      });
     });
   }
 

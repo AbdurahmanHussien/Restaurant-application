@@ -3,4 +3,6 @@ export interface Category {
   name: string;
   highlight: string;
   icon: string;
+  recommended?: boolean;
+
 }

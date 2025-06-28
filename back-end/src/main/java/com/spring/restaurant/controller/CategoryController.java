@@ -1,11 +1,13 @@
 package com.spring.restaurant.controller;
 
 import com.spring.restaurant.dto.CategoryDto;
+import com.spring.restaurant.service.auth.CustomUserDetails;
 import com.spring.restaurant.service.impl.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,7 +59,11 @@ public class CategoryController {
     @GetMapping
     @Operation(summary = "Get All category")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
-        List<CategoryDto> categories = categoryService.getAllCategories();
+
+        CustomUserDetails auth = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long userId = auth.getId();
+        System.out.println(userId);
+        List<CategoryDto> categories = categoryService.getAllCategories(userId);
         return ResponseEntity.ok(categories);
     }
 
