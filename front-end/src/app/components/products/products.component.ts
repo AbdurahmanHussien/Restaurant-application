@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
 
   updateUrlAndLoad() {
     const queryParams = { page: this.page };
-    let route: any[] = [];
+    let route: any[] ;
 
     if (this.categoryId && this.isSearching) {
       route = ['/searchInCategory', this.categoryId, 'search', this.searchValue];
