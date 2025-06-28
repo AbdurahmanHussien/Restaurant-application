@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import {CategoryComponent} from '../category/category.component';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OrderCart} from '../../models/OrderCart';
 import {OrderCartService} from '../../services/order-cart.service';
 import {ToastrService} from 'ngx-toastr';
@@ -83,7 +83,7 @@ export class ProductsComponent implements OnInit {
       route = ['/products'];
     }
 
-    this.router.navigate(route, {queryParams}).then(r =>
+    this.router.navigate(route, {queryParams}).then(() =>
       this.loadPage());
   }
 
