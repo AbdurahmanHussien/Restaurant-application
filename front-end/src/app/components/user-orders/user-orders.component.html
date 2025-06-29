@@ -20,7 +20,7 @@
 
       <div class="mb-3">
         <p class="text-sm text-gray-600 font-medium mb-2">Items:</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
+        <ul class="space-y-2 text-gray-700 text-sm max-h-[200px] overflow-y-auto comment-scroll pr-2">
           <li *ngFor="let item of order.items" class="flex justify-between items-center bg-gray-50 p-2 rounded-md border border-gray-200">
             <div>
               <span class="block font-medium">{{ item.productName }}</span>
