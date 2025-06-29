@@ -2,7 +2,7 @@
 <div *ngIf="noResultsFound" class="no-results-message">
   <span>{{ messageEn }}</span>
 </div>
-<div class="tab-content"  *ngIf="!noResultsFound" >
+<div class="tab-content mb-10"  *ngIf="!noResultsFound" >
   <div class="menu-item" *ngFor="let product of products ">
     <img class="menu-img mb-7 mr-3" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" width="350" height="350"/>
     <button *ngIf="isUserAdmin()"
@@ -33,7 +33,7 @@
     </div>
 
   </div>
-<div *ngIf="totalPages > 0" class="flex items-center justify-center space-x-4 my-10">
+<div *ngIf="totalPages > 1" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
     [disabled]="page === 1"

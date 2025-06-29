@@ -22,7 +22,7 @@ export class UserOrdersComponent implements OnInit {
   AllUserOrders: AllUserOrders[] = [];
   page = 1;
   size = 6;
-  totalPages = 10;
+  totalPages = 0;
   message: string = '';
   noResultsFound:boolean = false;
 
@@ -31,7 +31,7 @@ export class UserOrdersComponent implements OnInit {
     }
 
     getUserOrders(page:number){
-    debugger
+   // debugger
       // @ts-ignore
       let userId:number = localStorage.getItem('userId');
        this.userOrdersService.getUserOrders(userId, page, this.size).subscribe({

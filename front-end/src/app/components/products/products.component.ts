@@ -8,7 +8,7 @@ import {OrderCartService} from '../../services/order-cart.service';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from '../../services/auth.service';
 import {Product} from '../../models/product';
-import {combineLatest} from 'rxjs';
+import {combineLatest, Subject, takeUntil} from 'rxjs';
 
 
 
@@ -26,13 +26,14 @@ export class ProductsComponent implements OnInit {
   products: any[] = [];
   page = 1; // first page
   size = 6;
-  totalPages = 10; // changeable based on data rows from backend
+  totalPages = 0; // changeable based on data rows from backend
   searchValue = '';
   isSearching = false;
   noResultsFound = false;
   categoryId: string = '';
   messageEn : string = '';
 
+  destroy$ = new Subject<void>();
 
   constructor(private _productService: ProductService, private route: ActivatedRoute , private router: Router, private orderCartService: OrderCartService, private toastr: ToastrService, private authService:AuthService) {
   }
@@ -41,11 +42,15 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.params.subscribe(() => this.checkCategoryIdOrSearch());
-    this.route.queryParams.subscribe(() => this.checkCategoryIdOrSearch());
-
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.handleRoutingParams());
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
 
   loadProducts() {
@@ -90,7 +95,9 @@ export class ProductsComponent implements OnInit {
 
 
   loadPage() {
-    if (this.isSearching) {
+    if (this.isSearching && this.categoryId) {
+      this.searchByCategoryIdAndKey(this.categoryId, this.searchValue, this.page);
+    } else if (this.isSearching) {
       this.getProducts(this.searchValue , this.page);
     } else if (this.categoryId) {
       this.getProductsByCategory(this.categoryId);
@@ -136,7 +143,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  checkCategoryIdOrSearch() {
+  handleRoutingParams() {
       combineLatest([this.route.paramMap, this.route.queryParamMap])
         .subscribe(([params, queryParams]) => {
           this.page = +queryParams.get('page')! || 1;

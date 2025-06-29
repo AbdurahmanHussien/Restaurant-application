@@ -35,7 +35,7 @@ public class ContactInfo {
     private User user;
 
     @OneToMany(mappedBy = "contactInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @OrderBy("id ASC")
+    @OrderBy("id desc")
     private List<Comment> comments;
 
 }

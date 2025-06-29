@@ -29,7 +29,7 @@ public class CommentService implements ICommentService {
     @Caching(evict = {
             @CacheEvict(value = "comments", key = "'all'"),
             @CacheEvict(value = "comments", key = "#commentDto.contactInfoId"),
-            @CacheEvict(value = "contacts", key = "'all'")
+            @CacheEvict(value = "contacts" , allEntries = true)
     })
     public CommentDto addComment(CommentDto commentDto) {
         Comment comment = commentMapper.toEntity(commentDto);
@@ -74,8 +74,8 @@ public class CommentService implements ICommentService {
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value = "comments", key = "'all'"),
-            @CacheEvict(value = "contacts", key = "'all'")
+            @CacheEvict(value = "comments", allEntries = true),
+            @CacheEvict(value = "contacts" , allEntries = true)
 
     })
     @CacheEvict(value = "comments", allEntries = true)

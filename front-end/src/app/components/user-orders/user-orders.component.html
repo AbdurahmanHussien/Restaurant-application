@@ -1,4 +1,4 @@
-<h1 class="text-4xl font-bold text-center text-[#ff6600] mb-4 mt-32">
+<h1 class=" text-4xl font-bold text-center text-[#ff6600] mb-4 mt-32">
   My Orders
 </h1>
 
@@ -6,7 +6,7 @@
   {{message}}
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 md:mt-32">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 md:mt-32 mb-10">
   <div *ngFor="let order of AllUserOrders" class="bg-white shadow-lg rounded-2xl p-6 border border-[#ff6600] hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
 
     <div>
@@ -45,7 +45,7 @@
 
   </div>
 </div>
-<div *ngIf="totalPages > 0" class="flex items-center justify-center space-x-4 my-10">
+<div *ngIf="totalPages > 1" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
     [disabled]="page === 1"

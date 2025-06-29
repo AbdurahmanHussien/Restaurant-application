@@ -1,89 +1,67 @@
-<nav
-  class="navbar fixed top-0 left-0 right-0 w-full z-50 bg-white shadow-md rounded-lg px-4 py-3 flex flex-wrap items-center"
->
-  <div
-    class="w-full md:w-auto flex justify-center md:justify-start flex-1 order-1 md:order-none mb-2 md:mb-0">
-    <a routerLink="/"   class="navbar-title font-bold text-2xl flex items-center justify-center h-14 color">
-      Aroma Hub
-    </a>
+<nav class="navbar fixed top-0 left-0 right-0 w-full z-50 bg-white shadow-md rounded-lg px-6 py-5 flex items-center justify-between flex-wrap gap-4 h-">
 
-    <h3 class=" text-[#ff6600] rounded-full px-2 py-1 w-4 ml-3 mr-9 font-bold"> Welcome, {{username}} </h3>
-  </div>
+  <!-- Logo -->
+  <a routerLink="/" class="font-bold text-2xl text-[#ff6600]">Aroma Hub</a>
 
-
-  <div class="nav-links flex flex-wrap  md:gap-6 justify-center">
-
-
-        <a
-          routerLink="/products"
-          routerLinkActive="text-[#ff6600]"
-          [routerLinkActiveOptions]="{ exact: false }"
-          class="hover:text-[#ff6600]">
-          Products
-        </a>
-
-        <a
-          routerLink="/chefs"
-          routerLinkActive="text-[#ff6600]"
-          class="hover:text-[#ff6600]">
-          Team
-        </a>
-
-        <a
-          routerLink="/contact-info"
-          routerLinkActive="text-[#ff6600]"
-          class="hover:text-[#ff6600]">
-          Contact
-        </a>
-  </div>
-
-  <div  (click)="toggleDropdown()" class="nav-dropdown relative">
-  <span
-    class="dropdown-toggle cursor-pointer text-[#ff6600]"
-   >
-    Quick Menu <span class="ml-1">&#x25be;</span>
-  </span>
-
-    <div *ngIf="dropdownOpen"
-        class="dropdown-menu absolute top-8 left-0 w-36 bg-white border border-gray-300 rounded-lg shadow-lg overflow-auto z-50">
-      <a class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/profile">Profile</a>
-      <a class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/my-orders">My Orders</a>
-      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/product/add">Add product</a>
-      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/all-orders">All Orders</a>
-      <a *ngIf="isUserAdmin()" class="dropdown-item hover:bg-[#ff6600] hover:text-white px-4 py-2 block" routerLink="/feedback">All Feedbacks</a>
-
+  <!-- Center Links -->
+  <div class="flex gap-10 items-center flex-wrap">
+    <a routerLink="/products" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">Menu</a>
+    <a routerLink="/chefs" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">About Us</a>
+    <a routerLink="/contact-info" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">Contact</a>
+    <div *ngIf="isUserAdmin()" class="relative cursor-pointer" (click)="toggleDropdownAdmin()">
+      <div class="flex items-center gap-1">
+        <span class="text-lg hover:text-[#ff6600]">Admin Panel</span>
+        <span class="text-sm">&#x25be;</span>
+      </div>
+      <div *ngIf="dropdownOpenAdmin"
+           class="absolute right-0 mt-2 w-44 bg-white border border-gray-300 rounded-2xl shadow-lg z-50">
+        <a class="block px-4 py-2 hover:bg-[#ff6600] hover:rounded-2xl hover:text-white text-base" routerLink="/product/add">Add item</a>
+        <a class="block px-4 py-2 hover:bg-[#ff6600] hover:rounded-2xl hover:text-white text-base" routerLink="/all-orders">All Orders</a>
+        <a class="block px-4 py-2 hover:bg-[#ff6600] hover:rounded-2xl hover:text-white text-base" routerLink="/feedback">User Feedbacks</a>
+      </div>
     </div>
-  </div>
-
-
-  <div
-    class="search-container w-full md:w-auto flex items-center gap-2 mx-10 px-3 py-1 order-2 md:order-none mb-2 md:mb-0 md:mr-[10px]"
-  >
-    <input [(ngModel)]="searchKey" (keydown.enter)="search(searchKey)"
-           type="text"
-      placeholder="Search"
-      class="search-input outline-none text-gray-800 rounded-full px-2 py-1 w-full md:w-48"
-    />
-    <button (click)="search(searchKey)"
-            class="search-btn bg-[#ff6600] text-white rounded-full px-4 py-1 hover:bg-[#e65c00] transition-colors flex items-center justify-center"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg"
-           fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-           stroke="currentColor" class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z" />
-      </svg>
-    </button>
-
 
   </div>
 
-  <div class="navbar-card order-4 ml-0 md:ml-4 w-full md:w-auto flex justify-center md:justify-start">
+  <!-- Right Section -->
+  <div class="flex items-center gap-5">
+
+    <!-- Search -->
+    <div class="flex items-center gap-4">
+      <input [(ngModel)]="searchKey" (keydown.enter)="search(searchKey)"
+             placeholder="Search"
+             class="rounded-full px-3 py-1 text-lg border border-[#ff6600] w-40 outline-none"/>
+      <button (click)="search(searchKey)" class="bg-[#ff6600] text-white rounded-full px-3 py-1 hover:bg-[#e65c00]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Cart -->
     <app-card></app-card>
-  </div>
-  <div class="order-5 ml-4 mb-2 md:mb-0 md:mr-[10px]">
-    <button *ngIf="isLoggedIn" (click)="logout()" class="search-btn bg-[#ff6600] text-white rounded-full px-4 py-1 hover:bg-[#e65c00] transition-colors" >
 
-      Logout</button>
+    <!-- Account Dropdown -->
+    <div class="relative" (click)="toggleDropdownAccount()">
+      <div class="cursor-pointer text-[#ff6600] flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M5.121 17.804A4 4 0 016 15V11a6 6 0 1112 0v4a4 4 0 01.879 2.804M12 19a2 2 0 11-4 0"/>
+        </svg>
+        <span class="text-lg">Account</span>
+      </div>
+
+      <div *ngIf="dropdownOpenAccount"
+           class="absolute right-0 mt-3 w-44 bg-white border border-gray-300 rounded-2xl shadow-2xl z-50">
+        <a class="block px-4 py-2 hover:bg-[#ff6600] hover:rounded-2xl  hover:text-white text-sm" routerLink="/profile">My Profile</a>
+        <a class="block px-4 py-2 hover:bg-[#ff6600] hover:rounded-2xl  hover:text-white text-sm" routerLink="/my-orders">My Orders </a>
+        <button *ngIf="isLoggedIn" (click)="logout()"
+                class="w-full text-left px-4 py-2 hover:bg-red-100 hover:rounded-2xl  text-red-600 text-sm">Logout</button>
+      </div>
+    </div>
   </div>
 </nav>

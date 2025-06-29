@@ -20,7 +20,10 @@ export class HeaderComponent implements  OnInit{
               private loginService: AuthService) {
   }
 
-  dropdownOpen = false;
+  dropdownOpenAccount = false;
+  dropdownOpenAdmin = false;
+
+
   showInput = false;
 
 
@@ -72,8 +75,12 @@ export class HeaderComponent implements  OnInit{
     return JSON.parse(decodedPayload);
   }
 
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
+  toggleDropdownAccount() {
+    this.dropdownOpenAccount = !this.dropdownOpenAccount;
+  }
+
+  toggleDropdownAdmin() {
+    this.dropdownOpenAdmin = !this.dropdownOpenAdmin;
   }
 
   isUserAdmin(): boolean {

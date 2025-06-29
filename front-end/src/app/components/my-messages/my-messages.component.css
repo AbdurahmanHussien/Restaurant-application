@@ -1,0 +1,13 @@
+.comment-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.comment-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.comment-scroll::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 4px;
+}
+.comment-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: #a0a0a0;
+}
