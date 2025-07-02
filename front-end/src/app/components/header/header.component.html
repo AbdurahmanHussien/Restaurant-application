@@ -4,7 +4,7 @@
   <a routerLink="/" class="font-bold text-2xl text-[#ff6600]">Aroma Hub</a>
 
   <!-- Center Links -->
-  <div class="flex gap-10 items-center flex-wrap">
+  <div class="flex gap-14 items-center flex-wrap">
     <a routerLink="/products" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">Menu</a>
     <a routerLink="/chefs" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">About Us</a>
     <a routerLink="/contact-info" routerLinkActive="text-[#ff6600]" class="hover:text-[#ff6600] text-lg">Contact</a>
@@ -30,7 +30,7 @@
     <div class="flex items-center gap-4">
       <input [(ngModel)]="searchKey" (keydown.enter)="search(searchKey)"
              placeholder="Search"
-             class="rounded-full px-3 py-1 text-lg border border-[#ff6600] w-40 outline-none"/>
+             class="rounded-full px-3 py-1 text-lg border border-[#ff6600] w-52 outline-none"/>
       <button (click)="search(searchKey)" class="bg-[#ff6600] text-white rounded-full px-3 py-1 hover:bg-[#e65c00]">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

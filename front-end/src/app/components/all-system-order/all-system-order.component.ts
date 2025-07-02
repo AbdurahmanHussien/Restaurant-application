@@ -21,7 +21,7 @@ export class AllSystemOrderComponent implements OnInit{
   AllUserOrders: AllUserOrders[] = [];
   page = 1;
   size = 6;
-  totalPages = 10;
+  totalPages = 0;
   message: string = '';
   noResultsFound:boolean = false;
 

@@ -36,7 +36,7 @@
 <div *ngIf="totalPages > 1" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
-    [disabled]="page === 1"
+    *ngIf="page > 1"
     class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
   >
     ‹
@@ -50,7 +50,7 @@
 
   <button
     (click)="nextPage()"
-    [disabled]="page === totalPages || noResultsFound"
+    *ngIf="!(page >= totalPages) || noResultsFound"
     class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
   >
     ›

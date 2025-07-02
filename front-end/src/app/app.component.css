@@ -3,21 +3,13 @@
 * {
   user-select: none;
 }
-
-
-html, body {
-  height: 100%;
-  margin: 0;
-  background-color: #f2f2f2; /* Default background */
-}
-
 /* Styles for the main application container */
 .app-container {
   display: flex;
-  flex-direction: column; /* Stack header, main, and footer vertically */
+  flex-direction: column;
   min-height: 100vh; /* Ensure container takes at least the full viewport height */
-  overflow: hidden; /* Prevent potential overflow issues */
-  position: relative; /* Needed for positioning the spinner absolutely */
+  overflow: hidden;
+  position: relative;
 }
 
 /* Styles for the main content area */
@@ -27,22 +19,4 @@ html, body {
     padding: 20px; /* Optional: Add internal padding to the main content area */
 }
 
-/* Styles for the menu section */
-.back-to-top {
-  width: 40px;
-  height: 41px;
-  position: fixed;
-  bottom: 70px;
-  right: 10px;
-  color: white;
-  background-color: #ff6600;
-  padding: 10px 15px;
-  border-radius: 25px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.back-to-top:hover {
-  background:#e65c00;
-}
 
