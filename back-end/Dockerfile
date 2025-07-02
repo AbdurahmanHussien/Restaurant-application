@@ -1,7 +1,7 @@
-FROM eclipse-temurin:21-jdk-alpine
+FROM openjdk:21
 
 WORKDIR /app
 
-COPY target/restaurant.jar app.jar
+COPY target/spring-restaurant.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=docker"]
