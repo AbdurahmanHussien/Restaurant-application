@@ -4,7 +4,6 @@ import {CardComponent} from '../card/card.component';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {AppComponent} from '../../app.component';
 
 
 @Component({
