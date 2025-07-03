@@ -15,7 +15,7 @@ import {ActivatedRoute,  RouterModule} from '@angular/router';
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
 
-  currentCategoryId: number | null = null;
+  currentCategoryId: number | string | null = null;
 
 
   constructor(private _categoryService: CategoryService, private route: ActivatedRoute) {

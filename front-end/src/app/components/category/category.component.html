@@ -6,9 +6,12 @@
   </h5>
 
   <ul class="flex flex-wrap justify-center gap-3 px-2">
-    <li *ngFor="let cat of categories"
-        [ngClass]="{ 'bg-[#ff6600] text-white': cat.id === currentCategoryId }"
-        class="rounded-full border border-[#ff6600] dark:border-[#ff8800] bg-white dark:bg-gray-800 text-[#ff6600] hover:bg-[#ff6600] dark:hover:bg-[#ff8800] hover:text-white transition duration-300">
+    <li
+      *ngFor="let cat of categories"
+      [class.active]= "cat.id === currentCategoryId"
+
+      class="rounded-full border border-[#ff6600] dark:border-[#ff8800] bg-white dark:bg-gray-800 text-[#ff6600] hover:bg-[#ff6600] dark:hover:bg-[#ff6600] hover:text-white transition duration-300 "
+    >
 
       <a [routerLink]="cat.name === 'ALL' ? ['/products'] : ['/category', cat.id]"
          [queryParams]="{ page: 1 }"

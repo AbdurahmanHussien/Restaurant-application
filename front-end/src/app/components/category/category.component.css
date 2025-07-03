@@ -1,0 +1,8 @@
+.active {
+  background-color: #ff6600 !important;
+  color: white !important;
+}
+.dark .active {
+  background-color: #ff8800 !important;
+  color: white !important;
+}
