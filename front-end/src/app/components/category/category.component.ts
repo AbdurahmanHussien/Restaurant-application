@@ -8,7 +8,7 @@ import {ActivatedRoute,  RouterModule} from '@angular/router';
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterModule ],
+  imports: [CommonModule, RouterModule ],
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
