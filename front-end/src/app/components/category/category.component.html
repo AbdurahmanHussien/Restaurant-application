@@ -1,35 +1,35 @@
-<section class="menu-section" data-wow-delay="0.1s">
+<section class="pt-24 pb-16 text-center dark:bg-gray-800 mt-10">
+  <h5 class="text-3xl font-bold text-gray-700 dark:text-white mb-10 relative inline-block">
+    Our Menu
+    <span class="absolute top-1/2 -translate-y-1/2 -left-14 w-12 h-1 bg-[#ff6600]"></span>
+    <span class="absolute top-1/2 -translate-y-1/2 -right-14 w-12 h-1 bg-[#ff6600]"></span>
+  </h5>
 
+  <ul class="flex flex-wrap justify-center gap-3 px-2">
+    <li *ngFor="let cat of categories"
+        [ngClass]="{ 'bg-[#ff6600] text-white': cat.id === currentCategoryId }"
+        class="rounded-full border border-[#ff6600] dark:border-[#ff8800] bg-white dark:bg-gray-800 text-[#ff6600] hover:bg-[#ff6600] dark:hover:bg-[#ff8800] hover:text-white transition duration-300">
 
-  <h5 class="section-title">Our Menu</h5>
+      <a [routerLink]="cat.name === 'ALL' ? ['/products'] : ['/category', cat.id]"
+         [queryParams]="{ page: 1 }"
+         class="flex items-center gap-3 px-4 py-2 w-full h-auto">
 
+        <ng-container *ngIf="cat.recommended">
+          <i class="fas fa-star text-yellow-400 text-base"></i>
+        </ng-container>
 
+        <img
+          [src]="'assets/img/icons/' + cat.icon"
+          [alt]="cat.name"
+          class="w-6 h-6"
+        />
 
-<ul class="category-tabs">
-  <li class="category-item"
-      *ngFor="let cat of categories "
-      [ngClass]="{ 'active-category': cat.id === currentCategoryId }"
-  >
+        <div class="flex flex-col items-start text-left">
+          <small class="text-xs uppercase text-gray-500 dark:text-gray-400">{{ cat.highlight }}</small>
+          <span class="text-sm font-bold text-black dark:text-white">{{ cat.name }}</span>
+        </div>
 
-    <a
-      class="category-link"
-      [routerLink]="cat.name === 'ALL' ? ['/products'] : ['/category', cat.id]"
-      [queryParams]="{ page: 1 }"
-    >
-      <i *ngIf="cat.recommended" class=">recommended-icon fas fa-star"></i>
-      <img
-        [ngSrc]="'assets/img/icons/' + cat.icon"
-        [alt]="cat.name"
-        class="category-icon"
-        height="30"
-        width="30"
-      />
-      <div class="category-text">
-        <small class="category-subtitle">{{ cat.highlight }}</small>
-        <span class="category-title">{{ cat.name }}</span>
-      </div>
-    </a>
-  </li>
-</ul>
+      </a>
+    </li>
+  </ul>
 </section>
-

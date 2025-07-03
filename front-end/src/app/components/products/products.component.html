@@ -1,60 +1,58 @@
 <app-category></app-category>
-<div *ngIf="noResultsFound" class="no-results-message">
+<div *ngIf="noResultsFound" class="bg-gradient-to-r from-[#ff6600] to-[#ff8533] text-white font-bold text-lg text-center max-w-md mx-auto px-6 py-4 mt-10 rounded-2xl shadow-md dark:from-[#ff6600] dark:to-[#e65c00] dark:text-white">
   <span>{{ messageEn }}</span>
 </div>
-<div class="tab-content mb-10"  *ngIf="!noResultsFound" >
-  <div class="menu-item" *ngFor="let product of products ">
-    <img class="menu-img mb-7 mr-3" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" width="350" height="350"/>
-    <button *ngIf="isUserAdmin()"
-      type="button"
-      (click)="editProduct(product)"
-      class="text-yellow-500 text-xl hover:text-yellow-700 absolute bottom-2 left-12"
-    >
-      <i class="fas fa-edit"></i>
-    </button>
 
-    <button *ngIf="isUserAdmin()"
-      type="button"
-      (click)="deleteProduct(product.id)"
-      class="text-red-600 text-xl hover:text-red-800 absolute bottom-2 left-20"
-    >
-      <i class="fas fa-trash-alt"></i>
-    </button>
-    <div class="menu-info">
-      <h5>
-        <span>{{ product.name }}</span>
-        <span class="price"> {{ product.price | currency }}</span>
-      </h5>
-      <small>{{ product.description }}</small>
+<div class="tab-content grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-4 mb-10 mt-10" *ngIf="!noResultsFound">
+  <div *ngFor="let product of products"
+       class="relative flex bg-white dark:bg-gray-800 border border-[#ff6600] rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden max-w-2xl">
 
-      <button type="button" class="btn-add" (click)="addToCart(product)">Add to Cart</button>
+    <img class="w-32 h-32 object-cover rounded-xl m-4" [src]="'assets/img/'+product.imagePath" alt="{{product.name}}" />
+
+    <div class="flex flex-col justify-between py-4 pr-4 flex-grow">
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <h5 class="font-semibold text-gray-800 dark:text-white">{{ product.name }}</h5>
+          <span class="text-lg font-bold text-[#e74c3c]">{{ product.price | currency }}</span>
+        </div>
+        <small class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed block mb-3">{{ product.description }}</small>
+      </div>
+      <div class="flex justify-center items-center">
+        <button (click)="addToCart(product)"
+                class="bg-[#ff6600] text-white text-base w-40 font-semibold px-4 py-2 rounded-full hover:bg-[#e65c00] transition">
+          Add to Cart
+        </button>
+      </div>
+      <div *ngIf="isUserAdmin()" class="flex gap-2  justify-center items-center">
+        <button type="button" (click)="editProduct(product)" class="text-yellow-500 text-lg hover:text-yellow-700">
+          <i class="fas fa-edit"></i>
+        </button>
+
+        <button type="button" (click)="deleteProduct(product.id)" class="text-red-600 text-lg hover:text-red-800">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
     </div>
-
-    </div>
-
   </div>
+</div>
+
 <div *ngIf="totalPages > 1" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
     *ngIf="page > 1"
-    class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
-  >
+    class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed">
     ‹
   </button>
 
-  <span  *ngIf="!noResultsFound"
-         class="w-10 h-10 flex items-center justify-center rounded-full bg-white border-2 border-[#ff6600] text-[#ff6600] font-bold text-lg shadow"
-  >
-    {{ page  }}
+  <span *ngIf="!noResultsFound"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border-2 border-[#ff6600] text-[#ff6600] font-bold text-lg shadow">
+    {{ page }}
   </span>
 
   <button
     (click)="nextPage()"
     *ngIf="!(page >= totalPages) || noResultsFound"
-    class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed"
-  >
+    class="w-10 h-10 flex items-center justify-center rounded-full bg-[#ff6600] text-white font-bold text-lg shadow disabled:opacity-50 disabled:cursor-not-allowed">
     ›
   </button>
 </div>
-
-

@@ -4,6 +4,7 @@ import {CardComponent} from '../card/card.component';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {AppComponent} from '../../app.component';
 
 
 @Component({
@@ -13,22 +14,19 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements  OnInit{
+export class HeaderComponent implements  OnInit {
 
-  constructor(private router: Router ,
+  constructor(
               private activatedRoute: ActivatedRoute,
-              private loginService: AuthService) {
+              private loginService: AuthService,
+              private router: Router) {
   }
 
   dropdownOpenAccount = false;
   dropdownOpenAdmin = false;
 
 
-  showInput = false;
-
-
-
-  ngOnInit(): void {
+   ngOnInit(): void {
     let token = localStorage.getItem("jwt_token");
     let payload = this.getPayload(token);
     this.username = payload.username;
@@ -60,6 +58,9 @@ export class HeaderComponent implements  OnInit{
   }
   logout() {
     localStorage.removeItem('jwt_token');
+    localStorage.removeItem('roles');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('orderCart');
 
     this.router.navigate(['/login'],
       {

@@ -1,7 +1,8 @@
 <div
   *ngIf="showLoader"
-  class="loader-overlay"
+  class="fixed top-0 left-0 w-full h-full bg-white/70 dark:bg-black/70 flex items-center justify-center z-[1000]"
   role="status"
+  aria-live="polite"
 >
-  <div class="spinner"> </div>
+  <div class="w-10 h-10 border-4 border-gray-300 border-t-[#ff6600] rounded-full animate-spin"></div>
 </div>

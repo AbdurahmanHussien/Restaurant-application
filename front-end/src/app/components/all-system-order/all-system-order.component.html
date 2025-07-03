@@ -1,51 +1,53 @@
-<h1 class="text-4xl font-bold text-center text-[#ff6600] mb-4 mt-32">
+<h1 class="text-4xl font-bold text-center text-[#ff6600] dark:text-[#ff6600] mb-4 mt-32">
   All System Orders
 </h1>
 
-<div *ngIf="AllUserOrders.length === 0 || message" class="container mx-auto text-center text-2xl font-bold text-[#ff6600] mt-9">
+<div *ngIf="AllUserOrders.length === 0 || message" class="container mx-auto text-center text-2xl font-bold text-[#ff6600] dark:text-[#ff6600] mt-9">
   {{message}}
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 md:mt-32 mb-10">
-  <div *ngFor="let order of AllUserOrders" class="bg-white shadow-lg rounded-2xl p-6 border border-[#ff6600] hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
+  <div *ngFor="let order of AllUserOrders" class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-[#ff6600] hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
 
     <div>
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">Order #{{ order.id }}</h2>
-        <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Code: {{ order.code }}</span>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-white">Order #{{ order.id }}</h2>
+        <span class="text-sm text-gray-500 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Code: {{ order.code }}</span>
       </div>
-      <div class="mb-3 text-gray-600">
+
+      <div class="mb-3 text-gray-600 dark:text-gray-300">
         <h3>User name : {{order.userName}}</h3>
-        <time class="text-sm text-gray-600 font-medium mb-2"> Order Date: {{ order.createdAt | timeago }}</time>
+        <time class="text-sm font-medium mb-2 block">Order Date: {{ order.createdAt | timeago }}</time>
       </div>
 
       <div class="mb-3">
-        <p class="text-sm text-gray-600 font-medium mb-2">Items:</p>
-        <ul class="space-y-2 text-gray-700 text-sm max-h-[200px] overflow-y-auto comment-scroll pr-2">
-          <li *ngFor="let item of order.items" class="flex justify-between items-center bg-gray-50 p-2 rounded-md border border-gray-200">
+        <p class="text-sm font-medium mb-2 text-gray-600 dark:text-gray-300">Items:</p>
+        <ul class="space-y-2 text-sm max-h-[200px] overflow-y-auto comment-scroll pr-2">
+          <li *ngFor="let item of order.items" class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-2 rounded-md border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
             <div>
               <span class="block font-medium">{{ item.productName }}</span>
-              <span class="text-xs text-gray-500">Qty: {{ item.quantity }}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400">Qty: {{ item.quantity }}</span>
             </div>
-            <div class="font-semibold text-green-700">${{ item.price * item.quantity  }}</div>
+            <div class="font-semibold text-green-700 dark:text-green-400">${{ item.price * item.quantity }}</div>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="flex justify-between text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200">
+    <div class="flex justify-between text-sm text-gray-700 dark:text-gray-300 mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
       <div class="text-center">
-        <span class="block text-gray-500">Total Quantity</span>
+        <span class="block text-gray-500 dark:text-gray-400">Total Quantity</span>
         <span class="font-semibold">{{ order.totalQuantity }}</span>
       </div>
       <div class="text-center">
-        <span class="block text-gray-500">Total Price</span>
-        <span class="font-semibold text-green-600">${{ order.totalPrice }} </span>
+        <span class="block text-gray-500 dark:text-gray-400">Total Price</span>
+        <span class="font-semibold text-green-600 dark:text-green-400">${{ order.totalPrice }}</span>
       </div>
     </div>
 
   </div>
 </div>
+
 <div *ngIf="totalPages > 1" class="flex items-center justify-center space-x-4 my-10">
   <button
     (click)="previousPage()"
@@ -55,10 +57,10 @@
     ‹
   </button>
 
-  <span  *ngIf="!noResultsFound"
-         class="w-10 h-10 flex items-center justify-center rounded-full bg-white border-2 border-[#ff6600] text-[#ff6600] font-bold text-lg shadow"
+  <span *ngIf="!noResultsFound"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border-2 border-[#ff6600] text-[#ff6600] font-bold text-lg shadow"
   >
-    {{ page  }}
+    {{ page }}
   </span>
 
   <button

@@ -1,11 +1,15 @@
-<a class="card-link" routerLink="/cardDetails">
-  <div class="card-info">
-    <span class="price">
-        <i class="fas fa-dollar-sign price-icon"></i> {{totalPrice}}
+<a
+  class="card-link bg-white text-black border border-[#ff6600] dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:bg-gray-100 hover:text-[#ff6600] hover:border-gray-400 shadow px-4 py-2 rounded-[22px] min-w-[100px] flex items-center justify-center transition-all no-underline"
+  routerLink="/cardDetails">
+  <div class="card-info flex items-center">
+    <span class="price text-[#ff6600] dark:text-[#ff8800] font-bold flex items-center mr-2">
+      <i class="fas fa-dollar-sign price-icon mr-1"></i>
+      {{ totalPrice }}
     </span>
-    <span class="separator"> | </span>
-    <span class="item-count">
-       {{ totalQuantity }}
-        <i class="fas fa-shopping-cart item-icon"></i> </span>
+    <span class="separator text-gray-600 dark:text-gray-400 mx-2"> | </span>
+    <span class="item-count font-bold flex items-center">
+      {{ totalQuantity }}
+      <i class="fas fa-shopping-cart item-icon ml-1 text-gray-700 dark:text-white dark:bg-white-700"></i>
+    </span>
   </div>
 </a>

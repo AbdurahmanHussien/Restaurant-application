@@ -1,61 +1,66 @@
-<section class="orders-section">
-  <div class="container">
-    <div class="orders-header">
-      <h1 class="orders-title">Your Orders</h1>
+<section class="py-10 bg-gray-100 dark:bg-gray-800 mt-16">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white relative pb-4">
+        Your Orders
+        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-[#ff6600] rounded"></span>
+      </h1>
     </div>
-    <div class="orders-body">
-      <div *ngIf="orders.length === 0" class="no-orders-message">
+
+    <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow">
+      <div *ngIf="orders.length === 0" class="bg-gray-100 dark:bg-gray-700 text-[#ff6600] text-lg p-6 border border-dashed border-gray-300 dark:border-gray-600 rounded mb-6 text-center shadow-sm">
         Your cart is empty
       </div>
 
-      <div class="table-wrapper"  *ngIf="orders.length > 0">
-        <table class="orders-table">
-          <thead class="orders-thead">
+      <div *ngIf="orders.length > 0" class="overflow-x-auto">
+        <table class="min-w-full table-auto text-sm">
+          <thead class="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <tr>
-            <th class="empty-col"></th>
-            <th class="img-col">Item</th>
-            <th class="product-col">Product Details</th>
-            <th class="price-col">Price</th>
-            <th class="quantity-controls-col">Quantity</th>
-            <th class="total-col">Total</th>
-            <th class="close-col"></th>
+            <th></th>
+            <th class="p-3 text-center">Item</th>
+            <th class="p-3 text-center">Product Details</th>
+            <th class="p-3 text-center">Price</th>
+            <th class="p-3 text-center">Quantity</th>
+            <th class="p-3 text-center">Total</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
-          <tr class="order-row" *ngFor="let orderCart of orders">
-            <td class="empty-col"></td>
-            <td class="img-col">
-              <img class="order-img" [src]="'assets/img/' +orderCart.imagePath" alt="Product Image" />
+          <tr *ngFor="let orderCart of orders" class="hover:bg-orange-50 dark:hover:bg-gray-700 transition">
+            <td></td>
+            <td class="p-3 text-center">
+              <img class="w-20 h-20 object-cover rounded-xl bg-white" [src]="'assets/img/' +orderCart.imagePath" alt="Product Image" />
             </td>
-            <td class="product-col">
-              <div class="product-info">
-                <span class="product-name">{{ orderCart.name }}</span>
-                <span class="product-desc">{{ orderCart.description }}</span>
+            <td class="p-3 text-left">
+              <div class="flex flex-col">
+                <span class="font-bold text-gray-800 dark:text-white">{{ orderCart.name }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ orderCart.description }}</span>
               </div>
             </td>
-            <td class="price-col" data-label="Price">  ${{orderCart.price }}</td>
-            <td class="quantity-controls-col" data-label="Quantity">
-              <div class="quantity-wrapper">
-                <button class="remove-btn" (click)="decrementQuantity(orderCart)">-</button>
-                <input disabled type="text" name="quantity" class="quantity-input" value={{orderCart.quantity}} min="1" max="100" />
-                <button class="add-btn" (click)="incrementQuantity(orderCart)">+</button>
+            <td class="p-3 text-center text-[#e65c00] font-bold">${{ orderCart.price }}</td>
+            <td class="p-3 text-center">
+              <div class="flex items-center justify-center gap-2">
+                <button (click)="decrementQuantity(orderCart)" class="bg-[#ff6600] text-white px-2 py-1 rounded-full hover:bg-[#e65c00]">-</button>
+                <input disabled type="text" class="w-12 text-center border border-gray-300 bg-gray-50 dark:bg-gray-700 dark:text-white rounded-full" [value]="orderCart.quantity" />
+                <button (click)="incrementQuantity(orderCart)" class="bg-[#ff6600] text-white px-2 py-1 rounded-full hover:bg-[#e65c00]">+</button>
               </div>
             </td>
-            <td class="total-col" data-label="Total">${{ orderCart.quantity * orderCart.price }}</td>
-            <td class="close-col">
-              <button type="button" class="close-btn" (click)="remove(orderCart)" aria-label="Remove item">
+            <td class="p-3 text-center text-[#e65c00] font-bold">${{ orderCart.quantity * orderCart.price }}</td>
+            <td class="p-3 text-center">
+              <button (click)="remove(orderCart)" class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center">
                 <i class="fas fa-times"></i>
               </button>
             </td>
           </tr>
-
           </tbody>
         </table>
-        <div class="take-order-row">
-          <button class="take-order-btn" (click)="confirmOrder()">Order Now</button>
+
+        <div class="text-center mt-8">
+          <button (click)="confirmOrder()" class="bg-[#ff6600] hover:bg-[#e65c00] text-white font-bold text-lg px-8 py-3 rounded-full shadow-md hover:shadow-lg transition">
+            Order Now
+          </button>
         </div>
       </div>
-
     </div>
   </div>
 </section>
