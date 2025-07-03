@@ -60,6 +60,7 @@ export class HeaderComponent implements  OnInit {
     localStorage.removeItem('roles');
     localStorage.removeItem('userId');
     localStorage.removeItem('orderCart');
+    localStorage.removeItem('theme')
 
     this.router.navigate(['/login'],
       {

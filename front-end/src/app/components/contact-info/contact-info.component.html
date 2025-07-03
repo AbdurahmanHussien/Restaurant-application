@@ -1,7 +1,7 @@
 <header class="bg-white dark:bg-gray-800 shadow">
   <div class="hero-section relative h-[500px] z-30 flex items-center justify-center bg-center bg-cover text-white text-center mt-[87px] rounded-2xl" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/assets/img/contact.jpg')">
     <div class="container px-4">
-      <h1 class="text-4xl font-bold">Contact Us</h1>
+      <h1 class="text-4xl font-bold">Contact us</h1>
     </div>
   </div>
 </header>
@@ -9,33 +9,32 @@
 <section class="contact-section py-16 bg-gray-100 dark:bg-gray-800">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-12">
-      <h5 class="text-[#ff6600] text-sm font-semibold uppercase mb-2">Contact Us</h5>
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">Contact For Any Query</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">Have a question? Contact us</h1>
     </div>
 
     <div class="flex flex-wrap gap-24">
       <div class="flex-1 min-w-[200px] max-w-[400px]">
         <div class="space-y-6">
-          <div class="rounded-2xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700 p-5">
+          <div class="rounded-3xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700 p-5">
             <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">Booking</h5>
             <p class="text-gray-600 dark:text-gray-300"><i class="fa fa-envelope mr-2 text-[#ff6600]"></i> book&#64;example.com</p>
           </div>
-          <div class="rounded-2xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700  p-5">
+          <div class="rounded-3xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700  p-5">
             <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">General</h5>
             <p class="text-gray-600 dark:text-gray-300"><i class="fa fa-envelope mr-2 text-[#ff6600]"></i> book&#64;example.com</p>
           </div>
-          <div class="rounded-2xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700  p-5">
+          <div class="rounded-3xl border border-[#ff6600] bg-gray-50 dark:bg-gray-700  p-5">
             <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">Technical</h5>
             <p class="text-gray-600 dark:text-gray-300"><i class="fa fa-envelope mr-2 text-[#ff6600]"></i> book&#64;example.com</p>
           </div>
 
-          <div class="cursor-pointer rounded-2xl text-center border-2 border-[#ff6600] bg-white dark:bg-gray-700  mt-4 mb-4 mx-5 hover:bg-[#ff6600] transition" (click)="goToMyMessages()">
+          <div class="cursor-pointer rounded-3xl text-center border-2 border-[#ff6600] bg-white dark:bg-gray-700  mt-4 mb-4 mx-5 hover:bg-[#ff6600] dark:hover:bg-[#ff6600] transition" (click)="goToMyMessages()">
             <button class="text-black dark:text-white text-xl font-bold py-2 px-4">My Messages</button>
           </div>
         </div>
       </div>
 
-      <div class="flex-1 min-w-[300px] bg-gray-50 dark:bg-gray-800 border border-[#ff6600] p-6 rounded-2xl">
+      <div class="flex-1 min-w-[300px] bg-gray-50 dark:bg-gray-800 border border-[#ff6600] p-6 rounded-3xl">
         <form (ngSubmit)="onSubmit()">
           <div class="mb-4">
             <label for="name" class="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Your Name</label>
@@ -54,7 +53,7 @@
 
           <div class="mb-4">
             <label for="message" class="block text-gray-700 dark:text-gray-200 font-semibold mb-2">Message</label>
-            <textarea id="message" name="message" [(ngModel)]="contactData.message" placeholder="Leave a message here" rows="5" required class="w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 dark:bg-gray-700   focus:ring-[#ff6600]"></textarea>
+            <textarea id="message" name="message" [(ngModel)]="contactData.message" placeholder="Leave a message here" rows="3" required class="w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 dark:bg-gray-700   focus:ring-[#ff6600]"></textarea>
           </div>
 
           <div *ngIf="!success">

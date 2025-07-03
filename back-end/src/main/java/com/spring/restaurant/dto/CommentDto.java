@@ -1,5 +1,7 @@
 package com.spring.restaurant.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +14,8 @@ public class CommentDto implements Serializable {
 
     private Long id;
 
+    @Size(min = 2 , message = "short.comment")
+    @NotBlank
     private String value;
 
     private long contactInfoId;

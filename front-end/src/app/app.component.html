@@ -2,7 +2,7 @@
 <div class="dark:bg-gray-800 bg-gray-100  dark:text-white  text-black min-h-screen" [ngClass]="{ 'dark': isDark }">
 
   <app-header *ngIf="!isLoginPage"></app-header>
-  <button *ngIf="!isLoginPage" (click)="toggleDarkMode()" class="fixed bottom-5 right-5 bg-white border-2 border-[#ff6600] hover:bg-[#ff6600] dark:hover:bg-[#ff8800] dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded-full z-40 flex items-center gap-2 transition-colors">
+  <button *ngIf="!isLoginPage" (click)="toggleDarkMode()" class="fixed top-24 right-5 bg-white border-2 border-[#ff6600] hover:bg-[#ff6600] dark:hover:bg-[#ff8800] dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded-full z-40 flex items-center gap-2 transition-colors">
     <ng-container *ngIf="isDark; else lightIcon">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

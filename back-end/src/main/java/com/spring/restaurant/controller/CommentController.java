@@ -1,7 +1,9 @@
 package com.spring.restaurant.controller;
+
 import com.spring.restaurant.dto.CommentDto;
 import com.spring.restaurant.service.impl.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ public class CommentController {
 
     @PostMapping
     @Operation(summary = "add comment")
-    public ResponseEntity<CommentDto> addComment(@RequestBody CommentDto commentDto) {
+    public ResponseEntity<CommentDto> addComment(@Valid @RequestBody CommentDto commentDto) {
         return ResponseEntity.ok().body( commentService.addComment(commentDto));
     }
 

@@ -5,6 +5,7 @@ import {CommentService} from '../../services/comment.service';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {TimeagoPipe} from '../../services/timeago.pipe';
+import {ToastrService} from 'ngx-toastr';
 
 
 
@@ -31,7 +32,8 @@ export class AdminContactInfoComponent implements OnInit {
   constructor(
     private contactService: ContactService,
     private commentService: CommentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -70,23 +72,29 @@ export class AdminContactInfoComponent implements OnInit {
 
   submitReply(contactId: number) {
     const comment = {
-
       value: this.replyValue,
       contactInfoId: contactId,
       userId: this.authService.getCurrentUser(),
     };
 
-
-    this.commentService.addComment(comment).subscribe(() => {
-      this.replyValue = '';
-      this.selectedContact = null;
-      this.getAllMessages();
+    this.commentService.addComment(comment).subscribe({
+      next: () => {
+        this.replyValue = '';
+        this.selectedContact = null;
+        this.getAllMessages();
+        this.toastr.success('your comment has been sent', 'success')
+      },
+      error: () => {
+        this.toastr.error('your comment is too short', 'failed')
+      }
     });
   }
+
 
   deleteComment(id: number){
     this.commentService.deleteComment(id).subscribe(() => {
       this.getAllMessages();
+      this.toastr.success('comment has been deleted', 'success')
     });
   }
 }

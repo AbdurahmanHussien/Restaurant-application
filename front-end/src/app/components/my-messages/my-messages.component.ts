@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {CommentService} from '../../services/comment.service';
 import {AuthService} from '../../services/auth.service';
 import {TimeagoPipe} from '../../services/timeago.pipe';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-messages',
@@ -20,7 +21,7 @@ import {TimeagoPipe} from '../../services/timeago.pipe';
 })
 export class MyMessagesComponent implements  OnInit {
   constructor(private _contactService: ContactService ,
-              private commentService: CommentService, private authService: AuthService) { }
+              private commentService: CommentService, private authService: AuthService,private toastr: ToastrService) { }
 
   contactList: ContactRequest[] = [];
 
@@ -71,15 +72,24 @@ export class MyMessagesComponent implements  OnInit {
     };
 
 
-    this.commentService.addComment(comment).subscribe(() => {
-      this.replyValue = '';
-      this.selectedContact = null;
-      this.getAllContactMessages();
+    this.commentService.addComment(comment).subscribe({
+      next: () => {
+        this.replyValue = '';
+        this.selectedContact = null;
+        this.getAllContactMessages();
+        this.toastr.success('your comment has been sent', 'success')
+      },
+      error: () => {
+        this.toastr.error('your comment is too short', 'failed')
+      }
     });
   }
+
   deleteComment(id: number){
     this.commentService.deleteComment(id).subscribe(() => {
       this.getAllContactMessages();
+      this.toastr.success('your comment has been deleted', 'success')
+
     });
   }
 }
