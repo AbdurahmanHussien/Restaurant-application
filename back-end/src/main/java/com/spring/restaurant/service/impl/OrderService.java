@@ -97,7 +97,7 @@ public class OrderService {
     @Cacheable(value = "userOrders", key = "#userId + '_' + #page + '_' + #size")
     public Page<OrderDto> getUserOrders(Long userId, int page, int size) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
 
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
         Page<Order> orders = orderRepository.findAllByUserId(userId, pageable);

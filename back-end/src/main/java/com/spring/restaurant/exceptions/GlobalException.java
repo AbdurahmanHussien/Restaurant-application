@@ -79,4 +79,15 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+
+    // for global exception
+    @ExceptionHandler(RuntimeException .class)
+    public ResponseEntity<ApiError> handleGlobal(RuntimeException  ex) {
+        BundleMessageDTO messages = bundleTranslator.getBundleMessages(ex.getMessage());
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                messages);
+
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
 }

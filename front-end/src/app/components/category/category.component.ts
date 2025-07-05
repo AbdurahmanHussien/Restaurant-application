@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import {ActivatedRoute,  RouterModule} from '@angular/router';

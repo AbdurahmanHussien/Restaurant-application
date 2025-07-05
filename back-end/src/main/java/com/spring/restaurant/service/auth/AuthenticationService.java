@@ -43,7 +43,7 @@ public class AuthenticationService implements IAuthenticationService {
     @Cacheable(value = "user" , key = "#id")
     public User getUserById(Long id) {
        return userRepository.findById(id)
-               .orElseThrow(()-> new RuntimeException("user Not found"));
+               .orElseThrow(()-> new ResourceNotFoundException("user.notfound"));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class AuthenticationService implements IAuthenticationService {
         }
 
         Role userRole = roleRepository.findByRoleType(RoleType.USER)
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
 
         User user = User.builder()
                 .username(request.username())

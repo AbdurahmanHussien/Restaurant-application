@@ -18,7 +18,7 @@ public class UserService {
 
    @Cacheable(value = "userData", key = "#id")
   public UserData getUserData(long id){
-      User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+      User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
       return UserData.builder()
               .id(user.getId())
               .username(user.getUsername())
