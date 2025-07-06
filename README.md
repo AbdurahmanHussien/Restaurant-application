@@ -168,9 +168,9 @@ restaurant-management-system/
 ```
 ## 📸 Screenshots
 
-| Home Page | Home Dark | Login Page | Signup Page |
-|-----------|------------|-------------|-------------|
-| ![Home](/others/screenshots/home.png) |  ![Home(Darkmode)](/others/screenshots/dark.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) | 
+| Home Page | Home Dark | Login Page | Signup Page | orders History Page |
+|-----------|-----------|------------|-------------|---------------------|
+| ![Home](/others/screenshots/home.png) |  ![Home(Darkmode)](/others/screenshots/dark.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) | ![Order(Darkmode)](/others/screenshots/orders.png) 
 
 
 ## Contributing
