@@ -17,7 +17,6 @@ This project is a comprehensive restaurant management system built with Spring B
 - User authentication and authorization
 - Menu management (CRUD operations)
 - Order processing system
-- 
 
 ### Frontend Features
 - Responsive design with Tailwind CSS
@@ -84,7 +83,7 @@ Frontend Setup
 Navigate to the frontend directory:
 
 ```bash
-cd ../fron-tend
+cd ../front-end
 ```
 Install dependencies:
 
@@ -138,7 +137,7 @@ restaurant-management-system/
 │   │   │   ├── controller/     # 🎮 REST controllers
 │   │   │   ├── dto/            # 📦 Data Transfer Objects
 │   │   │   ├── exception/      # ❗ Exception handling
-│   │   │   ├── model/          # 🗃️ Entity classes
+│   │   │   ├── entity/          # 🗃️ Entity classes
 │   │   │   ├── repository/     # 💾 JPA repositories
 │   │   │   ├── security/       # 🔒 Security configuration
 │   │   │   └── service/        # 💡 Business logic
@@ -169,9 +168,9 @@ restaurant-management-system/
 ```
 ## 📸 Screenshots
 
-| Home Page | Login Page | Signup Page |
-|-----------|------------|-------------|
-| ![Home](/others/screenshots/home.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) |
+| Home Page | Home Dark | Login Page | Signup Page |
+|-----------|------------|-------------|-------------|
+| ![Home](/others/screenshots/home.png) |  ![Home(Darkmode)](/others/screenshots/dark.png) | ![Login](/others/screenshots/login.png) | ![Signup](/others/screenshots/sign.png) | 
 
 
 ## Contributing
