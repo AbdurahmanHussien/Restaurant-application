@@ -15,6 +15,8 @@ import com.spring.restaurant.utils.RoleType;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,6 +39,7 @@ public class AuthenticationService implements IAuthenticationService {
         private final JwtUtils jwtUtils;
         private final PasswordEncoder passwordEncoder;
         private final AuthenticationManager authenticationManager;
+        private final CustomUserDetailsService customUserDetailsService;
 
 
 
@@ -43,7 +47,7 @@ public class AuthenticationService implements IAuthenticationService {
     @Cacheable(value = "user" , key = "#id")
     public User getUserById(Long id) {
        return userRepository.findById(id)
-               .orElseThrow(()-> new ResourceNotFoundException("user.notfound"));
+               .orElseThrow(()-> new ResourceNotFoundException("user.not.found"));
     }
 
     @Override
@@ -95,12 +99,15 @@ public class AuthenticationService implements IAuthenticationService {
 
         List<String> roles = user.getRoles().stream().map(Role::getRoleType).map(RoleType::name).toList();
 
-        String token = jwtUtils.generateToken(user);
+        String accessToken = jwtUtils.generateToken(user, 24 * 60 * 60 * 1000);
+        String refreshToken = jwtUtils.generateToken(user, 7 * 24 * 60 * 60 * 1000);
+
 
 
         return AuthResponse.builder()
                 .userId(savedUser.getId())
-                .token(token)
+                .token(accessToken)
+                .refreshToken(refreshToken)
                 .UserRole(roles)
                 .build();
     }
@@ -119,11 +126,15 @@ public class AuthenticationService implements IAuthenticationService {
         } catch (BadCredentialsException ex) {
             throw new BadCredentialsException("invalid.password");
         }
-            List<String> roles = user.getRoles().stream().map(Role::getRoleType).map(RoleType::name).toList();
-            String token = jwtUtils.generateToken(user);
-            return AuthResponse.builder()
+        List<String> roles = user.getRoles().stream().map(Role::getRoleType).map(RoleType::name).toList();
+
+        String accessToken = jwtUtils.generateToken(user,  30 * 60 * 1000);   // 30 minutes
+        String refreshToken = jwtUtils.generateToken(user, 7 * 24 * 60 * 60 * 1000);
+
+        return AuthResponse.builder()
                     .userId(user.getId())
-                    .token(token)
+                    .token(accessToken)
+                    .refreshToken(refreshToken)
                     .UserRole(roles)
                     .build();
         }
@@ -134,5 +145,31 @@ public class AuthenticationService implements IAuthenticationService {
                 .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
         userRepository.delete(user);
     }
+
+    public ResponseEntity<?> refreshAccessToken(String refreshToken) {
+        try {
+            String email = jwtUtils.extractUsername(refreshToken);
+
+            User user = userRepository.findByUserDetailsEmail(email)
+                    .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
+            CustomUserDetails customUserDetails = (CustomUserDetails) customUserDetailsService.loadUserByUsername(email);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+            }
+
+            if (jwtUtils.isTokenValid(refreshToken, customUserDetails)) {
+                String newAccessToken = jwtUtils.generateToken(user,    30 * 60 * 1000); // 30 minutes
+                return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid refresh token");
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
+
+
+
 
 }

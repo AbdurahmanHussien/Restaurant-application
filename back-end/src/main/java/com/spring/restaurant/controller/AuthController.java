@@ -49,4 +49,12 @@ public class AuthController {
         response.put("message", "Password reset to Hello@1234");
         return ResponseEntity.ok(response);
     }
+
+
+    @PostMapping("/refresh-token")
+    @Operation(summary = "refresh access token")
+    public ResponseEntity<?> refresh(@RequestBody Map<String, String> body) {
+        String refreshToken = body.get("refreshToken");
+        return authService.refreshAccessToken(refreshToken);
+    }
 }

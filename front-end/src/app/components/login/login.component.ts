@@ -80,8 +80,10 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         const token = res.token;
         const userId = res.userId;
+        const refreshToken = res.refreshToken;
         console.log(userId);
         localStorage.setItem('jwt_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         this.UserRole = res.userRole;
         localStorage.setItem('roles', this.UserRole);
         localStorage.setItem('userId', userId);

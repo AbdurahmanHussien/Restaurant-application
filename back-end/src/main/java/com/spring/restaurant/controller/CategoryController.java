@@ -62,7 +62,7 @@ public class CategoryController {
 
         CustomUserDetails auth = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = auth.getId();
-        System.out.println(userId);
+       // System.out.println(userId);
         List<CategoryDto> categories = categoryService.getAllCategories(userId);
         return ResponseEntity.ok(categories);
     }

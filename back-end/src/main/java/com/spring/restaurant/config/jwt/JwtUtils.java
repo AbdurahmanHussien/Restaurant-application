@@ -29,7 +29,7 @@ public class JwtUtils {
     private int ExpirationTime;
 
 
-    public String generateToken(User user) {
+    public String generateToken(User user,  long expirationMillis) {
         Claims claims = Jwts.claims().setSubject(user.getUserDetails().getEmail());
         claims.put("roles", user.getRoles().stream().map(Role::getRoleType).collect(Collectors.toList()));
         claims.put("username", user.getUsername());
@@ -37,7 +37,7 @@ public class JwtUtils {
                 .setSubject("jwtToken")
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ExpirationTime * 1000L))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

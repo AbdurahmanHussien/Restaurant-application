@@ -40,6 +40,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Cacheable(value = "categories", key = "#userId")
     public List<CategoryDto> getAllCategories(Long userId) {
 
         List <CategoryDto> categories = categoryRepository.findAll(Sort.by("name"))
