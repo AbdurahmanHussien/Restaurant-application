@@ -1,6 +1,9 @@
 # Restaurant Management System - Full Stack Application
 
-This project is a comprehensive restaurant management system built with Spring Boot for the backend and Angular for the frontend.
+This project is a comprehensive restaurant management system built with Spring Boot for the back-end and Angular for the front-end.
+
+[![Watch the video](https://img.youtube.com/vi/5tyWKkKuHvI/0.jpg)](https://youtu.be/5tyWKkKuHvI)
+
 
 ## Table of Contents
 - [Features](#features)
