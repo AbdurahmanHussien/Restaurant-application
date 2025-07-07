@@ -4,6 +4,7 @@ This project is a comprehensive restaurant management system built with Spring B
 
 [![Watch the video](https://img.youtube.com/vi/5tyWKkKuHvI/0.jpg)](https://youtu.be/5tyWKkKuHvI)
 
+Click the image to watch the full demo video on YouTube.
 
 ## Table of Contents
 - [Features](#features)
